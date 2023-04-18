@@ -1,0 +1,37 @@
+{% extends "blogApp/Base.html" %}
+    {% load static %}
+        {% block templates %} 
+
+            <div class="wrapper">
+
+                {% block title %}
+                    Category_List
+                {% endblock %}
+
+                <div class="Updates">
+                    <h1>latest Posts on  {{Category_List.Category}}</h1>
+                </div>
+
+                {% for Categories_Post in Category_List.Category_Post   %}
+                  <div class="Grid">
+                    <div class="Grid-Item">
+                        <div class="Card">
+                            <img  src="{{Categories_Post.Image.url}}" alt="{{ Categories_Post.Category_Tag}}">
+                                <a href="{{Categories_Post.get_absolute_url}}"><p>{{ Categories_Post.Title|truncatechars:37}}</p></a>
+                                 <div class="Card-Footer">
+                                    <h3>{{Categories_Post.Category_Tag}}</h3>
+                                    <p>By {{Categories_Post.Last_Name }}</p>
+                                </div>
+                        </div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+
+
+        
+
+
+
+
+        {% endblock %}

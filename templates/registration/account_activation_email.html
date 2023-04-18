@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+   Hello {{user.username}}
+ 
+    You have  72 hours to activate your account using this token or  Your registartion will be deleted!
+    Please note that...
+    You can only click the link once!, after the first click the link gets invalid!
+    Thank you, have a splendid time blogging with us!
+
+    please click on the link below  to activate your account 
+    http://{{domain}}{% url 'accounts:Activate_Page' uidb64=uid  token=token %}
+{% endautoescape %}

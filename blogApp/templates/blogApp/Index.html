@@ -1,0 +1,50 @@
+{% extends 'blogApp/Base.html' %}
+{% load static %}
+    {% block title  %} Info-Hub {% endblock %}
+    {% block templates %} 
+       
+
+        <div class="Updates">
+            <h1>latest Post</h1>
+        </div>
+        
+        <div class="Grid">
+            {% for PostListNo in Posts %}
+            <div class="Grid-Item">
+                <div class="Card">
+                    <img  src="{{PostListNo.Image.url}}" alt="{{PostListNo.Category_Tag}}">
+                        <a href="{{PostListNo.get_absolute_url}}"><p>{{ PostListNo.Title|truncatechars:37}}</p></a>
+                        <div class="Card-Footer">
+                                 <h3>{{PostListNo.Category_Tag}}</h3>
+                            <p>By {{PostListNo.Last_Name }}</p>
+                        </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- <div class="Updates">
+            <h1>Older Post</h1>
+        </div> -->
+
+        <!-- <div class="Grid">
+            {% for PostListNo in Posts %}
+            <div class="Grid-Item">
+                <div class="Card">
+                    <img  src="{% static 'media/Blog4.jpg' %}">
+                        <a href="{{PostListNo.get_absolute_url}}"><p>{{ PostListNo.Brief_Content }}...</p></a>
+                        <div class="Card-Footer">
+                            <h3>Technology</h3>
+                            <p>By {{PostListNo.Last_Name }}</p>
+                        </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div> -->
+    {% endblock %}
+
+

@@ -1,0 +1,35 @@
+{% extends 'blogApp/Base.html' %}
+    {% block title %}
+    Search
+    {% endblock %}
+{% load static %}
+    {% block templates %} 
+       
+       <div class="wrapper" style="padding-top: 10em;">
+
+
+            <!-- <div class="Updates">
+                <h1>Make Your Search</h1>
+            </div> -->
+
+            {% if Query %}
+                <h1 style="color: black;">Post containing "{{Query}}"</h1>
+                <p>
+                    {% with Search_Result.count as Total_Results %}
+                    Found {{Total_Results}} Result{{Total_Results|pluralize}}
+                    {% endwith %}
+                </p>
+            {% endif %}
+
+            <form method="get">
+                {{Form.as_p}}
+                <input class="btn" type="Submit" value="Search">
+            </form>
+
+       </div>
+      
+
+
+    {% endblock %}
+
+

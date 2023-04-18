@@ -1,0 +1,85 @@
+{% extends "blogApp/Base.html" %}
+    {% load static %}
+        {% block templates %} 
+    <div class="wrapper">
+
+            <div class="Single-Grid">
+
+                    <div class="Main-Content ">
+                            <div class="Single">
+                                <div class=" Single-Header Identity-Bar">
+                                    <h1>{{S_post.First_Name}} &nbsp; {{S_post.Last_Name}}</h1>
+                                    <h4>{{S_post.Publish}}</h4>
+                            </div>
+                                <img   src="{{S_post.Image.url}}" alt="{{S_post.Category_Tag}}">
+
+                            <div class="Single-content">
+                                <h1>{{S_post.Title}}</h1>
+                                 <p>{{S_post.Content}}</p>
+                            </div>
+
+                            <div class="Card-Footer">
+                                <p>{{S_post.Email}}</p>
+                                <a href="#">Back</a>
+                            </div> 
+                            </div>
+                
+                            <div class="Make-Comment">
+                                <div class="Comment-Info">
+                                    {% with Comment.count as total_comments %}
+                                        <h3> {{total_comments}} Comment{{total_comments|pluralize}}</h3>
+                                </div>
+                                    {% endwith %}
+
+                                 
+                            <div class="comment-posted">
+                                {% for Comment in Comment %}
+                                        <div class="Comment-Wrapper">     
+                                            <div class="Comment-Posted-Info Identity-Bar">
+                                                <h3> comment &nbsp;{{forloop.counter}} by  &nbsp; {{Comment.Name}}</h3>
+                                                <h3>{{Comment.Publish}}</h3>
+                                        </div>
+                                        <p>{{Comment.Content}}</p>
+                                        </div>
+                                    {% empty %}
+                                {% endfor %}
+                                </div>
+                                 
+
+                                <div class="comment">
+                                    <h3>Make a new comment</h3>
+                                    <form method="post">
+                                        {{comment_form}}
+                                        {% csrf_token %}
+                                        <button class="btn" type="submit">submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="Side-Content ">
+                        <div class="Side-Grid">
+                            <div class="Side-Grid-Item">
+                                <h1>Other Posts</h1>
+                                <div class="Side-Card">
+                                    <img  src="{% static 'media/Blog1.jpg' %}">
+                                        <a href="#"></p>Auguste Comte (1798_1857) Is The Founder Of Positivism, A Philosophic...</p></a>
+                                        <div class="Side-Card-Footer">
+                                            <h3>Technology</h3>
+                                            <p>By Benjamin</p>
+                                        </div>
+                                </div>
+                
+                            </div>
+                        </div>
+             
+                    </div>
+
+            </div>
+           
+                   
+
+    </div>
+
+    
+    {% endblock %}
