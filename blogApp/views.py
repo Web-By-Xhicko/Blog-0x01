@@ -3,13 +3,25 @@ from .models import Post , Category
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 
-def Home(request):
-    #populating all the post from the database to the html homepage 
-    all_post = Post.Newmanager.all()
-    #adding the post to the rendered html pages(homepage)
-    return render(request, 'blogApp/Index.html', {'Posts' : all_post})
 
-    #Creates a single page of each post through slug
+class PostListView(ListView):
+    model = Post
+    template_name = 'blogApp/Index.html'
+    context_object_name = 'Blog_Post'
+
+        #returning all the informaton from the database into the queryset
+    def get_queryset(self):
+        Updated_Post = Post.Newmanager.order_by('-Publish')[:4]
+        Older_Post = Post.Newmanager.order_by('Publish')[:8]
+        return {'Updated_Post' : Updated_Post, 'Older_Post' : Older_Post }
+    
+        #Passing the information from the context variable to the html template
+    def get(self, request, *args, **kwargs):
+        context = self.get_queryset()
+        return render(request, self.template_name, context)
+    
+
+    #Creates a single page of each post through s
 def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)

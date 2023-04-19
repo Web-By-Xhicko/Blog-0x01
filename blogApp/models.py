@@ -32,7 +32,7 @@ class Post(models.Model):
     Last_Name = models.CharField(max_length=15, default='User_LastName')
     Email = models.EmailField(max_length=30, default='learningdjango@gmail.com')
     slug = models.SlugField(max_length=250, unique_for_date='Publish', default='default')
-    Publish = models.DateTimeField(default=timezone.now)
+    Publish = models.DateTimeField(default=timezone.now )
     Author = models.ForeignKey (User, on_delete=models.CASCADE, related_name='blog_posts')
     Brief_Content = models.CharField(max_length=40, null=True)
     Content = models.TextField()
@@ -54,7 +54,7 @@ class Post(models.Model):
 
     #ordering the list of post from latest to least latest
     class Meta:
-        ordering = ('-Publish',)
+        ordering = ('-Publish',)[:8]
 
     #making Human Readable text on post title in the database
     def __str__(self):
