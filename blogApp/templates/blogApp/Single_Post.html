@@ -59,18 +59,21 @@
 
                     <div class="Side-Content ">
                         <div class="Side-Grid">
+                          
                             <div class="Side-Grid-Item">
                                 <h1>Other Posts</h1>
+                                {% for sidePostItem in O_post %}
                                 <div class="Side-Card">
-                                    <img  src="{% static 'media/Blog1.jpg' %}">
-                                        <a href="#"></p>Auguste Comte (1798_1857) Is The Founder Of Positivism, A Philosophic...</p></a>
+                                    <img  src="{{ sidePostItem.Image.url }}">
+                                        <a href="{{sidePostItem.get_absolute_url}}"></p>{{sidePostItem.Title|truncatechars:43}}</p></a>
                                         <div class="Side-Card-Footer">
-                                            <h3>Technology</h3>
-                                            <p>By Benjamin</p>
+                                            <h3>{{sidePostItem.Category_Tag}}</h3>
+                                            <p>By {{sidePostItem.Last_Name}}</p>
                                         </div>
                                 </div>
-                
+                                {% endfor %}
                             </div>
+                         
                         </div>
              
                     </div>

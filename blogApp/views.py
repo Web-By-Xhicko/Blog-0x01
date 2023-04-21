@@ -26,35 +26,27 @@ def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
     user_comment = None
+    O_post = Post.Newmanager.filter(Status='published').exclude(id=S_post.id)[:5]
 
-#if the comment is eqaul to the post request on the template , the code should?
     if request.method == 'POST':
-        #the post should know that the current request is a post request on the form templates
         comment_form = NewCommentForm(request.POST)
-        #if the form is valid(coreect email and if they are no empty fields)
-        if comment_form.is_valid():
-            #the comment should be taken 
-            user_comment = comment_form.save(commit=False)#takr the comment but dont save yet (commit=False)
-            #populate the comment in the single page post
+        if comment_form.is_valid(): 
+            user_comment = comment_form.save(commit=False)
             user_comment.Post = S_post
-            #save the comment on the single page sections for comments
             user_comment.save()
-            #redirect the the page to the current page after it has been saved
             return HttpResponseRedirect('/' + S_post.slug)
     else:
         comment_form = NewCommentForm()
+
+        print(O_post)
         return render(request, 
                'blogApp/Single_Post.html', 
                {
-                #telling django waht it should display on the template
-                #the single post of each post
                 'S_post': S_post,
-                #the user comments
                 'user_comment' : user_comment, 
-                #other comments
                 'Comment' : Comment,
-                #comment form
-                 'comment_form': comment_form, 
+                 'comment_form': comment_form,
+                 'O_post' : O_post 
                   })
 
 

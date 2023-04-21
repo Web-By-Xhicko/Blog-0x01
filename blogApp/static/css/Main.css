@@ -358,7 +358,7 @@ nav img{
   font-family: 'Teko', sans-serif;
   font-size: var(--FS-Heading3);
   text-align: center;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .Side-Grid{
@@ -389,7 +389,7 @@ nav img{
 
 .Side-Card a p{
   font-size: var(--FS-Paragraph-bg2);
-  padding: .6em 0 .1em 0;
+  padding: .6em 0 0 0;
 }
 
 .Side-Card-Footer{
@@ -397,7 +397,7 @@ nav img{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: .7em 0 0 0 ;
+  margin-bottom: 1.5em;
 }
 
 .Side-Card-Footer h3{
@@ -409,7 +409,7 @@ nav img{
 
 .Side-Card-Footer p{
   color: #000;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Teko', sans-serif;
   font-size:var(--FS-Paragraph-bg2);
   text-transform: capitalize;
 }
@@ -457,7 +457,7 @@ height: 75vh;
  grid-column-start: 4;
  grid-column-end: 5;
  padding: 0 .5em 0 0 ;
- width: 70%;
+ width: 90%;
 }
 
 .Side-Content h2{
