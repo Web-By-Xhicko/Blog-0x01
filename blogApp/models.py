@@ -64,7 +64,7 @@ class Comment(models.Model):
     Post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='Comment' )
     Name = models.CharField(max_length=20)
     Email = models.EmailField(max_length=25)
-    Content = models.TextField()
+    Comment = models.TextField()
     Publish = models.DateTimeField(default=timezone.now)
     Status = models.BooleanField(default=True)
 

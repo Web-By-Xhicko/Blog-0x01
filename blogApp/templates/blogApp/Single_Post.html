@@ -33,13 +33,13 @@
 
                                  
                             <div class="comment-posted">
-                                {% for Comment in Comment %}
+                                {% for UserComment in Comment %}
                                         <div class="Comment-Wrapper">     
                                             <div class="Comment-Posted-Info Identity-Bar">
-                                                <h3> comment &nbsp;{{forloop.counter}} by  &nbsp; {{Comment.Name}}</h3>
-                                                <h3>{{Comment.Publish}}</h3>
+                                                <h3> comment by  &nbsp; {{UserComment.Name}}</h3>
+                                                <h3>{{UserComment.Publish}}</h3>
                                         </div>
-                                        <p>{{Comment.Content}}</p>
+                                        <p>{{UserComment.Comment}}</p>
                                         </div>
                                     {% empty %}
                                 {% endfor %}
