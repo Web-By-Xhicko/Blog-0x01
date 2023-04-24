@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/Main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="RemoveNav">
     
         <div class="wrapper">
             <nav>
@@ -19,14 +19,14 @@
 
                     <ul>
                         <li><a href="{% url 'blogApp:Home_Page' %}">Home</a></li>
-                        <li><a href="#" onclick="toggleMenu2()">Category</a></li>
+                        <li><a href="#" class="OpenCategoryList">Category</a></li>
                         <li><a href="#">Favourites</a></li>
                         <!-- <li><a href="#">Search</a></li> -->
                     </ul>
 
-                    <img src="{% static 'media/Profile.png' %}" alt="Default-Image" onclick="toggleMenu()" >
+                    <img src="{% static 'media/Profile.png' %}" alt="Default-Image"  class="More_Url" >
 
-                    <div class="Category-option" id="Open-Category">
+                    <div class="Category-option CategoryList">
                         <div class="Category-Option-List">
 
                             {% for Category_List_Item in Category_List_Options %}
@@ -41,7 +41,7 @@
                      </div>
 
 
-                    <div class="Sub-Profile-Wrap" id="Sub-Profile">
+                    <div class="Sub-Profile-Wrap SideProfile">
                             <div class="Sub-Profile">
                                <div class="User-Info">
                                 <!-- Image size 256 × 256 px -->

@@ -162,7 +162,11 @@ nav img{
   transition: max-height 0.8s
 }
 
-.Category-option.Open-Category{
+/* .Category-option.Open-Category{
+  max-height: 450px;
+} */
+
+.Category-option.CatList{
   max-height: 450px;
 }
 
@@ -206,8 +210,12 @@ nav img{
   transition: max-height 0.8s;
 }
 
-.Sub-Profile-Wrap.Open-Profile{
+.Sub-Profile-Wrap.OpenSideProfile{
   max-height: 720px;
+}
+
+.Sub-Profile-Wrap.RemoveNav{
+  max-height: 0px;
 }
 
 .Sub-Profile{
