@@ -49,7 +49,9 @@
                                 <div class="comment">
                                     <h3>Make a new comment</h3>
                                     <form method="post">
-                                        {{comment_form}}
+                                        {{comment_form.Name}}
+                                        {{comment_form.Email}}
+                                        {{comment_form.Comment}}
                                         {% csrf_token %}
                                         <button class="btn" type="submit">submit</button>
                                     </form>
