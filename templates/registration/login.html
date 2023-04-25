@@ -183,15 +183,6 @@
   
     <form action="." method="post">
       {% csrf_token %}
-
-      <!-- {% if error_message %}
-      <div class="Error_Info Disappear">
-          <p>{{error_message}}</p>
-          <i  class="fa fa-close Close"></i>
-      </div>
-    {% endif %} -->
-
-      <!-- Not using individual error checking because of hacking or bypassing, making the error annonymous! -->
           {% if form.errors %}
             <div class="Error_Info Disappear">
                 <p>Error : Username Or Password is not correct!</p>
@@ -205,8 +196,6 @@
             <label class="Input-Label"> {{form.password.label}} </label>
             {{form.password}}
 
-            <!-- <input type="text" name="username" placeholder="Enter username" required>
-            <input type="password" name="password" placeholder="Enter password" required> -->
             <button class="btn" type="submit">Login</button>
             
         

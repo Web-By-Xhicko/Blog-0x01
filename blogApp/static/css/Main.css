@@ -776,7 +776,7 @@ height: 75vh;
     transition: max-height 0.6s;
   }
 
-  .RevOpts.active{
+  .RevOpts.CatList2{
     max-height: 300px;
   }
 
