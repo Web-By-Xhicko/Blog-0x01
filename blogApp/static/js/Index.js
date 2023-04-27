@@ -18,6 +18,5 @@ openCategory.addEventListener('click', ()=>{
 
 openCategory2.addEventListener('click', ()=>{
     categoryList2.classList.toggle('CatList2')
-   
 })
 

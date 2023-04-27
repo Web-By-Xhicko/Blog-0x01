@@ -199,6 +199,10 @@ nav img{
  font-weight: 900;
 }
 
+.CategorySingleGrid{
+  height: 67.7vh;
+}
+
 .Sub-Profile-Wrap{
   z-index: 30;
   position: absolute;

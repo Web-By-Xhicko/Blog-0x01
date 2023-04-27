@@ -1,19 +1,16 @@
 {% extends "blogApp/Base.html" %}
+    {% block title %} Category {% endblock %}
     {% load static %}
         {% block templates %} 
 
             <div class="wrapper">
-
-                {% block title %}
-                    Category_List
-                {% endblock %}
 
                 <div class="Updates">
                     <h1>latest Posts on  {{Category_List.Category}}</h1>
                 </div>
 
                 {% for Categories_Post in Category_List.Category_Post   %}
-                  <div class="Grid">
+                  <div class="Grid CategorySingleGrid">
                     <div class="Grid-Item">
                         <div class="Card">
                             <img  src="{{Categories_Post.Image.url}}" alt="{{ Categories_Post.Category_Tag}}">
