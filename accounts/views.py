@@ -1,6 +1,6 @@
 from django.shortcuts import render,  redirect
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm  #UserLoginForm
+from .forms import RegistrationForm , UserLoginForm
 from .token import account_activation_token
 # from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
@@ -9,6 +9,8 @@ from django.utils.http import urlsafe_base64_encode , urlsafe_base64_decode
 from django.template.loader import render_to_string
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
 
 @login_required
 def account_profile(request):
@@ -19,6 +21,26 @@ def account_profile(request):
 
 # def account_creation_message(request):
 #     return render(request,'accounts/account_creation_message.html',)
+
+# def login_view(request):
+#     if request.method == 'POST':
+#         login_form = UserLoginForm(request.POST)
+#         if login_form.is_valid():
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None and user.is_active:
+#                 login(request, user)
+#                 return redirect('account_profile')
+#             else:
+#                 error_message = "Invalid login credentials or account not activated"
+#                 return render(request, 'registration/login.html', {'error_message': error_message, 'form': login_form})
+#     else:
+#         login_form = UserLoginForm()
+#     # Return a response object here that gets returned when request.method is not 'POST'
+#     return render(request, 'registration/login.html', {'form': login_form})
+
+
 
 def account_registration(request):
     #if the request the user is making is a post request
@@ -34,7 +56,8 @@ def account_registration(request):
             #save the specific information 
             user.email = registerForm.cleaned_data['email']
              #save the specific information 
-            user.set_password(registerForm.cleaned_data['password'])
+            # user.make_password(registerForm.cleaned_data['password'])
+            user.password = make_password(registerForm.cleaned_data['password'])
             #user cant be able to login just yet even after creating an account
             user.is_active = False
             #save all information into the database
@@ -92,6 +115,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         #save the active state to the database of the current user
         user.save()
+        # Set the user's backend to the default Django backend
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
         #login the user
         login(request, user)
         return redirect('login')

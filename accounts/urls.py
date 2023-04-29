@@ -19,6 +19,6 @@ urlpatterns = [
   path('profile/', views.account_profile, name='Profile_Page'), 
   # path('account_creation_message/', views.account_creation_message, name='account_creation_message'),
   path('register/', views.account_registration, name='Registration_Page'),
-  # path('login/', views.login, name='Login_Page'),
+  # path('login/', views.login_view, name='Login_Page'),
   path('activate/<slug:uidb64>/<slug:token>', views.activate, name='Activate_Page'),
 ] 

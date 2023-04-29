@@ -44,7 +44,17 @@ class UserLoginForm(AuthenticationForm):
                'placeholder':'Password'}
         ))
     
+    class Meta:
+        model = User
+        fields = ('username', 'password')
     
+    def __init__(self, *args, **kwargs):
+        print("Initializing UserLoginForm")
+        super().__init__(*args, **kwargs)
+    
+
+
+
 class RegistrationForm(forms.ModelForm):
     username = forms.CharField(
         label='Enter Username', min_length=5, max_length=50, help_text='Required'
