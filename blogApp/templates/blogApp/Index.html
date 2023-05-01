@@ -2,12 +2,54 @@
 {% load static %}
     {% block title  %} Info-Hub {% endblock %}
     {% block templates %} 
+
+    <style>
+      
+      .Messages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #02fc24;
+        padding: .7em .9em;
+        border-radius: .2em;
+        width: 90%;
+        margin: 4em auto -3em auto;
+      }
+    
+      .Messages.remove{
+        display: none;
+      }
+    
+      .Messages p{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .Messages i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
+    
+    </style>
        
+
+       {% if messages %}
+       {% for AlertMessage in messages %}
+           <div class="Messages Disappear">
+               <p>{{AlertMessage}}</p>
+               <i  class="fa fa-close Close"></i>
+           </div>
+       {% endfor %}
+     {% endif %}
 
         <div class="Updates">
             <h1>latest Post</h1>
         </div>
-        
+      
         <div class="Grid">
             {% for Blog_Post in Updated_Post %}
             <div class="Grid-Item">

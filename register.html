@@ -1,0 +1,277 @@
+{% extends '../Base/Base.html' %}
+{% block title %} Sign up Page {% endblock %}
+
+{% block templates %}
+{% include '../Base/navigation.html' %}
+
+<!-- {% if request.user.is_authenticated %}
+  <script>
+    window.location.href = '{% url "accounts:Profile_Page" %}'
+  </script>
+{% endif %} -->
+
+<style>
+
+    /* font-family: 'Anton', sans-serif;..other heading
+  font-family: 'Oswald', sans-serif;.....logo
+  font-family: 'Roboto', sans-serif;....Paragraphs
+  font-family: 'Teko', sans-serif;....Headings */
+
+   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&family=Roboto:wght@300&family=Teko:wght@700&display=swap');
+
+            
+:root{
+--FS-Paragraph-xm: .5rem;
+--FS-Paragraph-md: .6rem;
+--FS-Paragraph-md2: .7rem;
+--FS-Paragraph-bg: .8rem;
+--FS-Paragraph-bg2: .9rem;
+--FS-Heading-xm: .5rem;
+--FS-Heading-md: .6rem;
+--FS-Heading-bg: .7rem;
+--FS-Heading-md2: .8rem;
+--FS-Heading-bg2: .9rem;
+--FS-Paragraph: 1rem;
+--FS-Paragraph2: 1.1rem;
+--FS-Paragraph3: 1.2rem;
+--FS-Paragraph4: 1.3rem;
+--FS-Heading1:clamp(.4rem,  1rem, 1.5rem);
+--FS-Small-Heading:1.1rem;
+--FS-Small-Heading2:1.2rem;
+--FS-Small-Heading3:1.3rem;
+--FS-Small-Heading4:1.4rem;
+--FS-Heading2: 1.5rem;
+--FS-Heading3: 1.7rem;
+--FS-Heading4: 2rem;
+--FS-Heading5: 2.5rem;
+}
+
+  .Form-Wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 105vh;
+    margin: 1em;
+
+  }
+
+  .Form-Wrapper h1{
+    text-transform: uppercase;
+    font-size: var(--FS-Heading5);
+    font-family: 'Teko', sans-serif;
+    /* margin: .8em 0; */
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 70%;
+    border: .1em solid #000;
+    border-radius: .2em;
+    padding: .7em 2em;
+
+  }
+ 
+  form input{
+    padding: 1em ;
+    background: #fff ;
+    margin: .5em 0;
+    border: .1em solid #000;
+    border-radius: .1em ;
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--FS-Paragraph);
+    font-weight: 900;
+  }
+
+  form input:focus{
+   outline:none;
+   background-color: #fff;
+}
+
+  ::placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+
+
+  .Input-Label{
+    font-size: var(--FS-Small-Heading4);
+    font-family: 'Teko', sans-serif; 
+  }
+
+  .btn{
+    margin: .7em 0;
+    padding: 1em ;
+    background-color: #000;
+    color: #fff;
+    margin: .5em 0;
+    border-radius: .2em ;
+    border: none;
+    font-family: 'Anton', sans-serif;
+    font-size: var(--FS-Paragraph);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+
+  .Form-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0 0 0;
+  }
+
+  .flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span{
+    font-size: var(--FS-Heading-md2);
+  }
+
+  small{
+    color: #000;
+    font-weight: 900;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .sm-il{
+    margin: .7em 0 0 0 ;
+  }
+
+  .form-links p{
+    color: #000;
+    font-weight: 900;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .form-links a{
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: 'Anton', sans-serif;
+    margin-left: .3em;
+  }
+
+  .form-links  a:hover{
+   text-decoration: underline;
+  }
+
+  .Error_p{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #ee0707;
+    padding: .5em .9em;
+    border-radius: .2em;
+    margin: .5em 0;
+  }
+  
+  .Error_wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Error_wrapper.remove{
+    display: none;
+  }
+
+
+  .Error_p p{
+    color: #fff;
+    font-size: var(--FS-Paragraph);
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+  }
+
+  .Error_p i{
+    color: #fff;
+    font-size: var(--FS-Paragraph);
+    cursor: pointer;
+  }
+
+  .Error_message{
+    padding: .3em 1em;
+    background-color: #ff7800;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: var(--FS-Paragraph);
+  }
+
+</style>
+   
+  <div class="Form-Wrapper">
+    <h1>Create an account</h1>
+    <form action="." method="post">
+      {% csrf_token %}
+
+      <!-- Not using individual error checking because of hacking or bypassing, making the error annonymous! -->
+      {% if form.errors %}
+      <div class=" Error_wrapper Disappear">
+         <div class="Error_p ">
+           <p>Error : Please Correct the following Details!</p>
+           <i  class="fa fa-close Close"></i>
+         </div>
+
+         {% for field in form %}  
+         {% if field.errors %}
+             <p class="Error_message"> {{field.label}}: {{field.errors|striptags}}</p>
+         {% endif %}
+         {% endfor %}
+        </div> 
+         {% endif %}
+  
+
+        <label class="Input-Label"> {{form.username.label}}  <span>(Required)</span></label>
+            {{form.username}}
+
+            <label class="Input-Label"> {{form.email.label}}  <span>(Required)</span></label>
+            {{form.email}}
+
+            <label class="Input-Label"> {{form.password.label}}  <span>(Required)</span></label>
+            {{form.password}}
+
+            <small>Password Must be up to 8 characters and 1 digit </small>
+
+            <small class="Input-Label sm-il"> Confirm Password</small>
+            {{form.password2}}
+           
+
+            <button class="btn" type="submit">sign up</button>
+            
+
+           <div class="Form-bottom">
+              <div class="form-links flex">
+                <p>Already have  an account yet ?</p> 
+                <a href="{% url 'UserAuth:Login_Page' %}">Sign in</a>
+              </div>
+           </div>
+    </form>
+
+   
+
+  </div>   
+
+
+  
+  <script>
+    let Close = document.querySelector('.Close')
+    let disappear = document.querySelector('.Disappear')
+    Close.addEventListener('click', ()=>{
+      disappear.classList.toggle('remove')
+    })
+  </script>
+
+ {% include '../Base/Footer.html' %}
+{% endblock %}
