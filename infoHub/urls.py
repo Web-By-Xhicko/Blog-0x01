@@ -8,6 +8,7 @@ from Users import views as User_Views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Register/', User_Views.Register, name='Register_Page'),
+    path('Login/', User_Views.Login, name='Login_Page'),
     path('', include('blogApp.urls', namespace='blogApp')),
     # path('Login/', UserLoginView.UserLogin, name='UserLogin'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

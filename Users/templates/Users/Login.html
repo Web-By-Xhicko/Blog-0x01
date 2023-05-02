@@ -1,5 +1,5 @@
 {% extends 'Users/Base.html' %}
-{% block title %} Register Page {% endblock %}
+{% block title %} Login Page {% endblock %}
 
 {% block templates %}
 {% include 'Users/Navigation.html' %}
@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: center;
     margin: 4rem ;
-
+    height: 67.3vh;
   }
 
   .Form-Wrapper h1{
@@ -204,7 +204,7 @@ form small{
 </style>
    
   <div class="Form-Wrapper">
-    <h1>Join Us </h1>
+    <h1>Sign in </h1>
   
     <form action="." method="POST" class="SubmitListener">
 
@@ -214,31 +214,20 @@ form small{
           <p>Error : Please Correct the following Details!</p>
         <i  class="fa fa-close Close"></i>
     </div>
-    {% for field in form %}  
-      {% if field.errors %}
-        <p class="Error_message"{% if field.id_for_label %}  is-invalid{% endif %}> {{field.label}}: {{field.errors|join:"<br>"}}</p> 
-      {% endif %}
-    {% endfor %}
     </div> 
     {% endif %}
 
-   
-
       {% csrf_token %}
       {{form.username}}
-      {{form.email}}
-      {{form.password1}}
-      <small class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
-      <!-- the *safe* filter is there to help the helpext break into new lines  -->
-      {{form.password2}}
-    <button class="btn" type="submit">Register</button>
+      {{form.password}}
+    <button class="btn" type="submit">Login</button>
             
   
            <div class="Form-bottom">
 
               <div class="form-links flex">
-                <p>Already have an account ?</p> 
-                <a href="#">Sign in</a>
+                <p>Don't have an account ?</p> 
+                <a href="#">Register</a>
               </div>
             
            </div>

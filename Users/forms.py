@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
@@ -69,3 +69,16 @@ class UserRegistrationForm(UserCreationForm):
       )
 
       return user
+
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+    )
+
+    error_messages = {
+        'invalid_login': 'Please enter a correct %(username)s and password. Note that both fields may be case-sensitive.',
+        'inactive': 'This account is inactive.',
+    }
