@@ -45,8 +45,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1.2em ;
-    height:90vh;
+    margin: 4rem ;
+
   }
 
   .Form-Wrapper h1{
@@ -83,16 +83,21 @@
    background-color: #fff;
 }
 
-    form small{
-        display: block;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 900;
-    }
+form.submitted input:invalid{
+  border-color: #ee0707;
+}
+
+form small{
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+}
 
   ::placeholder{
     font-family: 'Teko', sans-serif;
-    /* font-weight: 900; */
+    font-weight: 900;
     letter-spacing: 1px;
+    color: #000;
   }
 
 
@@ -175,7 +180,7 @@
 
   .Error_p p{
     color: #fff;
-    font-size: var(--FS-Paragraph);
+    font-size: var(--FS-Paragraph-bg);
     font-weight: 900;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
@@ -183,7 +188,7 @@
 
   .Error_p i{
     color: #fff;
-    font-size: var(--FS-Paragraph-md);
+    font-size: var(--FS-Paragraph-bg);
     cursor: pointer;
   }
 
@@ -192,7 +197,8 @@
     background-color: #ff7800;
     font-family: 'Roboto', sans-serif;
     color: #fff;
-    font-size: var(--FS-Paragraph);
+    font-size: var(--FS-Paragraph-bg);
+    white-space: pre-line;
   }
 
 </style>
@@ -200,19 +206,18 @@
   <div class="Form-Wrapper">
     <h1>Join Us </h1>
   
-    <form action="." method="POST">
+    <form action="." method="POST" class="SubmitListener">
 
     {% if form.errors %}
     <div class=" Error_wrapper Disappear">
         <div class="Error_p ">
-        <p>Error : Please Correct the following Details!</p>
+          <p>Error : Please Correct the following Details!</p>
         <i  class="fa fa-close Close"></i>
-        </div>
-
+    </div>
     {% for field in form %}  
-    {% if field.errors %}
-    <p class="Error_message"> {{field.label}}: {{field.errors|striptags}} </p> 
-    {% endif %}
+      {% if field.errors %}
+        <p class="Error_message"{% if field.id_for_label %}  is-invalid{% endif %}> {{field.label}}: {{field.errors|join:"<br>"}}</p> 
+      {% endif %}
     {% endfor %}
     </div> 
     {% endif %}
@@ -228,20 +233,15 @@
       {{form.password2}}
     <button class="btn" type="submit">Register</button>
             
-<!--   
+  
            <div class="Form-bottom">
 
               <div class="form-links flex">
                 <p>Already have an account ?</p> 
-                <a href="#">Login</a>
+                <a href="#">Sign</a>
               </div>
             
-              <div class="form-links flex">
-                <p>forgotten your password?</p> 
-                <a href="#">Click here </a>
-              </div>
-
-           </div> -->
+           </div>
     </form>
 
    
@@ -249,12 +249,22 @@
   </div>   
 
   <script>
+
     let Close = document.querySelector('.Close')
     let disappear = document.querySelector('.Disappear')
     Close.addEventListener('click', ()=>{
       disappear.classList.toggle('remove')
     })
+
+    let form = document.querySelector('.SubmitListener')
+    let submitBtn = form.querySelector('button[type="submit"]')
+    submitBtn.addEventListener('click', ()=> {
+      form.classList.add('submitted')
+    })
+
   </script>
+
+
 
  {% include 'Users/Footer.html' %}
 {% endblock %}

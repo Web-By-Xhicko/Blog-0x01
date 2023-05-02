@@ -11,7 +11,7 @@ def Register(request):
          if form.is_valid():
              form.save()
              username = form.cleaned_data.get('username')
-             messages.success(request, mark_safe( f'Account Sucessfully created for <strong>{username}</strong>! &nbsp; &nbsp; Welcome to Infohub!'))
+             messages.success(request, mark_safe( f'Account Sucessfully created for {username}! &nbsp; &nbsp; Welcome to Infohub!'))
              return redirect('blogApp:Home_Page')
     else:
         form = UserRegistrationForm()
