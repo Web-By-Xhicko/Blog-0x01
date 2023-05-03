@@ -176,16 +176,16 @@ form small{
 
 
   .Error_wrapper p{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
+    color: #000;
+    font-size: var(--FS-Paragraph);
     font-weight: 900;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
   }
 
   .Error_wrapper i{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
+    color: #000;
+    font-size: var(--FS-Paragraph);
     cursor: pointer;
   }
 
@@ -218,30 +218,31 @@ form small{
         cursor: pointer;
       }
 
-  .SuccessMessages{
+
+  .WarningMessages{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        background: #02fc24;
+        background: #ffa600;
         padding: .7em .9em;
         border-radius: .2em;
         width: 45%;
         margin: 5em auto 0 auto;
       }
     
-      .SuccessMessages.remove{
+      .WarningMessages.remove{
         display: none;
       }
     
-      .SuccessMessages p{
+      .WarningMessages p{
         font-family: 'Roboto', sans-serif;
         color: #030303;
         font-weight: 900;
         font-size: var(--FS-Paragraph);
       }
     
-      .SuccessMessages i{
+      .WarningMessages i{
         color: #030303;
         font-size: var(--FS-Paragraph);
         cursor: pointer;
@@ -269,6 +270,17 @@ form small{
   {% for message in messages %}
       {% if message.tags == 'success' %}
           <div class="SuccessMessages Disappear">
+              <p>{{ message }}</p>
+              <i class="fa fa-close Close"></i>
+          </div> 
+      {% endif %}
+  {% endfor %}
+{% endif %}
+
+  {% if messages %}
+  {% for message in messages %}
+      {% if message.tags == 'warning' %}
+          <div class="WarningMessages Disappear">
               <p>{{ message }}</p>
               <i class="fa fa-close Close"></i>
           </div> 

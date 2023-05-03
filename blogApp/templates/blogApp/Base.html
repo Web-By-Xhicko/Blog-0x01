@@ -105,12 +105,13 @@
                                         <span><i class="fa fa-angle-right"></i></span>
                                     </a>
 
-                                    <a href="#" class="Sub-Menu-Links">
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'Logout_Page' %}" class="Sub-Menu-Links">
                                         <i class="fa fa-mail-reply-all"></i>
                                         <p>Logout</p>
                                         <span><i class="fa fa-angle-right"></i></span>
                                     </a>
-                                   
+                                   {% endif %}
                                 </div>
                             </div>
                     </div>

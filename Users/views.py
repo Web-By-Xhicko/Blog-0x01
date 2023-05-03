@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate , login
+from django.contrib.auth import authenticate , login, logout
 from .forms import UserRegistrationForm, UserLoginForm
 from django.contrib import messages
 from django.utils.safestring import mark_safe
@@ -33,3 +33,9 @@ def Login(request):
     else:
         form = UserLoginForm()
     return render(request, 'Users/Login.html',{'form': form})
+
+
+def Logout(request):
+    logout(request)
+    messages.warning(request,'You have Logged out Sucessfully, Login Again?' )
+    return redirect('Login_Page')
