@@ -11,7 +11,7 @@ def Register(request):
          if form.is_valid():
              form.save()
              username = form.cleaned_data.get('username')
-             messages.success(request, mark_safe( f'Account Sucessfully created for {username}! &nbsp; &nbsp; Welcome to Infohub!'))
+             messages.success(request, mark_safe( f'Account Sucessfully created for {username}! &nbsp; Welcome to Infohub!'))
              return redirect('Login_Page')
     else:
         form = UserRegistrationForm()
@@ -21,15 +21,15 @@ def Register(request):
 def Login(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
-        # print(form.is_valid())
-        if form.is_valid():
-            # use authenticate() to verify user's credentials
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('blogApp:Home_Page')
-            else:
-                form.add_error(None, 'Invalid username or password')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, mark_safe( f'Hello {username}...You are now logged in, Enjoy your Time!'))
+            return redirect('blogApp:Home_Page')
+        else:
+            messages.error(request, 'Invalid Username Or Password.')
     else:
         form = UserLoginForm()
-    return render(request, 'Users/Login.html', {'form': form})
+    return render(request, 'Users/Login.html',{'form': form})

@@ -41,12 +41,13 @@
 }
 
   .Form-Wrapper{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 4rem ;
-    height: 67.3vh;
+    margin: 1em 0;
+    height: 81.8vh;
   }
 
   .Form-Wrapper h1{
@@ -76,6 +77,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: var(--FS-Paragraph);
     font-weight: 900;
+    width: 100%;
   }
 
   form input:focus{
@@ -157,20 +159,15 @@ form small{
    text-decoration: underline;
   }
 
-  .Error_p{
+  .Error_wrapper{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background: #ee0707;
-    padding: .2em .9em;
+    padding: .7em .9em;
     border-radius: .2em;
     margin: .5em 0;
-  }
-  
-  .Error_wrapper{
-    display: flex;
-    flex-direction: column;
   }
 
   .Error_wrapper.remove{
@@ -178,7 +175,7 @@ form small{
   }
 
 
-  .Error_p p{
+  .Error_wrapper p{
     color: #fff;
     font-size: var(--FS-Paragraph-bg);
     font-weight: 900;
@@ -186,36 +183,115 @@ form small{
     cursor: pointer;
   }
 
-  .Error_p i{
+  .Error_wrapper i{
     color: #fff;
     font-size: var(--FS-Paragraph-bg);
     cursor: pointer;
   }
 
-  .Error_message{
-    padding: .1em 1em;
-    background-color: #ff7800;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    white-space: pre-line;
-  }
+  .SuccessMessages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #02fc24;
+        padding: .7em .9em;
+        border-radius: .2em;
+        width: 45%;
+        margin: 5em auto 0 auto;
+      }
+    
+      .SuccessMessages.remove{
+        display: none;
+      }
+    
+      .SuccessMessages p{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .SuccessMessages i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
+
+  .SuccessMessages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #02fc24;
+        padding: .7em .9em;
+        border-radius: .2em;
+        width: 45%;
+        margin: 5em auto 0 auto;
+      }
+    
+      .SuccessMessages.remove{
+        display: none;
+      }
+    
+      .SuccessMessages p{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .SuccessMessages i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
 
 </style>
    
+
+      
+     
   <div class="Form-Wrapper">
+
+  <!-- {% if messages %}
+
+    {% for SuccessMessage in messages %} 
+    <div class="SuccessMessages Disappear">
+      <p>{{SuccessMessage}}</p>
+      <i  class="fa fa-close Close"></i>
+    </div>
+    {% endfor %}
+
+  {% endif %} -->
+
+  {% if messages %}
+  {% for message in messages %}
+      {% if message.tags == 'success' %}
+          <div class="SuccessMessages Disappear">
+              <p>{{ message }}</p>
+              <i class="fa fa-close Close"></i>
+          </div> 
+      {% endif %}
+  {% endfor %}
+{% endif %}
+
     <h1>Sign in </h1>
   
     <form action="." method="POST" class="SubmitListener">
 
-    {% if form.errors %}
-    <div class=" Error_wrapper Disappear">
-        <div class="Error_p ">
-          <p>Error : Please Correct the following Details!</p>
-        <i  class="fa fa-close Close"></i>
-    </div>
-    </div> 
-    {% endif %}
+    
+      {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'error' %}
+              <div class="Error_wrapper Disappear">
+                  <p>{{ message }}</p>
+                  <i class="fa fa-close Close"></i>
+              </div> 
+          {% endif %}
+      {% endfor %}
+  {% endif %}
+  
 
       {% csrf_token %}
       {{form.username}}
@@ -227,7 +303,7 @@ form small{
 
               <div class="form-links flex">
                 <p>Don't have an account ?</p> 
-                <a href="#">Register</a>
+                <a href="{% url 'Register_Page' %}">Register</a>
               </div>
             
            </div>

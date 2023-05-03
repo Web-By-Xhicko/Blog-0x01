@@ -35,20 +35,18 @@
       }
     
     </style>
-       
 
-  
-    
-       
 
-    {% if messages %}
-        {% for AlertMessage in messages %}  
-        <div class="Messages Disappear">
-            <p>{{AlertMessage}}</p>
-            <i  class="fa fa-close Close"></i>
-        </div>
-        {% endfor %}
-    {% endif %}
+        <div class="Wrapper">
+
+        {% if messages %}
+            {% for AlertMessage in messages %}  
+                <div class="Messages Disappear">
+                    <p>{{AlertMessage}}</p>
+                    <i  class="fa fa-close Close"></i>
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <div class="Updates">
             <h1>latest Post</h1>
@@ -92,7 +90,8 @@
             {% endfor %}
 
         </div>
-
+ 
+        </div>
     {% endblock %}
 
 
