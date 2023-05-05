@@ -1,27 +1,18 @@
+
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from .models import Post , Category
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def PostListView(request):
+    updated_posts = Post.Newmanager.order_by('-Publish')[:4]
+    older_posts = Post.Newmanager.order_by('Publish')[:8]
+    context = {'Updated_Post': updated_posts, 'Older_Post': older_posts}
+    return render(request, 'blogApp/Index.html', context)
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'blogApp/Index.html'
-    context_object_name = 'Blog_Post'
-
-        #returning all the informaton from the database into the queryset
-    def get_queryset(self):
-        Updated_Post = Post.Newmanager.order_by('-Publish')[:4]
-        Older_Post = Post.Newmanager.order_by('Publish')[:8]
-        return {'Updated_Post' : Updated_Post, 'Older_Post' : Older_Post }
-    
-        #Passing the information from the context variable to the html template
-    def get(self, request, *args, **kwargs):
-        context = self.get_queryset()
-        return render(request, self.template_name, context)
-    
-
-    #Creates a single page of each post through s
+@login_required
 def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
@@ -37,22 +28,13 @@ def Single_Post(request, S_post):
             return HttpResponseRedirect('/' + S_post.slug)
     else:
         comment_form = NewCommentForm()
-
         print(O_post)
-        return render(request, 
-               'blogApp/Single_Post.html', 
-               {
-                'S_post': S_post,
-                'user_comment' : user_comment, 
-                'Comment' : Comment,
-                 'comment_form': comment_form,
-                 'O_post' : O_post 
-                  })
+        return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
+                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post })
 
-
+# @login_required
 class CategoryListView(ListView):
     template_name = 'blogApp/Category_Pages.html'
-    #passes the information about the category query from the database to the  html template 
     context_object_name = 'Category_List'
 
     def get_queryset(self):

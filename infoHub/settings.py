@@ -135,8 +135,8 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'accounts:Profile_Page'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'blogApp:Home_Page'
+LOGIN_URL = 'Login_Page'
+LOGOUT_URL = 'Logout_Page'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
