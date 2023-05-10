@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
@@ -82,3 +82,19 @@ class UserLoginForm(AuthenticationForm):
         'invalid_login': 'Please enter a correct %(username)s and password. Note that both fields may be case-sensitive.',
         'inactive': 'This account is inactive.',
     }
+
+class PwdResetForm(PasswordResetForm):
+   email = forms.EmailField(
+      widget = forms.TextInput(attrs = {'placeholder': 'Enter Email'}),
+      max_length = 30,
+      required = True,
+      label = 'Email'
+   )
+
+   def clean_email(self):
+      email = self.cleaned_data['email']
+      check = User.objects.filter(email=email).exists()
+      if not check:
+         raise forms.ValidationError(
+            'unfortunately we can not find that email address') 
+      return email 

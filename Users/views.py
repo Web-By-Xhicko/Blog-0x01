@@ -1,8 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate , login, logout
-from .forms import UserRegistrationForm, UserLoginForm
+from .forms import UserRegistrationForm, UserLoginForm, PwdResetForm
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+from django.contrib.auth.views import PasswordResetView
+
 
 
 def Register(request):
@@ -39,3 +41,8 @@ def Logout(request):
     logout(request)
     messages.warning(request,'You have Logged out Sucessfully, Login Again?' )
     return redirect('Login_Page')
+
+
+class PasswordResetFormPage(PasswordResetView):
+    form_class = PwdResetForm
+    template_name = 'Users/Password_Reset.html'
