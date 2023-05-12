@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,Passwo
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
-
+from django.contrib import messages
 
 class UserRegistrationForm(UserCreationForm):
    username = forms.CharField(
@@ -91,10 +91,14 @@ class PwdResetForm(PasswordResetForm):
       label = 'Email'
    )
 
+   def __init__(self, request=None, *args, **kwargs):
+       self.request = request
+       super().__init__(*args, **kwargs)
+
    def clean_email(self):
       email = self.cleaned_data['email']
       check = User.objects.filter(email=email).exists()
       if not check:
-         raise forms.ValidationError(
-            'unfortunately we can not find that email address') 
+         messages.warning(self.request, 'Sorry! we could not find a user with that email address.')
+         raise forms.ValidationError('unfortunately we can not find that email address') 
       return email 
