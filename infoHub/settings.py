@@ -139,10 +139,10 @@ LOGIN_REDIRECT_URL = 'blogApp:Home_Page'
 LOGIN_URL = 'Login_Page'
 LOGOUT_URL = 'Logout_Page'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_TLS = True 
-EMAIL_HOST_USER = 'web.by.xhicko@gmail.com'
-EMAIL_HOST_PASSWORD = 'qnpruioprzditmot'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_TLS = True 
+# EMAIL_HOST_USER = 'web.by.xhicko@gmail.com'
+# EMAIL_HOST_PASSWORD = 'qnpruioprzditmot'
 

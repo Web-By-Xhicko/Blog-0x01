@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
@@ -83,6 +83,7 @@ class UserLoginForm(AuthenticationForm):
         'inactive': 'This account is inactive.',
     }
 
+
 class PwdResetForm(PasswordResetForm):
    email = forms.EmailField(
       widget = forms.TextInput(attrs = {'placeholder': 'Enter Email'}),
@@ -102,3 +103,20 @@ class PwdResetForm(PasswordResetForm):
          messages.warning(self.request, 'Sorry! we could not find a user with that email address.')
          raise forms.ValidationError('unfortunately we can not find that email address') 
       return email 
+   
+class PwdResetConfirmForm(SetPasswordForm):
+   password1 = forms.CharField(
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password'}),
+      max_length = 50,
+      required = True,
+      label = 'Passowrd',
+      help_text = 'Your password can not be too similar to your other personal information. <br> Your password must contain at least 8 characters.<br> Your password can not be a commonly used password.<br> Your password can not  be entirely numeric <br>'
+   )
+
+   password2 = forms.CharField(
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password'}),
+      max_length = 50,
+      required = True,
+      label = 'Confirm  Passowrd'
+   )
+

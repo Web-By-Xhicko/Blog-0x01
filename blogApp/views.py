@@ -5,7 +5,7 @@ from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
-# @login_required
+@login_required
 def PostListView(request):
     updated_posts = Post.Newmanager.order_by('-Publish')[:4]
     older_posts = Post.Newmanager.order_by('Publish')[:8]
@@ -13,7 +13,7 @@ def PostListView(request):
     return render(request, 'blogApp/Index.html', context)
 
 
-# @login_required
+@login_required
 def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)

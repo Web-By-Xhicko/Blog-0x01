@@ -255,17 +255,6 @@ form small{
      
   <div class="Form-Wrapper">
 
-  <!-- {% if messages %}
-
-    {% for SuccessMessage in messages %} 
-    <div class="SuccessMessages Disappear">
-      <p>{{SuccessMessage}}</p>
-      <i  class="fa fa-close Close"></i>
-    </div>
-    {% endfor %}
-
-  {% endif %} -->
-
   {% if messages %}
   {% for message in messages %}
       {% if message.tags == 'success' %}
@@ -303,6 +292,8 @@ form small{
           {% endif %}
       {% endfor %}
   {% endif %}
+  
+
   
 
       {% csrf_token %}
