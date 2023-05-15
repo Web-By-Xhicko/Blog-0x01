@@ -1,15 +1,16 @@
-from audioop import reverse
+from urllib import request
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate , login, logout
-import Users
+from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, UserLoginForm, PwdResetForm, PwdResetConfirmForm
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.urls import reverse_lazy
-from django.utils.http import  urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import force_bytes,  force_str
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 
 def Register(request):
@@ -51,11 +52,27 @@ def Logout(request):
 class PasswordResetFormPage(PasswordResetView):
     form_class = PwdResetForm
     template_name = 'Users/Password_Reset.html'
+    email_template_name = 'Users/Password_Reset_Email.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
+    
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        user = User.objects.get(email=email)
+        current_site = get_current_site(self.request)
+        subject = 'Reset Your Password'
+        message = render_to_string('Users/Password_Reset_Email.html', {
+            'user': user,
+            'domain' : current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+        user.email_user(subject=subject, message=message) 
+        return super().form_valid(form)
+    
 
 class PassowrdResetDonePage(PasswordResetFormPage):
     template_name = 'Users/Password_Reset.html'
@@ -73,40 +90,40 @@ class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'Users/Password_Reset_Confirm.html'
 
     
-    def get(self, request, uidb64=None, token=None, *args, **kwargs):
-        try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = Users.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, Users.DoesNotExist):
-            user = None
+    # def get(self, request, uidb64=None, token=None, *args, **kwargs):
+    #     try:
+    #         uid = force_str(urlsafe_base64_decode(uidb64))
+    #         user = Users.objects.get(pk=uid)
+    #     except (TypeError, ValueError, OverflowError, Users.DoesNotExist):
+    #         user = None
 
-        if user is not None and default_token_generator.check_token(user, token):
-            current_site = get_current_site(request)
-            context = {
-                'form': self.form_class(user=user),
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
-                'current_site': current_site,
-            }
-            return render(request, self.template_name, context)
-        else:
-            messages.error(request, 'The link you entered is either  invalid or expired')
-            return redirect('Password_Reset_Page')
+    #     if user is not None and default_token_generator.check_token(user, token):
+    #         current_site = get_current_site(request)
+    #         context = {
+    #             'form': self.form_class(user=user),
+    #             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+    #             'token': default_token_generator.make_token(user),
+    #             'current_site': current_site,
+    #         }
+    #         return render(request, self.template_name, context)
+    #     else:
+    #         messages.error(request, 'The link you entered is either  invalid or expired')
+    #         return redirect('Password_Reset_Page')
         
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+    # def post(self, request, *args, **kwargs):
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
 
-    def form_valid(self, form):
-        messages.success(self.request, 'Your password has been reset.')
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     messages.success(self.request, 'Your password has been reset.')
+    #     return super().form_valid(form)
 
-    def form_invalid(self, form):
-        messages.error(self.request, 'Please correct the error below.')
-        return super().form_invalid(form)
+    # def form_invalid(self, form):
+    #     messages.error(self.request, 'Please correct the error below.')
+    #     return super().form_invalid(form)
 
     # def get_success_url(self):
     #     return reverse_lazy('password_reset_complete')
