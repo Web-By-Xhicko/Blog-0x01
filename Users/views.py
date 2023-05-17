@@ -1,4 +1,3 @@
-from urllib import request
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate , login, logout
 from django.contrib.auth.models import User
@@ -12,6 +11,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import get_user_model
 
 def Register(request):
     if request.method == 'POST':
@@ -85,7 +85,13 @@ class PassowrdResetDonePage(PasswordResetFormPage):
         return super().get(request, *args, **kwargs)
     
     
-class PasswordResetConfirmView(PasswordResetConfirmView):
-    form_class = PwdResetConfirmForm
-    template_name = 'Users/Password_Reset_Confirm.html'
+# class PasswordResetConfirmViewPage(PasswordResetConfirmView):
+#     template_name = 'Users/Password_Reset_Confirm.html'
 
+#     def form_valid(self, form):
+#         # Perform any additional actions if needed
+#         return super().form_valid(form)
+
+#     def form_invalid(self, form):
+#         # Perform any additional actions if needd
+#          return super().form_invalid(form)

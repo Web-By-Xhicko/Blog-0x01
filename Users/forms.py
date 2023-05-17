@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+
 
 class UserRegistrationForm(UserCreationForm):
    username = forms.CharField(
@@ -104,8 +106,8 @@ class PwdResetForm(PasswordResetForm):
          raise forms.ValidationError('unfortunately we can not find that email address') 
       return email 
    
-class PwdResetConfirmForm(SetPasswordForm):
-   password1 = forms.CharField(
+class PwdResetConfirmForm( SetPasswordForm):
+   new_password1 = forms.CharField(
       widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password'}),
       max_length = 50,
       required = True,
@@ -113,7 +115,7 @@ class PwdResetConfirmForm(SetPasswordForm):
       help_text = 'Your password can not be too similar to your other personal information. <br> Your password must contain at least 8 characters.<br> Your password can not be a commonly used password.<br> Your password can not  be entirely numeric <br>'
    )
 
-   password2 = forms.CharField(
+   new_password2 = forms.CharField(
       widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password'}),
       max_length = 50,
       required = True,
