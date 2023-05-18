@@ -107,7 +107,7 @@ form small{
     align-items: center;
   }
 
-  .pwd_flex .Pwd1{
+  .pwd_flex .Pwd{
     width: 100%;
   }
 
@@ -257,7 +257,10 @@ form small{
       </div>
       <small class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
       <!-- the *safe* filter is there to help the helpext break into new lines  -->
-      {{form.password2}}
+      <div class="pwd_flex">
+        {{form.password2}}
+        <button class="Show_Password password-toggle-button"  type="button"><i  class="fa fa fa-eye"></i></button>
+      </div>
     <button class="btn" type="submit">Register</button>
             
   
@@ -319,10 +322,10 @@ form small{
       button.addEventListener('click', function () {
         if (passwordField.type === 'password') {
           passwordField.type = 'text';
-          button.innerHTML = '<i class="fa fa-eye"></i>'
+          button.innerHTML = '<i class="fa fa-eye-slash"></i>'
         } else {
           passwordField.type = 'password';
-          button.innerHTML = '<i class="fa fa-eye-slash"></i>'
+          button.innerHTML = '<i class="fa fa-eye"></i>'
         }
         });
         });

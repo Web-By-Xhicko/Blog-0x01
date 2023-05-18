@@ -23,7 +23,7 @@ class UserRegistrationForm(UserCreationForm):
    )
 
    password1 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd1'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
       label = 'Passowrd',
@@ -31,7 +31,7 @@ class UserRegistrationForm(UserCreationForm):
    )
 
    password2 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
       label = 'Confirm  Passowrd'
