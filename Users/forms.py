@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -77,7 +76,7 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control Pwd ', 'placeholder': 'Password'})
     )
 
     error_messages = {
@@ -108,7 +107,7 @@ class PwdResetForm(PasswordResetForm):
    
 class PwdResetConfirmForm( SetPasswordForm):
    new_password1 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
       label = 'Passowrd',
@@ -116,7 +115,7 @@ class PwdResetConfirmForm( SetPasswordForm):
    )
 
    new_password2 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Confrim Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
       label = 'Confirm  Passowrd'
