@@ -64,7 +64,6 @@
     border: .1em solid #000;
     border-radius: .2em;
     padding: .7em 2em;
-
   }
  
   form input{
@@ -100,8 +99,33 @@ form small{
     color: #000;
   }
 
+  .pwd_flex{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .pwd_flex .Pwd1{
+    width: 100%;
+  }
 
+ .pwd_flex .Show_Password{
+    width: 15%;
+    padding: .9em 0;;
+    position: absolute;
+    right: 1%;
+    background-color: transparent;
+    border: none;
+   
+  }
+
+ .pwd_flex .Show_Password i{
+   font-size: 2rem;
+   color: #000;
+   cursor: pointer;
+  }
 
   .btn{
     margin: .7em 0;
@@ -227,7 +251,10 @@ form small{
       {% csrf_token %}
       {{form.username}}
       {{form.email}}
-      {{form.password1}}
+      <div class="pwd_flex">
+        {{form.password1}}
+        <button class="Show_Password password-toggle-button"  type="button"><i  class="fa fa fa-eye"></i></button>
+      </div>
       <small class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
       <!-- the *safe* filter is there to help the helpext break into new lines  -->
       {{form.password2}}
@@ -263,6 +290,45 @@ form small{
     })
 
   </script>
+
+<script>
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   const passwordToggle = document.getElementById('passwordToggle');
+    //   const passwordFields = document.querySelectorAll('input[type="password"]');
+
+    //   passwordToggle.addEventListener('click', function () {
+    //     Array.from(passwordFields).forEach(function (field) {
+    //       if (field.type === 'password') {
+    //         field.type = 'text';
+    //         passwordToggle.textContent = 'Hide Passwords';
+    //       } else {
+    //         field.type = 'password';
+    //         passwordToggle.textContent = 'Show Passwords';
+    //       }
+    //     });
+    //   });
+    // });
+
+      document.addEventListener('DOMContentLoaded', function () {
+      const passwordToggleButtons = document.querySelectorAll('.password-toggle-button');
+
+      passwordToggleButtons.forEach(function (button) {
+      const passwordField = button.previousElementSibling;
+      // Get the password field associated with the toggle button
+
+      button.addEventListener('click', function () {
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          button.innerHTML = '<i class="fa fa-eye"></i>'
+        } else {
+          passwordField.type = 'password';
+          button.innerHTML = '<i class="fa fa-eye-slash"></i>'
+        }
+        });
+        });
+        });
+</script>
+
 
 
 

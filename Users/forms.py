@@ -23,7 +23,7 @@ class UserRegistrationForm(UserCreationForm):
    )
 
    password1 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd1'}),
       max_length = 50,
       required = True,
       label = 'Passowrd',
