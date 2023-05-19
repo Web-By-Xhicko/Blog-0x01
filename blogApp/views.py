@@ -5,6 +5,11 @@ from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 
+
+@login_required
+def Settings(request):
+    return render(request, 'blogApp/settings.html' )
+
 @login_required
 def PostListView(request):
     updated_posts = Post.Newmanager.order_by('-Publish')[:4]

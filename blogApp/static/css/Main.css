@@ -58,8 +58,7 @@ nav{
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1000;
-    /* width: 100%; */
+    z-index: 1000
 }
 
 #ResNav{
@@ -102,10 +101,10 @@ nav ul li:hover {
 }
 
 nav img{
+  border: .2em solid #fff;
+  width: 90px;
+  height: 40px; 
   border-radius: 50%;
-  border: .3em solid #fff;
-  width: 50px;
-  height: auto;
   cursor: pointer;
 }
 
@@ -243,14 +242,35 @@ nav img{
 }
 
 .User-Info img{
-  border: .3em solid #fff;
-  width: 28%;
+  border: .15em solid #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.Users{
+ padding-left: .3em;
 }
 
 .User-Info h3{
   font-family: 'Oswald', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-transform: uppercase;
+  color: #fff;
+}
+
+.User-Info h5{
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--FS-Heading-bg);
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.User-Info p{
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--FS-Heading-bg);
+  text-transform: uppercase;
+  color: #fff;
 }
 
 .User-Info-Options{

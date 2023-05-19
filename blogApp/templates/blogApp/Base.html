@@ -19,11 +19,10 @@
                     <ul>
                         <li><a href="{% url 'blogApp:Home_Page' %}">Home</a></li>
                         <li><a href="#" class="OpenCategoryList">Category</a></li>
-                        <li><a href="#">Favourites</a></li>
-                        <!-- <li><a href="#">Search</a></li> -->
+                        <li><a href="#">Search</a></li>
                     </ul>
 
-                    <img src="{% static 'media/Profile.png' %}" alt="Default-Image"  class="More_Url" >
+                    <img src="{{user.profile.image.url}}" alt="Default-Image"  class="More_Url" >
 
                     <div class="Category-option CategoryList">
                         <div class="Category-Option-List">
@@ -44,23 +43,20 @@
                             <div class="Sub-Profile">
                                <div class="User-Info">
                                 <!-- Image size 256 × 256 px -->
-                                <img src="{% static 'media/Profile.png' %}" alt="Default-Image">
-                                <h3>Benjamin Faraday</h3>
+                                <img src="{{user.profile.image.url}}" alt="Default-Image">
+                                    <div class="Users">
+                                        <h3>{{user.first_name}} &nbsp;{{user.last_name}}</h3>
+                                        <h5>{{user.username}}</h5>
+                                        <p>{{user.email}}</p>
+                                    </div>
                                </div>
                                <hr>
  
-                               
                                <div id="ResNav" class="User-Info-Options">
 
                                 <a href="{% url 'blogApp:Home_Page' %}" class="Sub-Menu-Links">
                                     <i class="fa fa-home"></i>
                                     <p>Home</p>
-                                    <span><i class="fa fa-angle-right"></i></span>
-                                </a>
-
-                                <a href="#" class="Sub-Menu-Links">
-                                    <i class="fa fa-heart"></i>
-                                    <p>Favorites</p>
                                     <span><i class="fa fa-angle-right"></i></span>
                                 </a>
 
@@ -93,12 +89,12 @@
                                 <div class="User-Info-Options">
 
                                     <a href="#" class="Sub-Menu-Links">
-                                        <i class="fa fa-address-card"></i>
-                                        <p>Profile</p>
+                                        <i class="fa fa-heart"></i>
+                                        <p>Favourites</p> 
                                         <span><i class="fa fa-angle-right"></i></span>
                                     </a>
 
-                                    <a href="#" class="Sub-Menu-Links">
+                                    <a href="{% url 'blogApp:Settings_Page' %}" class="Sub-Menu-Links">
                                         <i class="fa fa-cogs"></i>
                                         <p>Settings</p>
                                         <span><i class="fa fa-angle-right"></i></span>
