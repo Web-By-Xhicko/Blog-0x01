@@ -254,7 +254,7 @@ nav img{
 
 .User-Info h3{
   font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
+  font-size: var(--FS-Heading-bg2);
   text-transform: uppercase;
   color: #fff;
 }
