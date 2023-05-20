@@ -51,14 +51,126 @@
     margin: 0 0 1em 0;
     }
 
+    form{
+        display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+    }
+
+    .textarea{
+  margin: .5em 0;
+  padding: .5em .7em;
+  width: 100%;
+  border-radius: .2em ;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid  #000;
+}
+
+    .textarea:focus{
+  outline: none;
+ }
+
+    .input{
+  width: 100%;
+  padding: .8em .6em;
+  margin: .4em 0;
+  text-transform: capitalize;
+  background-color: #fff;
+  border: .01em solid #000;
+  border-radius: .2em ;
+}
+
+ input:focus{
+  outline: none;
+ }
+
+::placeholder{
+  color: #000;
+  font-family: 'Teko', sans-serif;
+  font-size:var(--FS-Paragraph); 
+}
+
+.image_input{
+    border: 1px solid #000;
+    margin: .4em 0;
+    border-radius: .2em;
+}
+
+::-webkit-file-upload-button{
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 1em;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button:hover{
+    background-color: #0a0a0ae5;
+}
+
+ .btn{
+  width: 30%;
+  padding: .5em .5em;
+  margin: .4em 0;
+  font-size:var(--FS-Paragraph3);
+  font-weight: 900;
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  border: .01em solid #000;
+  border-radius: .3em ;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition:  .5s ease-in-out;
+}
+
+ .btn:hover{
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+
+
+.Form_Wrapper{
+    width: 70%;
+    margin:  0 auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2em;
+    }
+
+    .Form_Grid1{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .Form_Grid2{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 
 </style>
 
     <div class="Wrapper">
             <h1> Profile Update</h1>
             <form method="post" enctype="multipart/form-data">
-                {{UserProfileUpdate}}
-                {{ProfileUpdate}}
+              <div class="Form_Wrapper">
+                <div class="Form_Grid1">
+                    {{UserProfileUpdate.username}}
+                    {{UserProfileUpdate.first_name}}
+                    {{UserProfileUpdate.last_name}}
+                    {{UserProfileUpdate.email}}
+                    {{ProfileUpdate.age}}
+                    {{ProfileUpdate.image}}
+                   </div>
+                   <div class="Form_Grid2">
+                    {{ProfileUpdate.bio}}
+                   </div>
+              </div>
                 <button class="btn" type="submit">Update</button>
             </form>
     </div>

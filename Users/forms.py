@@ -160,12 +160,14 @@ class ProfileUpdateForm(forms.ModelForm):
        )
     
     bio = forms.CharField(
-       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'bio'}),
-       max_length=310
+          widget=forms.Textarea(attrs={'rows':17, 'cols':30 ,'class':'textarea','placeholder':'Bio'}),
+            max_length=310
        )
     
-    image = forms.ImageField()
+    image = forms.ImageField(
+         widget=forms.FileInput(attrs={'class':'image_input', 'title': 'Choose image' })
+    )
     
     class Meta:
        model = profile
-       fields = ['age', 'bio', 'image']
+       fields = ['age', 'image', 'bio']
