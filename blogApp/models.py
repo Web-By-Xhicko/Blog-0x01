@@ -28,13 +28,12 @@ class Post(models.Model):
     )
 
     Title = models.CharField(max_length=250)
-    First_Name = models.CharField(max_length=15, default='User_LastName')
-    Last_Name = models.CharField(max_length=15, default='User_LastName')
-    Email = models.EmailField(max_length=30, default='learningdjango@gmail.com')
+    First_Name = models.CharField(max_length=15)
+    Last_Name = models.CharField(max_length=15)
+    Email = models.EmailField(max_length=30)
     slug = models.SlugField(max_length=250, unique_for_date='Publish', default='default')
     Publish = models.DateTimeField(default=timezone.now )
     Author = models.ForeignKey (User, on_delete=models.CASCADE, related_name='blog_posts')
-    Brief_Content = models.CharField(max_length=40, null=True)
     Content = models.TextField()
     Category = models.ForeignKey(Category, on_delete=models.PROTECT, default=1)
     Category_Tag = models.CharField(max_length=20, default='Default')
@@ -73,10 +72,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.Name}"
-
-
-# class User_Profile(models.Model):
-#     Avatar = models.ImageField(default='Posts/Profile_Picture/Profile.png', upload_to='Posts/Profile_Picture/')
-
-#     def __str__(self):
-#         return self.Avatar

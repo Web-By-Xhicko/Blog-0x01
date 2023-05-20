@@ -8,6 +8,7 @@ urlpatterns = [
     # path('Search/', views.Search_Item, name='Search_Page'),
     path('', views.PostListView, name='Home_Page'),
     path('Settings/', views.Settings, name='Settings_Page'),
+    path('Profile/', views.Profile, name='Profile_Page'),
     path('<slug:S_post>/', views.Single_Post, name='Single_Post'),
     path('Category/<Category>/', views.CategoryListView.as_view(), name='Category'),
 ] 

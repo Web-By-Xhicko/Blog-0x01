@@ -11,6 +11,10 @@ def Settings(request):
     return render(request, 'blogApp/settings.html' )
 
 @login_required
+def Profile(request):
+    return render(request, 'blogApp/Profile.html' )
+
+@login_required
 def PostListView(request):
     updated_posts = Post.Newmanager.order_by('-Publish')[:4]
     older_posts = Post.Newmanager.order_by('Publish')[:8]
