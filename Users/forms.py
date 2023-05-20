@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm
 from django.contrib.auth.models import User
+from .models import profile
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
@@ -121,3 +122,50 @@ class PwdResetConfirmForm( SetPasswordForm):
       label = 'Confirm  Passowrd'
    )
 
+
+class UserProfileUpdateForm(forms.ModelForm):
+
+    username = forms.CharField(
+       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'Username'}),
+       max_length=15
+       )
+    
+    first_name = forms.CharField(
+       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'first_name'}),
+        max_length=10
+       )
+    
+    last_name = forms.CharField(
+       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'last_name'}),
+        max_length=10
+       )
+    
+    email = forms.EmailField(
+       widget=forms.EmailInput(attrs={'class':'input','placeholder':'Email'}),
+        max_length=25
+       )
+    
+
+    class Meta:
+         model = User
+         fields = ['username', 'first_name', 'last_name', 'email']
+    
+   
+
+class ProfileUpdateForm(forms.ModelForm):
+    
+    age = forms.CharField(
+       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'age'}),
+       max_length=3
+       )
+    
+    bio = forms.CharField(
+       widget=forms.TextInput(attrs={'class':'input', 'placeholder':'bio'}),
+       max_length=310
+       )
+    
+    image = forms.ImageField()
+    
+    class Meta:
+       model = profile
+       fields = ['age', 'bio', 'image']

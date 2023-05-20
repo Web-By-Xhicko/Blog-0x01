@@ -15,5 +15,7 @@ class NewCommentForm(forms.ModelForm):
         fields = ['Name', 'Email', 'Comment']
 
 
+
+
 # class SearchForm(forms.Form):
 #     Search_Input = forms.CharField()

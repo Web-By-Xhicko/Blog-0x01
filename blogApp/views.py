@@ -4,6 +4,7 @@ from .models import Post , Category
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
+from Users.forms import UserProfileUpdateForm, ProfileUpdateForm
 
 
 @login_required
@@ -13,6 +14,19 @@ def Settings(request):
 @login_required
 def Profile(request):
     return render(request, 'blogApp/Profile.html' )
+
+@login_required
+def Update_Profile(request):
+    UserProfileUpdate = UserProfileUpdateForm()
+    ProfileUpdate = ProfileUpdateForm()
+
+    context = {
+        'UserProfileUpdate' : UserProfileUpdate,
+        'ProfileUpdate' : ProfileUpdate
+    }
+
+    return render(request, 'blogApp/Update_Profile.html', context)
+
 
 @login_required
 def PostListView(request):
