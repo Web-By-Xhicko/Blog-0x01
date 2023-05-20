@@ -5,6 +5,8 @@ from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from Users.forms import UserProfileUpdateForm, ProfileUpdateForm
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 @login_required
@@ -17,9 +19,19 @@ def Profile(request):
 
 @login_required
 def Update_Profile(request):
-    UserProfileUpdate = UserProfileUpdateForm()
-    ProfileUpdate = ProfileUpdateForm()
+    if request.method == 'POST':
+        UserProfileUpdate = UserProfileUpdateForm(request.POST, instance=request.user)
+        ProfileUpdate = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if UserProfileUpdate.is_valid() and ProfileUpdate.is_valid():
+            UserProfileUpdate.save()
+            ProfileUpdate.save()
+        messages.success(request, f'Your Profile has been updated successfully!')
+        return redirect('blogApp:UpdateProfile_Page')
 
+    else:
+        UserProfileUpdate = UserProfileUpdateForm(instance=request.user)
+        ProfileUpdate = ProfileUpdateForm(instance=request.user.profile)
+    
     context = {
         'UserProfileUpdate' : UserProfileUpdate,
         'ProfileUpdate' : ProfileUpdate

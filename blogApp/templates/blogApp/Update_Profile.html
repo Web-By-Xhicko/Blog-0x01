@@ -71,14 +71,17 @@
   outline: none;
  }
 
-    .input{
+.input{
   width: 100%;
-  padding: .8em .6em;
+  padding: .75em .6em;
   margin: .4em 0;
   text-transform: capitalize;
   background-color: #fff;
   border: .01em solid #000;
   border-radius: .2em ;
+  font-weight: 900;
+  font-family: 'Teko', sans-serif;
+  font-size: var(--FS-Heading1);
 }
 
  input:focus{
@@ -153,11 +156,94 @@
         flex-direction: column;
     }
 
+    
+  .SuccessMessages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #02fc24;
+        padding: .7em .9em;
+        border-radius: .2em;
+        width: 45%;
+        margin: 5em auto 0 auto;
+      }
+    
+      .SuccessMessages.remove{
+        display: none;
+      }
+    
+      .SuccessMessages p{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .SuccessMessages i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
+
+
+  .WarningMessages{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #ffa600;
+        padding: .7em .9em;
+        border-radius: .2em;
+        width: 45%;
+        margin: 5em auto 0 auto;
+      }
+    
+      .WarningMessages.remove{
+        display: none;
+      }
+    
+      .WarningMessages p{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .WarningMessages i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
+
 </style>
 
     <div class="Wrapper">
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="SuccessMessages Disappear">
+                    <p>{{ message }}</p>
+                    <i class="fa fa-close Close"></i>
+                </div> 
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+      
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                <div class="WarningMessages Disappear">
+                    <p>{{ message }}</p>
+                    <i class="fa fa-close Close"></i>
+                </div> 
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+
             <h1> Profile Update</h1>
             <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
               <div class="Form_Wrapper">
                 <div class="Form_Grid1">
                     {{UserProfileUpdate.username}}

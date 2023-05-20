@@ -160,7 +160,7 @@ class ProfileUpdateForm(forms.ModelForm):
        )
     
     bio = forms.CharField(
-          widget=forms.Textarea(attrs={'rows':17, 'cols':30 ,'class':'textarea','placeholder':'Bio'}),
+          widget=forms.Textarea(attrs={'rows':21, 'cols':30 ,'class':'textarea','placeholder':'Bio'}),
             max_length=310
        )
     
