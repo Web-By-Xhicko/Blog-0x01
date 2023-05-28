@@ -149,19 +149,22 @@ class UserProfileUpdateForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
 
-   #  def clean_email(self):
-   #    email = self.cleaned_data['email']
-   #    if User.objects.filter(email=email).exists():
-   #       raise forms.ValidationError('email is already Taken')
-   #    return email
+    def clean_email(self):
+      email = self.cleaned_data['email']
+      #check if the email entered in the form is both different from the current email and
+      #not already taken by another user.
+      if email != self.instance.email and User.objects.filter(email=email).exists():
+         messages.warning(self.request, 'Email is already Taken.')
+         raise forms.ValidationError('email is already Taken')
+      return email
 
-   #  def clean_username(self):
-   #    username = self.cleaned_data['username']
-   #    if User.objects.filter(username=username).exists():
-   #       raise forms.ValidationError('Username is already Taken')
-   #    return username 
+    def clean_username(self):
+      username = self.cleaned_data['username']
+      if username != self.instance.username and User.objects.filter(username=username).exists():
+         messages.warning(self.request, 'Username is already Taken.')
+         raise forms.ValidationError('Username is already Taken')
+      return username 
     
-
     class Meta:
          model = User
          fields = ['username', 'first_name', 'last_name', 'email']

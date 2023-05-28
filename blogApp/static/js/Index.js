@@ -19,8 +19,10 @@ openCategory2.addEventListener('click', ()=>{
 })
 
 
-let Close = document.querySelector('.Close')
-let disappear = document.querySelector('.Disappear')
-Close.addEventListener('click', ()=>{
-  disappear.classList.toggle('remove')
-})
+let Close = document.querySelectorAll('.Close')
+let disappear = document.querySelectorAll('.Disappear')
+Close.forEach((closeBtn, index) => {
+    closeBtn.addEventListener('click', () => {
+    disappear[index].classList.toggle('remove');
+    });
+});

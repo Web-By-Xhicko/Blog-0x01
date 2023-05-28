@@ -1,4 +1,5 @@
 {% extends "blogApp/Base.html" %}
+{% load static %}
 {% block title %} Profile Update Page{% endblock %}
 {% block templates %}
 
@@ -48,7 +49,7 @@
     font-size: var(--FS-Heading5);
     text-transform: uppercase;
     text-align: center;
-    margin: 0 0 1em 0;
+    margin: 0 0 .5em 0;
     }
 
     form{
@@ -155,8 +156,8 @@
         background: #02fc24;
         padding: .7em .9em;
         border-radius: .2em;
-        width: 45%;
-        margin: 5em auto 0 auto;
+        width: 50%;
+        margin: .5em auto 0 auto;
       }
     
       .SuccessMessages.remove{
@@ -185,8 +186,8 @@
         background: #ffa600;
         padding: .7em .9em;
         border-radius: .2em;
-        width: 45%;
-        margin: 5em auto 0 auto;
+        width: 50%;
+        margin: .5em auto 0 auto;
       }
     
       .WarningMessages.remove{
@@ -221,51 +222,6 @@
         font-family: 'Oswald', sans-serif;
       }
 
-
-      .Error_p{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: #ee0707;
-    padding: .2em .9em;
-    border-radius: .2em;
-    margin: .5em 0;
-  }
-  
-  .Error_wrapper{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .Error_wrapper.remove{
-    display: none;
-  }
-
-
-  .Error_p p{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-  }
-
-  .Error_p i{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    cursor: pointer;
-  }
-
-  .Error_message{
-    padding: .1em 1em;
-    background-color: #ff7800;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    white-space: pre-line;
-  }
-
 </style>
 
     <div class="Wrapper">
@@ -280,20 +236,18 @@
         {% endfor %}
       {% endif %}
       
-      {% if form.errors %}
-      <div class=" Error_wrapper Disappear">
-          <div class="Error_p ">
-            <p>Error : Please Correct the following Details!</p>
-          <i  class="fa fa-close Close"></i>
-      </div>
-      {% for field in form %}  
-        {% if field.errors %}
-          <p class="Error_message"{% if field.id_for_label %}  is-invalid{% endif %}> {{field.label}}: {{field.errors|join:"<br>"}}</p> 
-        {% endif %}
-      {% endfor %}
-      </div> 
+
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+                <div class="WarningMessages Disappear">
+                    <p>{{ message }}</p>
+                    <i class="fa fa-close Close"></i>
+                </div> 
+            {% endif %}
+        {% endfor %}
       {% endif %}
-      
+
             <h1> Profile Update</h1>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -310,6 +264,7 @@
             </form>
 
     </div>
+
 
 {% endblock %}
 

@@ -21,16 +21,16 @@ def Profile(request):
 @login_required
 def Update_Profile(request):
     if request.method == 'POST':
-        UserProfileUpdate = UserProfileUpdateForm(request.POST, instance=request.user)
+        UserProfileUpdate = UserProfileUpdateForm(request.POST, instance=request.user, request = request)
         ProfileUpdate = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if UserProfileUpdate.is_valid() and ProfileUpdate.is_valid():
             UserProfileUpdate.save()
             ProfileUpdate.save()
-        messages.success(request, f'Your Profile has been updated successfully!')
-        return redirect('blogApp:UpdateProfile_Page')
-
+            messages.success(request, f'Your Profile has been updated successfully!')
+            return redirect('blogApp:UpdateProfile_Page')
+    
     else:
-        UserProfileUpdate = UserProfileUpdateForm(instance=request.user)
+        UserProfileUpdate = UserProfileUpdateForm(instance=request.user, request = request)
         ProfileUpdate = ProfileUpdateForm(instance=request.user.profile)
     
     FileName = request.user.profile.file_name
