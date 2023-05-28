@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm
 from django.contrib.auth.models import User
-from .models import profile
+from .models import Profile
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
@@ -145,6 +145,22 @@ class UserProfileUpdateForm(forms.ModelForm):
         max_length=25
        )
     
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+
+   #  def clean_email(self):
+   #    email = self.cleaned_data['email']
+   #    if User.objects.filter(email=email).exists():
+   #       raise forms.ValidationError('email is already Taken')
+   #    return email
+
+   #  def clean_username(self):
+   #    username = self.cleaned_data['username']
+   #    if User.objects.filter(username=username).exists():
+   #       raise forms.ValidationError('Username is already Taken')
+   #    return username 
+    
 
     class Meta:
          model = User
@@ -159,15 +175,10 @@ class ProfileUpdateForm(forms.ModelForm):
        max_length=3
        )
     
-    bio = forms.CharField(
-          widget=forms.Textarea(attrs={'rows':21, 'cols':30 ,'class':'textarea','placeholder':'Bio'}),
-            max_length=310
-       )
-    
     image = forms.ImageField(
          widget=forms.FileInput(attrs={'class':'image_input', 'title': 'Choose image' })
     )
     
     class Meta:
-       model = profile
-       fields = ['age', 'image', 'bio']
+       model = Profile
+       fields = ['age', 'image']

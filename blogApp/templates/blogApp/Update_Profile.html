@@ -98,6 +98,7 @@
     border: 1px solid #000;
     margin: .4em 0;
     border-radius: .2em;
+    width: 100%;
 }
 
 ::-webkit-file-upload-button{
@@ -123,7 +124,7 @@
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   border: .01em solid #000;
-  border-radius: .3em ;
+  border-radius: .1em ;
   background-color: #000;
   color: #fff;
   cursor: pointer;
@@ -133,29 +134,18 @@
  .btn:hover{
   background-color: #fff;
   color: #000;
-  border: 2px solid #000;
+  border: 1px solid #000;
 }
 
 
 .Form_Wrapper{
-    width: 70%;
+    width: 50%;
     margin:  0 auto;
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     }
-
-    .Form_Grid1{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .Form_Grid2{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
     
   .SuccessMessages{
         display: flex;
@@ -216,6 +206,66 @@
         cursor: pointer;
       }
 
+      .FileName{
+        width: 100%;
+        border: 1px solid #000;
+        font-family: 'Oswald', sans-serif;
+      }
+
+      .FileName span{
+        color: #fff;
+        background-color: #000;
+        border: none;
+        padding: 0  .5em 0 0 ;
+        margin-right: .5em;
+        font-family: 'Oswald', sans-serif;
+      }
+
+
+      .Error_p{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #ee0707;
+    padding: .2em .9em;
+    border-radius: .2em;
+    margin: .5em 0;
+  }
+  
+  .Error_wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Error_wrapper.remove{
+    display: none;
+  }
+
+
+  .Error_p p{
+    color: #fff;
+    font-size: var(--FS-Paragraph-bg);
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+  }
+
+  .Error_p i{
+    color: #fff;
+    font-size: var(--FS-Paragraph-bg);
+    cursor: pointer;
+  }
+
+  .Error_message{
+    padding: .1em 1em;
+    background-color: #ff7800;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: var(--FS-Paragraph-bg);
+    white-space: pre-line;
+  }
+
 </style>
 
     <div class="Wrapper">
@@ -230,35 +280,35 @@
         {% endfor %}
       {% endif %}
       
-        {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'warning' %}
-                <div class="WarningMessages Disappear">
-                    <p>{{ message }}</p>
-                    <i class="fa fa-close Close"></i>
-                </div> 
-            {% endif %}
-        {% endfor %}
+      {% if form.errors %}
+      <div class=" Error_wrapper Disappear">
+          <div class="Error_p ">
+            <p>Error : Please Correct the following Details!</p>
+          <i  class="fa fa-close Close"></i>
+      </div>
+      {% for field in form %}  
+        {% if field.errors %}
+          <p class="Error_message"{% if field.id_for_label %}  is-invalid{% endif %}> {{field.label}}: {{field.errors|join:"<br>"}}</p> 
+        {% endif %}
+      {% endfor %}
+      </div> 
       {% endif %}
-
+      
             <h1> Profile Update</h1>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
               <div class="Form_Wrapper">
-                <div class="Form_Grid1">
                     {{UserProfileUpdate.username}}
                     {{UserProfileUpdate.first_name}}
                     {{UserProfileUpdate.last_name}}
                     {{UserProfileUpdate.email}}
                     {{ProfileUpdate.age}}
                     {{ProfileUpdate.image}}
-                   </div>
-                   <div class="Form_Grid2">
-                    {{ProfileUpdate.bio}}
-                   </div>
+                    <div class="FileName"><span>Current File</span>{{FileName}}</div>
               </div>
                 <button class="btn" type="submit">Update</button>
             </form>
+
     </div>
 
 {% endblock %}

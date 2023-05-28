@@ -1,6 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from .models import Post , Category
+from Users.models import Profile
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -32,9 +33,11 @@ def Update_Profile(request):
         UserProfileUpdate = UserProfileUpdateForm(instance=request.user)
         ProfileUpdate = ProfileUpdateForm(instance=request.user.profile)
     
+    FileName = request.user.profile.file_name
     context = {
         'UserProfileUpdate' : UserProfileUpdate,
-        'ProfileUpdate' : ProfileUpdate
+        'ProfileUpdate' : ProfileUpdate,
+        'FileName': FileName
     }
 
     return render(request, 'blogApp/Update_Profile.html', context)

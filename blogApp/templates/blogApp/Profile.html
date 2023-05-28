@@ -40,7 +40,7 @@
 }
 
     .Wrapper{
-        margin: 4em 0;
+        margin-top: 4em;
     }
 
     .Wrapper h1{
@@ -48,74 +48,55 @@
     font-size: var(--FS-Heading5);
     text-transform: uppercase;
     text-align: center;
-    margin: 0 0 1em 0;
     }
 
    .User_Information{
-      display: grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap: 1rem;
-      justify-content: center;
-      width: 100%;
-      height: 45vh;
-      margin: .5em 0 6.8em 0;
-   }
-
-   .User_Information .User_Image{
-      grid-column-start: 1;
-      grid-column-end: 2;
+      display: flex;
+      justify-content:space-evenly;
+      align-items: center;
       width: 90%;
       margin: 0 auto;
-      border-radius: .2em ;
-
+      padding: 1em;
    }
 
-   .User_Image .Image{
-      width: 200px;
-      height: 200px;
-      border-radius: .4em;
+   .Image{
+      width:30%;
+      border-radius: 100%;
       text-align: center;
-      background-color: #000;
+      background-color:#000 ;
+      padding: 1em;
    }
 
    .Image img{
-      width: 310px;
-      height: 330px;
-      border-radius: .4em;
+     width: 300px;
+     height: 300px;
+     border-radius: 50%;
    }
 
-   .User_Information .User_Data{
-      display: flex;
-      flex-direction: row;
-      grid-column-start: 2;
-      grid-column-end: 5;
-      width: 98%;
-      color: #fff;
-      border-radius: .2em ;
-   }
-
-   .User_Data_Left{
+   .User_Data{
       display: flex;
       flex-direction: column;
-      width: 60%;
+      color: #fff;
+      border-radius: .2em ;
+      width: 100%;
    }
 
    .label{
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-evenly;
       align-items: center;
       font-family: 'Teko', sans-serif;
       font-size: var(--FS-Paragraph4);
       text-transform: capitalize; 
       margin: .3em ;
+      width: 90%;
    }
 
    .label div{
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: #000;
+      border: 1px solid #000;
    }
 
    .label p{
@@ -162,16 +143,11 @@
             <h1>Profile Page </h1>
     
          <div class="User_Information">
-             <div class="User_Image">
                    <div class="Image">
                             <img src="{{user.profile.image.url}}" alt="profile_image">
                    </div>
-             </div>
     
-             <div class="User_Data">
-    
-                   <div class="User_Data_Left">
-    
+                  <div class="User_Data">
                      <div class="label">
                          <div></div>
                          <p>User name</p>
@@ -213,13 +189,7 @@
                          <p>Time Joined</p>
                          <span>{{user.date_joined|time:"g:i A"}}</span> 
                      </div>
-                   </div>
-    
-                   <div class="User_Data_Right">
-                      <div>User Bio</div>
-                      <p>{{user.profile.bio}}</p>
-                   </div>
-             </div>
+                  </div>
          </div>
     </div>
 
