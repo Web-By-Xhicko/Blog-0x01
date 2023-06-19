@@ -65,7 +65,7 @@
     </style>
 
 
-        <div class="Wrapper">
+    <div class="Wrapper">
 
         {% if messages %}
             {% for AlertMessage in messages %}  
@@ -76,49 +76,53 @@
             {% endfor %}
         {% endif %}
 
-        <div class="Updates">
-            <h1>latest Post</h1>
-        </div>
+        {% if Updated_Post %}
+            <div class="Updates">
+                <h1>latest Post</h1>
+            </div>
 
-      
-        <div class="Grid">
-            {% for Blog_Post in Updated_Post %}
-            <div class="Grid-Item">
-                <div class="Card">
-                    <img  src="{{Blog_Post.Image.url}}" alt="{{Blog_Post.Category_Tag}}">
-                        <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:37}}</p></a>
-                        <div class="Card-Footer">
-                                 <h3>{{Blog_Post.Category_Tag}}</h3>
-                            <p>By {{Blog_Post.Last_Name }}</p>
-                        </div>
+            <div class="Grid">
+                {% for Blog_Post in Updated_Post %}
+                <div class="Grid-Item">
+                    <div class="Card">
+                        <img  src="{{Blog_Post.Image.url}}" alt="{{Blog_Post.Category_Tag}}">
+                            <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:37}}</p></a>
+                            <div class="Card-Footer">
+                                    <h3>{{Blog_Post.Category_Tag}}</h3>
+                                <p>By {{Blog_Post.Last_Name }}</p>
+                            </div>
+                    </div>
+
                 </div>
+                {% endfor %}
 
             </div>
-            {% endfor %}
+        {% endif %}
 
-        </div>
 
-        <div class="Updates">
-            <h1>Older Post</h1>
-        </div> 
+        {% if Older_Post %}
+            <div class="Updates">
+                <h1>Older Post</h1>
+            </div> 
 
-        <div class="Grid">
-            {% for OlderPostList in Older_Post %}
-            <div class="Grid-Item">
-                <div class="Card">
-                    <img  src="{{OlderPostList.Image.url}}" alt="{{OlderPostList.Category_Tag}}">
-                        <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title|truncatechars:37}}</p></a>
-                        <div class="Card-Footer">
-                                 <h3>{{OlderPostList.Category_Tag}}</h3>
-                            <p>By {{OlderPostList.Last_Name }}</p>
-                        </div>
+            <div class="Grid">
+                {% for OlderPostList in Older_Post %}
+                <div class="Grid-Item">
+                    <div class="Card">
+                        <img  src="{{OlderPostList.Image.url}}" alt="{{OlderPostList.Category_Tag}}">
+                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title|truncatechars:37}}</p></a>
+                            <div class="Card-Footer">
+                                    <h3>{{OlderPostList.Category_Tag}}</h3>
+                                <p>By {{OlderPostList.Last_Name }}</p>
+                            </div>
+                    </div>
+
                 </div>
+            {% endfor %}
 
             </div>
-            {% endfor %}
+        {% endif %}
 
-        </div>
- 
-        </div>
+    </div>
 
     {% endblock %}

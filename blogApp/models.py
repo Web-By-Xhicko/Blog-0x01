@@ -3,6 +3,9 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
+from PIL import Image  
+import os
+
 
 def  User_Directory_Path(instance, filename):
     return 'Posts/{0}/{1}'.format(instance.id, filename)
@@ -45,10 +48,31 @@ class Post(models.Model):
     #to get to each individual post from a link
     def get_absolute_url(self):
         return reverse('blogApp:Single_Post', args=[self.slug])
+    
 
-    #converts the slug so that django can read it
+
     def save(self,*args,**kwargs):
+        #converts the slug so that django can read it
         self.slug=slugify(self.slug)
+        # resizes the Image field
+        if self.Image:
+            target_size = (600, 600)
+            image = Image.open(self.Image)
+            # Resize the image to fit within the target size
+            resized_image = image.resize(target_size, Image.ANTIALIAS)
+            # Create a new blank square image with dimensions of 600x600 pixels
+            square_image = Image.new('RGB', target_size, (255, 255, 255))
+            # Calculate the coordinates for centering the resized image within the square image
+            x = (target_size[0] - resized_image.width) // 2
+            y = (target_size[1] - resized_image.height) // 2
+            # Paste the resized image onto the square image
+            square_image.paste(resized_image, (x, y))
+        # Save the square image
+        resized_image_path = os.path.join('media/', User_Directory_Path(self, self.Image.name))
+        square_image.save(resized_image_path)
+        # Delete the original image file
+        # Update the ImageField to point to the resized image
+        self.Image.name = resized_image_path
         super().save(*args,**kwargs)
 
     #ordering the list of post from latest to least latest

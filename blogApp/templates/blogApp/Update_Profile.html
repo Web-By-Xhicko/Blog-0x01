@@ -42,6 +42,18 @@
 
     .Wrapper{
         margin: 4em 0;
+        position: relative;
+    }
+
+    .Back{
+      position: absolute;
+      top: 0;
+      margin: 0 1em ;
+    }
+
+    .Back a{
+      color: #000;
+      font-size: 1.5rem;
     }
 
     .Wrapper h1{
@@ -225,6 +237,13 @@
 </style>
 
     <div class="Wrapper">
+
+      <div class="Back">
+        <a href="{% url 'blogApp:Settings_Page' %}">
+           <i class="fa fa-arrow-left"></i>
+        </a>
+  </div>
+
         {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'success' %}

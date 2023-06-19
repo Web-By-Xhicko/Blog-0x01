@@ -41,6 +41,18 @@
 
     .Wrapper{
         margin-top: 4em;
+        position: relative;
+    }
+
+    .Back{
+      position: absolute;
+      top: 0;
+      margin: 0 1em ;
+    }
+
+    .Back a{
+      color: #000;
+      font-size: 1.5rem;
     }
 
     .Wrapper h1{
@@ -140,6 +152,12 @@
 </style>
 
     <div class="Wrapper">
+
+      <div class="Back">
+            <a href="{% url 'blogApp:Settings_Page' %}">
+               <i class="fa fa-arrow-left"></i>
+            </a>
+      </div>
             <h1>Profile Page </h1>
     
          <div class="User_Information">
