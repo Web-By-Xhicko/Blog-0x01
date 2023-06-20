@@ -43,11 +43,12 @@ def Update_Profile(request):
     return render(request, 'blogApp/Update_Profile.html', context)
 
 
+
 @login_required
 def PostListView(request):
     updated_posts = Post.Newmanager.order_by('-Publish')[:4]
     older_posts = None
-    
+
     if len(updated_posts) > 4:
          older_posts = Post.Newmanager.order_by('Publish')[:8]
 

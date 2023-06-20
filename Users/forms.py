@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm,PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.core.exceptions import ValidationError
@@ -108,7 +108,7 @@ class PwdResetForm(PasswordResetForm):
    
 class PwdResetConfirmForm( SetPasswordForm):
    new_password1 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd'}),
+      widget = forms.PasswordInput(attrs = {'onkeyup':'checkPassword(this.value)', 'placeholder': 'Enter Password', 'class':'Pwd' }),
       max_length = 50,
       required = True,
       label = 'Passowrd',
@@ -121,6 +121,47 @@ class PwdResetConfirmForm( SetPasswordForm):
       required = True,
       label = 'Confirm  Passowrd'
    )
+
+
+class PwdChangeForm(PasswordChangeForm):
+   old_password = forms.CharField(
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Old Passowrd', 'class':'Pwd'}),
+      max_length = 50,
+      required = True,
+      label = 'Old Passowrd',
+   )
+
+   new_password1 = forms.CharField(
+   widget = forms.PasswordInput(attrs = {'placeholder': 'New Passowrd', 'class':'Pwd'}),
+   max_length = 50,
+   required = True,
+   label = 'New Passowrd'
+   )
+
+   new_password2 = forms.CharField(
+   widget = forms.PasswordInput(attrs = {'placeholder': 'Confirm Passowrd', 'class':'Pwd'}),
+   max_length = 50,
+   required = True,
+   label = 'Confirm  Passowrd'
+   )
+
+   def save(self, commit = True):
+      user = self.user
+      old_password = self.cleaned_data.get('old_password')
+      new_password1 = self.cleaned_data.get(' new_password1')
+      new_password2 = self.cleaned_data.get(' new_password2')
+
+      if new_password1 != new_password2:
+         messages.warning(self.request, 'New Password and Confirm Password does not match!')
+         return
+
+      if user.check_password(old_password):
+         user.set_password(new_password1)
+         if commit:
+            user.save()
+            messages.success(self.request, 'Password have been successfully changed.')
+      else:
+         messages.error(self.request, 'Old password is incorrect!')
 
 
 class UserProfileUpdateForm(forms.ModelForm):
@@ -185,3 +226,4 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
        model = Profile
        fields = ['age', 'image']
+
