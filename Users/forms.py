@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm,PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordResetForm,SetPasswordForm ,PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.core.exceptions import ValidationError
@@ -23,11 +23,10 @@ class UserRegistrationForm(UserCreationForm):
    )
 
    password1 = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Enter Password', 'class':'Pwd'}),
+      widget = forms.PasswordInput(attrs = {'onkeyup':'checkPassword(this.value)', 'placeholder': 'Enter Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
       label = 'Passowrd',
-      help_text = 'Your password can not be too similar to your other personal information. <br> Your password must contain at least 8 characters.<br> Your password can not be a commonly used password.<br> Your password can not  be entirely numeric <br>'
    )
 
    password2 = forms.CharField(
@@ -111,8 +110,7 @@ class PwdResetConfirmForm( SetPasswordForm):
       widget = forms.PasswordInput(attrs = {'onkeyup':'checkPassword(this.value)', 'placeholder': 'Enter Password', 'class':'Pwd' }),
       max_length = 50,
       required = True,
-      label = 'Passowrd',
-      help_text = 'Your password can not be too similar to your other personal information. <br> Your password must contain at least 8 characters.<br> Your password can not be a commonly used password.<br> Your password can not  be entirely numeric <br>'
+      label = 'Passoword',
    )
 
    new_password2 = forms.CharField(
@@ -125,31 +123,31 @@ class PwdResetConfirmForm( SetPasswordForm):
 
 class PwdChangeForm(PasswordChangeForm):
    old_password = forms.CharField(
-      widget = forms.PasswordInput(attrs = {'placeholder': 'Old Passowrd', 'class':'Pwd'}),
+      widget = forms.PasswordInput(attrs = {'placeholder': 'Old Password', 'class':'Pwd'}),
       max_length = 50,
       required = True,
-      label = 'Old Passowrd',
+      label = 'Old Password',
    )
 
    new_password1 = forms.CharField(
-   widget = forms.PasswordInput(attrs = {'placeholder': 'New Passowrd', 'class':'Pwd'}),
+   widget = forms.PasswordInput(attrs = {'placeholder': 'New Password', 'class':'Pwd'}),
    max_length = 50,
    required = True,
-   label = 'New Passowrd'
+   label = 'New Password'
    )
 
    new_password2 = forms.CharField(
-   widget = forms.PasswordInput(attrs = {'placeholder': 'Confirm Passowrd', 'class':'Pwd'}),
+   widget = forms.PasswordInput(attrs = {'placeholder': 'New Password', 'class':'Pwd'}),
    max_length = 50,
    required = True,
-   label = 'Confirm  Passowrd'
+   label = 'Confirm  Password'
    )
 
    def save(self, commit = True):
       user = self.user
       old_password = self.cleaned_data.get('old_password')
-      new_password1 = self.cleaned_data.get(' new_password1')
-      new_password2 = self.cleaned_data.get(' new_password2')
+      new_password1 = self.cleaned_data.get('new_password1')
+      new_password2 = self.cleaned_data.get('new_password2')
 
       if new_password1 != new_password2:
          messages.warning(self.request, 'New Password and Confirm Password does not match!')

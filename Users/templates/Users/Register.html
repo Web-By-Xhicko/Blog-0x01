@@ -225,6 +225,64 @@ form small{
     white-space: pre-line;
   }
 
+  .Password_Validation{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: .1em solid #000;
+    border-radius: .2em;
+    padding: .3em .5em;
+    transition: .5s ease-in-out;
+  }
+
+  .Password_Ban{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: .2em;
+    margin-bottom: .3em;
+  }
+
+
+  .Ban_Content,
+  .Validation_Content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: .1em .5em;
+  }
+
+.Validation_Content button{
+  background-color: transparent;
+  border: none;
+}
+
+  .Validation_Content  i {
+    margin-right: 1em;
+    color: #ee0707;
+    font-size:1.1rem ;
+    transition: .5s ease-in-out;
+  }
+
+  .Validation_Content i .Marked{
+    color: #02fc24;
+  }
+
+  .Ban_Content i {
+    margin-right: 1em;
+    color: #ff5100;
+  }
+
+  .Ban_Content p{
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    font-weight: 900;
+  }
+
+  .Validation_Content p{
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+  }
 </style>
    
   <div class="Form-Wrapper">
@@ -255,8 +313,51 @@ form small{
         {{form.password1}}
         <button class="Show_Password password-toggle-button"  type="button"><i  class="fa fa fa-eye"></i></button>
       </div>
-      <small class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
-      <!-- the *safe* filter is there to help the helpext break into new lines  -->
+      <div class="Password_Validation">
+
+        <div class="Password_Ban">
+          <div class="Ban_Content">
+              <i  class="fa fa-ban"></i>
+              <p> password must not be similar to your personal information</p>
+          </div>
+          <div class="Ban_Content">
+              <i  class="fa fa-ban"></i>
+              <p>  password can not be a commonly used password</p>
+          </div>
+        </div>
+
+          <div class="Validation_Content">
+            <i  id="length" class="fa fa-dot-circle-o"></i>
+            <p> Your password must contain at least 8 characters.</p>
+          </div>
+      
+          <div class="Validation_Content">
+            <i id="upper" class="fa fa-dot-circle-o"></i>
+            <p> Your password must at least contain an uppercase Character.</p>
+          </div>
+        
+          <div class="Validation_Content">
+           <i id="lower" class="fa fa-dot-circle-o"></i>
+            <p> Your password must at least contain an lowercase Character.</p>
+          </div>
+
+          <div class="Validation_Content">
+            <i id="special" class="fa fa-dot-circle-o"></i>
+            <p> Your password must at least contain a Special Character</p>
+          </div>
+
+          <div class="Validation_Content">
+            <i id="number" class="fa fa-dot-circle-o"></i>
+            <p> Your password must at least contain one number</p>
+          </div>
+
+          <div class="Validation_Content">
+            <i  id="entirelyNumeric" class="fa fa-dot-circle-o"></i>
+            <p> Your password must not  be entirely numeric.</p>
+          </div>
+
+      </div>
+
       <div class="pwd_flex">
         {{form.password2}}
         <button class="Show_Password password-toggle-button"  type="button"><i  class="fa fa fa-eye"></i></button>
@@ -314,6 +415,98 @@ form small{
         });
         });
         });
+</script>
+
+<script>
+  const chkLength = document.getElementById('length')
+  const lowerCase = document.getElementById('lower')
+  const upperCase = document.getElementById('upper') 
+  const chkNumber = document.getElementById('number')
+  const chkSpecial = document.getElementById('special')
+  const chkentirelyNumeric = document.getElementById('entirelyNumeric')
+  const toggleWarapper = document.querySelector('.Password_Validation')
+
+  function checkPassword(data){
+     const lower = new RegExp('(?=.*[a-z])')
+     const upper = new RegExp('(?=.*[A-Z])')
+     const number = new RegExp('(?=.*[0-9])')
+     const entirelyNumeric = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).+$')
+     const special = new RegExp('(?=.*[!@#\$%\^&\*])')
+     const length = new RegExp('(?=.{8,})')
+
+     // Checks if the lower case condition is met and apply chnages to the instruction
+     if(lower.test(data)){
+       lowerCase.classList.remove('fa-dot-circle-o');
+       lowerCase.classList.add('fa-check-square', 'Marked');
+       lowerCase.style.color = '#02fc24'
+     }else{
+       lowerCase.classList.remove('fa-check-square');
+       lowerCase.classList.add('fa-dot-circle-o');
+       lowerCase.style.color = '#ee0707'
+     }
+
+      // Checks if the lower case condition is met and apply chnages to the instruction
+     if(upper.test(data)){
+       upperCase.classList.remove('fa-dot-circle-o');
+       upperCase.classList.add('fa-check-square', 'Marked');
+       upperCase.style.color = '#02fc24'
+     }else{
+       upperCase.classList.remove('fa-check-square');
+       upperCase.classList.add('fa-dot-circle-o');
+       upperCase.style.color = '#ee0707'
+     }
+
+      // Checks if the number case condition is met and apply chnages to the instruction
+      if(number.test(data)){
+       chkNumber.classList.remove('fa-dot-circle-o');
+       chkNumber.classList.add('fa-check-square', 'Marked');
+       chkNumber.style.color = '#02fc24'
+     }else{
+       chkNumber.classList.remove('fa-check-square');
+       chkNumber.classList.add('fa-dot-circle-o');
+       chkNumber.style.color = '#ee0707'
+     }
+
+      // Checks if the Special case condition is met and apply chnages to the instruction
+      if(special.test(data)){
+       chkSpecial.classList.remove('fa-dot-circle-o');
+       chkSpecial.classList.add('fa-check-square', 'Marked');
+       chkSpecial.style.color = '#02fc24'
+     }else{
+       chkSpecial.classList.remove('fa-check-square');
+       chkSpecial.classList.add('fa-dot-circle-o');
+       chkSpecial.style.color = '#ee0707'
+     }
+
+      // Checks if the Length case condition is met and apply chnages to the instruction
+      if(length.test(data)){
+       chkLength.classList.remove('fa-dot-circle-o');
+       chkLength.classList.add('fa-check-square', 'Marked');
+       chkLength.style.color = '#02fc24'
+     }else{
+       chkLength.classList.remove('fa-check-square');
+       chkLength.classList.add('fa-dot-circle-o');
+       chkLength.style.color = '#ee0707'
+     }
+
+      // Checks if the EntirelyNumeric case condition is met and apply chnages to the instruction
+      if(entirelyNumeric.test(data)){
+       chkentirelyNumeric.classList.remove('fa-dot-circle-o');
+       chkentirelyNumeric.classList.add('fa-check-square', 'Marked');
+       chkentirelyNumeric.style.color = '#02fc24'
+     }else{
+       chkentirelyNumeric.classList.remove('fa-check-square');
+       chkentirelyNumeric.classList.add('fa-dot-circle-o');
+       chkentirelyNumeric.style.color = '#ee0707'
+     }
+
+     if(lower.test(data) && upper.test(data) && number.test(data) && special.test(data) && length.test(data)){
+       toggleWarapper.style.display = 'none'
+     }else{
+       toggleWarapper.style.display = 'flex'
+   }
+  }
+
 </script>
 
 
