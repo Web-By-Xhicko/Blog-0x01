@@ -48,6 +48,7 @@
         border-bottom: .1em  solid #030303;
         padding: .4em 0;
         margin: .5em 0;
+        position: relative;
       }
 
       .item, .Item_Info{
@@ -71,10 +72,6 @@
        padding-left: .3em;
     }
 
-    .fa-comment{
-        color:#0509f5ec;
-    }
-
     .Reaction_Info{
         justify-content: space-evenly;
         border-top: none;
@@ -90,9 +87,41 @@
     .Item_Info p{
          margin-right: 0;
     }
+
+    /* .Favourites i{
+        color: #FFD700  ;
+    } */
+
+    .Comment i{
+        color: #1E90FF;
+    }
+
+    .Share i{
+        color:#00FF00;
+    }
+
+    #popup-message {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding:.9em .5em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 900;
+        background-color: #000;
+        color: #fff;
+        border-radius: .2em ;
+        width: 30%;
+        position: fixed;
+        top: 10%;
+        right: 1%;
+        text-transform: capitalize;
+        transition: .5s ease-in-out;
+    }
+
 </style>
 
     <div class="wrapper">
+        <div id="popup-message">Page link has been copied to your clipboard</div>
 
             <div class="Single-Grid">
 
@@ -133,9 +162,9 @@
                                 {% endwith %}
                             </div>
 
+
                             <div class="Reactions">
-                                 
-                                <div class="item">
+                                <div class="item Favourites">
                                     <i  class="fa fa-bookmark"></i>
                                     <p>0</p>
                                 </div>
@@ -152,15 +181,14 @@
                                 </div>
 
                                 {% with Comment.count as total_comments %}
-                                <div class="item">
+                                <div class="item Comment">
                                     <i  class="fa fa-comment"></i>
                                     <p>{{total_comments}}</p>
                                 </div>
                                 {% endwith %}
 
-                                <div class="item">
-                                    <i  class="fa fa-share-alt"></i>
-                                    <p>0</p>
+                                <div class="item Share">
+                                    <i  class="fa fa-share-alt" onclick="copyToClipboard()"></i>
                                 </div>
 
                             </div>
@@ -257,7 +285,7 @@ $(document).ready(function() {
                 // Update the likes count
                 $('#likes_count').text(result);
 
-                // Store the updated like status in the session
+                // Store the updated like status in the session 
                 sessionStorage.setItem('liked_' + postId, liked);
 
                 // Apply or remove the 'liked' class based on the updated like status
@@ -277,40 +305,27 @@ $(document).ready(function() {
 
 </script>
 
-
-<!-- 
 <script>
+    function copyToClipboard(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url)
 
-        $(document).on('click', '#likes_button', function(e){
-            e.preventDefault();
-            var icon = $(this);
-            $.ajax({
-                type: 'POST',
-                url: '/likes/',
-                data: {
-                    postid:$('#likes_button').data('postid'),
-                    action: 'post',
-                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                },
-                success: function (json) {
-                    document.getElementById('likes_check').innerHTML = json['result']
-                    document.getElementById('likes_count').innerHTML = json['result']
-                    var liked = json['liked'];
-                    if (liked === 'true') {
-                        $('#likes_button').addClass('liked');
-                    } else {
-                        $('#likes_button').removeClass('liked');
+        .then(() => {
+            const popup = document.getElementById('popup-message');
+            popup.style.display = 'flex';
+            setTimeout(() => {
+            popup.style.display = 'none';
+            }, 2000); // Hide the message after 2 seconds
+    })
+    .catch((err) => {
+      // Error occurred while copying
+      console.error('Failed to copy URL: ', err);
+    });
+
     }
-                },
-                error: function (xhr, errmsg, err) {
-                    console.log(err);
-                    var liked = !liked;
-                    updateButtonState(liked);
-                }
-            });
-        });
+</script>
 
-</script>  -->
+
 
 
     {% endblock %}
