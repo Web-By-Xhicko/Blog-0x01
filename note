@@ -1,0 +1,159 @@
+ #checks if a user has made a vote
+        if update.thumbs.filter(id=request.user.id).exists():
+
+            # Checks what a user current vote is 
+            thumbs_query = Thumbs.objects.get(
+                Q(post_id=id) & Q(user_id=request.user.id))
+            existing_thumbs = thumbs_query.currentThumbs
+
+            if existing_thumbs == True:
+                #checks the action of a user 
+                if button == 'thumbsup':
+                    update.thumbsup = F('thumbsup') - 1
+                    update.thumbs.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    thumbs_query.delete()
+
+                    return JsonResponse({'up': up , 'down': down})
+                
+                if button == 'thumbsdown':
+                    update.thumbsup = F('thumbsup') - 1
+                    update.thumbsdown = F('thumbsdown') + 1
+                    thumbs_query.currentThumbs = False
+                    thumbs_query.save(update_fields=['currentThumbs'])
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                
+                    return JsonResponse({'up': up , 'down': down})
+
+                pass
+
+            if existing_thumbs == False:
+
+                if button == 'thumbsup':
+                    update.thumbsup = F('thumbsup') + 1
+                    update.thumbsdown = F('thumbsdown') - 1
+                    thumbs_query.currentThumbs = True
+                    thumbs_query.save(update_fields=['currentThumbs'])
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                
+                    return JsonResponse({'up': up , 'down': down})
+
+                if button == 'thumbsdown':
+                    update.thumbsdown = F('thumbsdown') - 1
+                    update.thumbs.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    thumbs_query.delete()
+
+                    return JsonResponse({'up': up , 'down': down})
+
+
+
+            #checks if they is no New thumbsup or thumbsdown vote
+        else:
+     
+
+     
+            # try:
+            #     thumbs_query = Thumbs.objects.get(post_id=post_id, user=request.user)
+            #     existing_thumbs = thumbs_query.currentThumbs
+            # except ObjectDoesNotExist:
+            # # Thumbs object does not exist, handle it accordingly
+            #     existing_thumbs = None
+
+
+
+def thumbs(request):
+
+    if request.POST.get('action') == 'thumbs':
+
+        post_id = int(request.POST.get('postid'))
+        button = request.POST.get('button')
+        update = get_object_or_404(Post, id=post_id)
+
+        if Thumbs.objects.filter(post_id=post_id, user=request.user).exists():
+            thumbs_query = Thumbs.objects.get(
+                 Q(post_id=post_id) & Q(user=request.user.id))
+            existing_thumbs = thumbs_query.current_thumbs
+
+            if existing_thumbs:
+                #checks the action of a user 
+                if button == 'thumbsup':
+                    update.thumbsup = F('thumbsup') - 1
+                    update.thumbs.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    thumbs_query.delete()
+
+                    return JsonResponse({'up': up , 'down': down})
+                    
+                if button == 'thumbsdown':
+                    update.thumbsup = F('thumbsup') - 1
+                    update.thumbsdown = F('thumbsdown') + 1
+                    thumbs_query.current_thumbs = False
+                    thumbs_query.save(update_fields=['current_thumbs'])
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    
+                    return JsonResponse({'up': up , 'down': down})
+
+            if not existing_thumbs:
+
+                if button == 'thumbsup':
+                    update.thumbsup = F('thumbsup') + 1
+                    update.thumbsdown = F('thumbsdown') - 1
+                    thumbs_query.current_thumbs = True
+                    thumbs_query.save(update_fields=['current_thumbs'])
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    
+                    return JsonResponse({'up': up , 'down': down})
+
+                if button == 'thumbsdown':
+                    update.thumbsdown = F('thumbsdown') - 1
+                    update.thumbs.remove(request.user)
+                    update.save()
+                    update.refresh_from_db()
+                    up = update.thumbsup
+                    down = update.thumbsdown
+                    thumbs_query.delete()
+
+                    return JsonResponse({'up': up , 'down': down})
+
+        else:   
+            if button == 'thumbsup':
+                update.thumbsup = F('thumbsup') + 1
+                update.thumbs.add(request.user)
+                update.save()
+                #New thumbsup or thumbsdown vote
+                new_check = Thumbs(post_id=post_id, user=request.user, current_thumbs=True)
+                new_check.save()
+
+            else:
+                update.thumbsdown = F('thumbsdown') + 1
+                update.thumbs.add(request.user)
+                update.save()
+                #New thumbsup or thumbsdown vote
+                new_check = Thumbs(post_id=post_id, user=request.user, current_thumbs=False)
+                new_check.save()
+
+            update.refresh_from_db()
+            up = update.thumbsup
+            down = update.thumbsdown
+
+            return JsonResponse({'up': up , 'down': down})
+    
+    return HttpResponseBadRequest("Invalid request")

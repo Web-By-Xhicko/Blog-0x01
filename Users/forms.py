@@ -130,36 +130,27 @@ class PwdChangeForm(PasswordChangeForm):
    )
 
    new_password1 = forms.CharField(
-   widget = forms.PasswordInput(attrs = {'placeholder': 'New Password', 'class':'Pwd'}),
+   widget = forms.PasswordInput(attrs = {'onkeyup':'checkPassword(this.value)', 'placeholder': 'New Password', 'class':'Pwd'}),
    max_length = 50,
    required = True,
    label = 'New Password'
    )
 
    new_password2 = forms.CharField(
-   widget = forms.PasswordInput(attrs = {'placeholder': 'New Password', 'class':'Pwd'}),
+   widget = forms.PasswordInput(attrs = {'placeholder': 'Confirm New Password', 'class':'Pwd'}),
    max_length = 50,
    required = True,
    label = 'Confirm  Password'
    )
 
-   def save(self, commit = True):
-      user = self.user
-      old_password = self.cleaned_data.get('old_password')
-      new_password1 = self.cleaned_data.get('new_password1')
-      new_password2 = self.cleaned_data.get('new_password2')
+   def clean(self):
+       cleaned_data = super().clean()
+       old_password = cleaned_data.get('old_password')
+       new_password1 = cleaned_data.get('new_password1')
+       
+       if old_password == new_password1:
+         self.add_error('new_password1', 'Old Password and New Password must not match!')
 
-      if new_password1 != new_password2:
-         messages.warning(self.request, 'New Password and Confirm Password does not match!')
-         return
-
-      if user.check_password(old_password):
-         user.set_password(new_password1)
-         if commit:
-            user.save()
-            messages.success(self.request, 'Password have been successfully changed.')
-      else:
-         messages.error(self.request, 'Old password is incorrect!')
 
 
 class UserProfileUpdateForm(forms.ModelForm):

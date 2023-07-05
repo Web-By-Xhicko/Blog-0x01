@@ -62,6 +62,22 @@
         cursor: pointer;
       }
     
+
+      .Reactions{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: .1em  solid #030303;
+        border-bottom: .1em  solid #030303;
+        padding: .4em 0;
+      }
+
+      .item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     </style>
 
 
@@ -89,7 +105,26 @@
                             <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:37}}</p></a>
                             <div class="Card-Footer">
                                     <h3>{{Blog_Post.Category_Tag}}</h3>
-                                <p>By {{Blog_Post.Last_Name }}</p>
+                                    <p>By {{Blog_Post.Last_Name }}</p>
+                            </div>
+                      
+                            <div class="Reactions">
+
+                                <div class="item">
+                                    <i  class="fa fa-heart"></i>
+                                    <p>{{Blog_Post.likes_count}}</p>
+                                </div>
+
+                                 <div class="item">
+                                    <i  class="fa fa-bookmark"></i>
+                                    <p>0</p>
+                                </div>
+
+                                <div class="item">
+                                    <i  class="fa fa-comment"></i>
+                                    <p>0</p>
+                                </div>
+
                             </div>
                     </div>
 
@@ -124,5 +159,6 @@
         {% endif %}
 
     </div>
+
 
     {% endblock %}

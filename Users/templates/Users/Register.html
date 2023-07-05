@@ -181,49 +181,38 @@ form small{
    text-decoration: underline;
   }
 
-  .Error_p{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: #ee0707;
-    padding: .2em .9em;
-    border-radius: .2em;
-    margin: .5em 0;
-  }
-  
-  .Error_wrapper{
-    display: flex;
-    flex-direction: column;
-  }
+  .Error_Wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #ee0707;
+        padding:.3em;
+        border-radius: .2em;
+        width:100%;
+        margin: .2em auto;
+      }
+    
+      .Error_Wrapper.remove{
+        display: none;
+      }
+    
+      .Error_Wrapper ul{
+        list-style: none;
+      }
 
-  .Error_wrapper.remove{
-    display: none;
-  }
-
-
-  .Error_p p{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    font-weight: 900;
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-  }
-
-  .Error_p i{
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    cursor: pointer;
-  }
-
-  .Error_message{
-    padding: .1em 1em;
-    background-color: #ff7800;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    font-size: var(--FS-Paragraph-bg);
-    white-space: pre-line;
-  }
+      .Error_Wrapper li{
+        font-family: 'Roboto', sans-serif;
+        color: #030303;
+        font-weight: 900;
+        font-size: var(--FS-Paragraph);
+      }
+    
+      .Error_Wrapper i{
+        color: #030303;
+        font-size: var(--FS-Paragraph);
+        cursor: pointer;
+      }
 
   .Password_Validation{
     display: flex;
@@ -290,19 +279,15 @@ form small{
   
     <form action="." method="POST" class="SubmitListener">
 
-    {% if form.errors %}
-    <div class=" Error_wrapper Disappear">
-        <div class="Error_p ">
-          <p>Error : Please Correct the following Details!</p>
-        <i  class="fa fa-close Close"></i>
-    </div>
-    {% for field in form %}  
-      {% if field.errors %}
-        <p class="Error_message"{% if field.id_for_label %}  is-invalid{% endif %}> {{field.label}}: {{field.errors|join:"<br>"}}</p> 
-      {% endif %}
-    {% endfor %}
-    </div> 
-    {% endif %}
+        {% for field in form %}
+        {% if field.errors %}
+              <div class="Error_Wrapper Disappear">
+                {{field.errors}}
+                <i class="fa fa-close Close"></i>
+              </div>
+        {% endif %}
+      {% endfor %}
+
 
    
 
@@ -381,11 +366,14 @@ form small{
 
   <script>
 
-    let Close = document.querySelector('.Close')
-    let disappear = document.querySelector('.Disappear')
-    Close.addEventListener('click', ()=>{
-      disappear.classList.toggle('remove')
-    })
+let Close = document.querySelectorAll('.Close')
+let disappear = document.querySelectorAll('.Disappear')
+Close.forEach((closeBtn, index) => {
+    closeBtn.addEventListener('click', () => {
+    disappear[index].classList.toggle('remove');
+    });
+});
+
 
     let form = document.querySelector('.SubmitListener')
     let submitBtn = form.querySelector('button[type="submit"]')

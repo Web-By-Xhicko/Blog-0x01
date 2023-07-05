@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate , login, logout
+from django.contrib.auth import authenticate , login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-from .forms import UserRegistrationForm, UserLoginForm, PwdResetForm
+from .forms import UserRegistrationForm, UserLoginForm, PwdResetForm, PwdChangeForm
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.contrib.auth.views import PasswordResetView
@@ -11,6 +11,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.decorators import login_required
 
 def Register(request):
     if request.method == 'POST':
@@ -83,14 +84,3 @@ class PassowrdResetDonePage(PasswordResetFormPage):
         messages.success(request, 'Verification successful! check your email for the password reset link.')
         return super().get(request, *args, **kwargs)
     
-    
-# class PasswordResetConfirmViewPage(PasswordResetConfirmView):
-#     template_name = 'Users/Password_Reset_Confirm.html'
-
-#     def form_valid(self, form):
-#         # Perform any additional actions if needed
-#         return super().form_valid(form)
-
-#     def form_invalid(self, form):
-#         # Perform any additional actions if needd
-#          return super().form_invalid(form)

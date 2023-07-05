@@ -1,14 +1,51 @@
-
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
-from .models import Post , Category
 from Users.models import Profile
+from .models import Post
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
-from Users.forms import UserProfileUpdateForm, ProfileUpdateForm
+from Users.forms import UserProfileUpdateForm, ProfileUpdateForm, PwdChangeForm
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.db.models import F
+from django.http import  JsonResponse
 
+
+@login_required
+def likes(request):
+   if request.POST.get('action') == 'post':
+       result = ''
+       post_id = int(request.POST.get('postid'))
+       post = get_object_or_404(Post, id=post_id)
+       
+       if post.likes.filter(id=request.user.id).exists():
+           post.likes.remove(request.user)
+           post.likes_count -= 1
+           result = post.likes_count
+           post.liked = False
+           post.save()
+       else:
+           post.likes.add(request.user)
+           post.likes_count  += 1
+           result = post.likes_count
+           post.liked = True
+           post.save()
+
+
+       return JsonResponse({'result':result, 'post.liked':post.liked,})
+
+
+@login_required
+def Delete(request):
+    if request.method == 'POST':
+        user = User.objects.get(username=request.user)
+        user.is_active = False
+        user.save()
+        messages.success(request,'Account Successfully Deleted!' )
+        return redirect('Login_Page') 
+    
+    return render(request, 'Users/delete.html')
 
 @login_required
 def Settings(request):
@@ -42,8 +79,6 @@ def Update_Profile(request):
 
     return render(request, 'blogApp/Update_Profile.html', context)
 
-
-
 @login_required
 def PostListView(request):
     updated_posts = Post.Newmanager.order_by('-Publish')[:4]
@@ -54,7 +89,6 @@ def PostListView(request):
 
     context = {'Updated_Post': updated_posts, 'Older_Post': older_posts}
     return render(request, 'blogApp/Index.html', context)
-
 
 @login_required
 def Single_Post(request, S_post):
@@ -76,7 +110,6 @@ def Single_Post(request, S_post):
         return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
                 'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post })
 
-# @login_required
 class CategoryListView(ListView):
     template_name = 'blogApp/Category_Pages.html'
     context_object_name = 'Category_List'
