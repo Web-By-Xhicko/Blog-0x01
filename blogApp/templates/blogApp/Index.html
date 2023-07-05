@@ -78,6 +78,26 @@
         align-items: center;
     }
 
+      .item p{
+       padding-left: .2em;
+       font-family: 'Teko', sans-serif;
+    }
+
+    .Favourites i{
+        color: #FFD700  ;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .Comments i{
+        color: #1E90FF;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .Likes i{
+        color:#ee0707;
+        text-shadow: 2px 2px 2px #000;
+    }
+
     </style>
 
 
@@ -110,17 +130,17 @@
                       
                             <div class="Reactions">
 
-                                <div class="item">
+                                <div class="item Likes">
                                     <i  class="fa fa-heart"></i>
                                     <p>{{Blog_Post.likes_count}}</p>
                                 </div>
 
-                                 <div class="item">
+                                 <div class="item Favourites">
                                     <i  class="fa fa-bookmark"></i>
                                     <p>0</p>
                                 </div>
 
-                                <div class="item">
+                                <div class="item Comments">
                                     <i  class="fa fa-comment"></i>
                                     <p>0</p>
                                 </div>

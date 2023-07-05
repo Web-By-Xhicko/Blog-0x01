@@ -37,9 +37,9 @@ font-family: 'Teko', sans-serif;....Headings */
     box-sizing: border-box;
 }
 
-/* body{
-  overflow-y: hidden;
-} */
+body{
+  background-color: #333333;
+}
 
 a{
     text-decoration: none;
@@ -113,11 +113,12 @@ nav img{
   justify-content: center;
   align-items: center;
   margin-top: 4em;
+  color: #fff;
 }
 
 .Updates h1{
   font-size:var(--FS-Heading2);
-  font-family: 'Anton', sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
   position: relative;
 }
@@ -129,7 +130,7 @@ nav img{
   left: -35%;
   height: 10%;
   width: 30%;
-  background-color: #000;
+  background-color: #fff;
   border-bottom-left-radius: .1em;
   border-top-left-radius: .1em;
 }
@@ -141,7 +142,7 @@ nav img{
   right: -33%;
   height: 10%;
   width: 30%;
-  background-color: #000;
+  background-color: #fff;
   border-bottom-right-radius: .1em;
   border-top-right-radius: .1em;
 }
@@ -321,6 +322,10 @@ nav img{
 
 .Card{
   margin: 1.3em;
+  background-color: #000;
+  padding: .7em .5em;
+  border-radius: .3em;
+  color: #fff;
 }
 
 .Card img{
@@ -338,9 +343,8 @@ nav img{
 
 .Card a{
   font-size:var(--FS-Heading1);
-  font-family: 'Teko', sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-transform: capitalize;
-  color: #000;
 }
 
 .Card a p{
@@ -357,15 +361,15 @@ nav img{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  letter-spacing: .5px;
   align-items: center;
   margin: .7em 0 0 0 ;
 }
 
 .Card-Footer p, h3{
   font-size:var(--FS-Heading1);
-  font-family: 'Teko', sans-serif;
+  font-family: 'Oswald', sans-serif;
   text-transform: capitalize;
-  color: #000;
 }
 
 
@@ -497,17 +501,25 @@ height: 75vh;
   text-align: center;
 }
 
+.Post-Information{
+  background-color: #000;
+  padding: .7em  1em;
+  border-radius: .3em;
+}
+
 .Single{
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   width: 100%;
+  color: #fff;
 }
 
 .Identity-Bar{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #fff;
 }
 
 .Single-Header h1{
@@ -515,16 +527,34 @@ height: 75vh;
   font-size: var(--FS-Heading2);
   font-weight: 900;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .Single-Header h4{
   font-family: 'Teko', sans-serif;
   font-size: var(--FS-Heading1);
   text-transform: uppercase;
+  color: #fff;
 }
 
 .Single-content{
   padding: 1em 0;
+  color: #fff;
+}
+
+.Single-content-Footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-family: 'Anton', sans-serif
+}
+
+.Single-content-Footer a{
+  padding: .2em .6em;
+  background-color: #fff;
+  color: #000;
+  border-radius: .2em;
 }
 
 
@@ -537,26 +567,17 @@ height: 75vh;
   line-height: 1.4rem;
 }
 
-/* .Img-X{
-  width: 100%;
-  border-radius: .2em;
-} */
-
 .Single-content p{
   font-family: 'Roboto', sans-serif;
 }
 
 .Make-Comment{
   width: 100%;
-  margin: .4em auto;
+  margin: 8em auto 0  auto;
   display: flex;
   flex-direction: column;
-}
-
-.Comment-Info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #000;
+  border-radius: .3em;
 }
 
 .Comment-Info h3{
@@ -568,16 +589,35 @@ height: 75vh;
 .comment-posted{
   display: flex;
   flex-direction: column;
-  padding: .4em;
+  padding: .4em 1em;
+  color: #fff;
 }
 
-.comment-posted p{
-  font-family: 'Roboto', sans-serif
+.comment-posted h1{
+  text-align: center;
+  font-family: 'Teko', sans-serif;
+  font-size:2rem;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+.Comment-Wrapper{
+  margin: 0 0 2em 0;
+  background-color: #fff;
+  padding: .4em .3em;
+  border-radius: .2em;
+}
+
+.Comment-Wrapper p {
+ background-color: #000;
+ color: #fff;
+ padding: .3em .4em;
+ border-radius: .2em;
+ font-family: 'Roboto', sans-serif;
 }
 
 .Comment-Posted-Info {
-  border-bottom: .1em solid #000;
-  border-top:  .1em solid #000;
   margin: .2em 0 0 0;
 }
 
@@ -587,23 +627,7 @@ height: 75vh;
 }
 
 
-.comment-posted{
-  border-radius: .2em;
-  padding: .2em .4em;
-  margin: 0 0 3em 0;
-}
 
-.Comment-Wrapper{
-  margin: 0 0 2em 0;
-}
-
-.Comment-Wrapper p {
- background-color: #000;
- color: #fff;
- padding: .3em 1em;
- border-bottom-left-radius: .3em;
- border-bottom-right-radius: .3em;
-}
 
 .comment{
   display: flex;
@@ -617,10 +641,10 @@ height: 75vh;
   border-radius: .3em;
 }
 
-.comment h3{
+.comment h1{
   text-align: center;
   font-family: 'Teko', sans-serif;
-  font-size:var(--FS-Small-Heading);
+  font-size:2rem;
   color: #fff;
   text-transform: uppercase;
 }
@@ -658,45 +682,31 @@ height: 75vh;
 
 .comment button{
   width: 100%;
-  padding: .3em .5em;
+  padding: .1em 0;
   margin: .4em 0;
-  font-size:var(--FS-Paragraph);
+  font-size:2rem;
   font-weight: 900;
-  text-transform: capitalize;
-  font-family: 'Roboto', sans-serif;
-  border: .01em solid #000;
-  border-radius: .14em ;
+  text-transform: uppercase;
+  font-family: 'Teko', sans-serif;
+  border: none;
+  border-radius: .1em ;
   background-color: #fff;
   color: #000;
   cursor: pointer;
+  transition: all .5s ease-in-out;
+}
+
+.comment button:hover{
+  background-color: #ffffff;
+  transform: scale(1.05);
 }
 
 .comment label{
   display: none;
 }
 
-.btn{
-  padding: .3em .5em;
-  margin: .4em 0;
-  font-size:var(--FS-Paragraph);
-  font-weight: 900;
-  text-transform: capitalize;
-  font-family: 'Teko', sans-serif;
-  border: .01em solid #000;
-  border-radius: .14em ;
-  background-color: #fff;
-  color: #000;
-  cursor: pointer;
-}
-/* 
-.btn:hover{
-  background-color: #000;
-  color: #fff;
-} */
 
-.comment button:hover{
-  background-color: #ffffff;
-}
+
 
 
 .Footer{

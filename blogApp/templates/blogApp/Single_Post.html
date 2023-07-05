@@ -40,16 +40,26 @@
 --FS-Heading5: 2.5rem;
 }
 
+
+
 .Reactions,.Reaction_Info{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-top: .1em  solid #030303;
-        border-bottom: .1em  solid #030303;
-        padding: .4em 0;
-        margin: .5em 0;
-        position: relative;
-      }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .4em 0;
+    margin: .5em 0;
+    position: relative;
+    color: #fff;  
+ }
+
+ .Reaction_Info{
+    background-color: #fff;
+    color: #000;
+    border-radius: .2em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+}
+
 
       .item, .Item_Info{
         display: flex;
@@ -60,7 +70,12 @@
       .item i{
        font-size: 1.5rem;
        cursor: pointer;
-       color:#030303;
+       color:#fff;
+       transition:  .5s ease-in-out;
+    }
+
+      .item i:hover{
+        transform: scale(1.3);
     }
 
     .item i.liked{
@@ -88,16 +103,22 @@
          margin-right: 0;
     }
 
-    /* .Favourites i{
+    .Likes i{
+        text-shadow: 2px 2px 2px #000;
+    }
+    .Favourites i{
         color: #FFD700  ;
-    } */
+        text-shadow: 2px 2px 2px #000;
+    }
 
     .Comment i{
         color: #1E90FF;
+        text-shadow: 2px 2px 2px #000;
     }
 
     .Share i{
         color:#00FF00;
+        text-shadow: 2px 2px 2px #000;
     }
 
     #popup-message {
@@ -107,8 +128,8 @@
         padding:.9em .5em;
         font-family: 'Roboto', sans-serif;
         font-weight: 900;
-        background-color: #000;
-        color: #fff;
+        background-color: #02fc23c4;
+        color: #000;
         border-radius: .2em ;
         width: 30%;
         position: fixed;
@@ -118,6 +139,7 @@
         transition: .5s ease-in-out;
     }
 
+
 </style>
 
     <div class="wrapper">
@@ -126,76 +148,79 @@
             <div class="Single-Grid">
 
                     <div class="Main-Content ">
-                            <div class="Single">
-                                <div class=" Single-Header Identity-Bar">
-                                    <h1>{{S_post.First_Name}} &nbsp; {{S_post.Last_Name}}</h1>
-                                    <h4>{{S_post.Publish}}</h4>
+                            <div class="Post-Information">
+                                <div class="Single">
+                                    <div class=" Single-Header Identity-Bar">
+                                        <h1>{{S_post.First_Name}} &nbsp; {{S_post.Last_Name}}</h1>
+                                        <h4>{{S_post.Publish}}</h4>
+                                </div>
+                                    <img   src="{{S_post.Image.url}}" alt="{{S_post.Category_Tag}}">
+    
+                                <div class="Single-content">
+                                    <h1>{{S_post.Title}}</h1>
+                                     <p>{{S_post.Content}}</p>
+                                </div>
+    
+                                <div class="Single-content-Footer">
+                                    <p>{{S_post.Email}}</p>
+                                    <a href="{% url 'blogApp:Home_Page' %}">Back</a>
+                                </div> 
+                                </div>
+    
+                                <div class="Reaction_Info">
+                                    <div class="Item_Info">
+                                        <span id="likes_check">{{S_post.likes_count}}</span>
+                                        <p>likes</p>
+                                    </div>
+                                    <div class="Item_Info">
+                                        <span>0</span>
+                                        <p>Favourites</p>
+                                    </div>
+    
+                                    {% with Comment.count as total_comments %}
+                                    <div class="Item_Info">
+                                        <span>{{total_comments}}</span>
+                                        <p>Comment</p>
+                                    </div>
+                                    {% endwith %}
+                                </div>
+    
+    
+                                <div class="Reactions">
+                                    <div class="item Favourites">
+                                        <i  class="fa fa-bookmark"></i>
+                                        <p>0</p>
+                                    </div>
+    
+                                    <div class="item Likes">
+    
+                                        {% if post.liked %}
+                                        <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart liked "></i>
+                                        {% else %}
+                                        <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart "></i>
+                                        {% endif %}
+    
+                                        <p id="likes_count">{{S_post.likes_count}}</p>
+                                    </div>
+    
+                                    {% with Comment.count as total_comments %}
+                                    <div class="item Comment">
+                                        <i  class="fa fa-comment"></i>
+                                        <p>{{total_comments}}</p>
+                                    </div>
+                                    {% endwith %}
+    
+                                    <div class="item Share">
+                                        <i  class="fa fa-share-alt" onclick="copyToClipboard()"></i>
+                                    </div>
+    
+                                </div>
+    
                             </div>
-                                <img   src="{{S_post.Image.url}}" alt="{{S_post.Category_Tag}}">
-
-                            <div class="Single-content">
-                                <h1>{{S_post.Title}}</h1>
-                                 <p>{{S_post.Content}}</p>
-                            </div>
-
-                            <div class="Card-Footer">
-                                <p>{{S_post.Email}}</p>
-                                <a href="{% url 'blogApp:Home_Page' %}">Back</a>
-                            </div> 
-                            </div>
-
-                            <div class="Reaction_Info">
-                                <div class="Item_Info">
-                                    <span id="likes_check">{{S_post.likes_count}}</span>
-                                    <p>likes</p>
-                                </div>
-                                <div class="Item_Info">
-                                    <span>0</span>
-                                    <p>Favourites</p>
-                                </div>
-
-                                {% with Comment.count as total_comments %}
-                                <div class="Item_Info">
-                                    <span>{{total_comments}}</span>
-                                    <p>Comment</p>
-                                </div>
-                                {% endwith %}
-                            </div>
-
-
-                            <div class="Reactions">
-                                <div class="item Favourites">
-                                    <i  class="fa fa-bookmark"></i>
-                                    <p>0</p>
-                                </div>
-
-                                <div class="item">
-
-                                    {% if post.liked %}
-                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart liked"></i>
-                                    {% else %}
-                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart "></i>
-                                    {% endif %}
-
-                                    <p id="likes_count">{{S_post.likes_count}}</p>
-                                </div>
-
-                                {% with Comment.count as total_comments %}
-                                <div class="item Comment">
-                                    <i  class="fa fa-comment"></i>
-                                    <p>{{total_comments}}</p>
-                                </div>
-                                {% endwith %}
-
-                                <div class="item Share">
-                                    <i  class="fa fa-share-alt" onclick="copyToClipboard()"></i>
-                                </div>
-
-                            </div>
-
                             <div class="Make-Comment">
                              
                             <div class="comment-posted">
+                                <h1>Latest Comments</h1>
                                 {% for UserComment in Comment %}
                                         <div class="Comment-Wrapper">     
                                             <div class="Comment-Posted-Info Identity-Bar">
@@ -210,7 +235,7 @@
                                  
 
                                 <div class="comment">
-                                    <h3>Make a new comment</h3>
+                                    <h1>Make a new comment</h1>
                                     <form method="post">
                                         {{comment_form.Name}}
                                         {{comment_form.Email}}
@@ -279,6 +304,8 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: csrfToken
             },
             success: function(json) {
+                document.getElementById('likes_check').innerHTML = json['result']
+                // document.getElementById('likes_count').innerHTML = json['result']
                 var result = json['result'];
                 var liked = json['liked'];
 

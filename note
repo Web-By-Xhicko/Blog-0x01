@@ -157,3 +157,365 @@ def thumbs(request):
             return JsonResponse({'up': up , 'down': down})
     
     return HttpResponseBadRequest("Invalid request")
+
+
+
+
+
+
+
+
+
+
+
+    {% extends "blogApp/Base.html" %}
+        {% load static %}
+        {% block templates %} 
+
+
+<style>
+
+
+    /* font-family: 'Anton', sans-serif;..other heading
+  font-family: 'Oswald', sans-serif;.....logo
+  font-family: 'Roboto', sans-serif;....Paragraphs
+  font-family: 'Teko', sans-serif;....Headings */
+
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&family=Roboto:wght@300&family=Teko:wght@700&display=swap');
+
+            
+:root{
+--FS-Paragraph-xm: .5rem;
+--FS-Paragraph-md: .6rem;
+--FS-Paragraph-md2: .7rem;
+--FS-Paragraph-bg: .8rem;
+--FS-Paragraph-bg2: .9rem;
+--FS-Heading-xm: .5rem;
+--FS-Heading-md: .6rem;
+--FS-Heading-bg: .7rem;
+--FS-Heading-md2: .8rem;
+--FS-Heading-bg2: .9rem;
+--FS-Paragraph: 1rem;
+--FS-Paragraph2: 1.1rem;
+--FS-Paragraph3: 1.2rem;
+--FS-Paragraph4: 1.3rem;
+--FS-Heading1:clamp(.4rem,  1rem, 1.5rem);
+--FS-Small-Heading:1.1rem;
+--FS-Small-Heading2:1.2rem;
+--FS-Small-Heading3:1.3rem;
+--FS-Small-Heading4:1.4rem;
+--FS-Heading2: 1.5rem;
+--FS-Heading3: 1.7rem;
+--FS-Heading4: 2rem;
+--FS-Heading5: 2.5rem;
+}
+
+.Reactions,.Reaction_Info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: .1em  solid #030303;
+        border-bottom: .1em  solid #030303;
+        padding: .4em 0;
+        margin: .5em 0;
+        position: relative;
+      }
+
+      .item, .Item_Info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+      .item i{
+       font-size: 1.5rem;
+       cursor: pointer;
+       color:#030303;
+    }
+
+    .item i.liked{
+        color: #ee0707;
+    }
+
+      .item p{
+       font-size: 1.4rem;
+       padding-left: .3em;
+    }
+
+    .Reaction_Info{
+        justify-content: space-evenly;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .Item_Info span, p{
+         font-family: 'Teko', sans-serif;
+         font-size:1.2rem;
+         margin-right: .2em;
+    }
+
+    .Item_Info p{
+         margin-right: 0;
+    }
+
+    .Likes i{
+        text-shadow: 2px 2px 2px #000;
+    }
+    .Favourites i{
+        color: #FFD700  ;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .Comment i{
+        color: #1E90FF;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .Share i{
+        color:#00FF00;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    #popup-message {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding:.9em .5em;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 900;
+        background-color: #000;
+        color: #fff;
+        border-radius: .2em ;
+        width: 30%;
+        position: fixed;
+        top: 10%;
+        right: 1%;
+        text-transform: capitalize;
+        transition: .5s ease-in-out;
+    }
+
+
+    .comment-posted{
+        margin: 2em 0;
+    }
+</style>
+
+    <div class="wrapper">
+        <div id="popup-message">Page link has been copied to your clipboard</div>
+
+            <div class="Single-Grid">
+
+                    <div class="Main-Content ">
+                            <div class="Post-Information">
+                                <div class="Single">
+                                <div class=" Single-Header Identity-Bar">
+                                    <h1>{{S_post.First_Name}} &nbsp; {{S_post.Last_Name}}</h1>
+                                    <h4>{{S_post.Publish}}</h4>
+                            </div>
+                                <img   src="{{S_post.Image.url}}" alt="{{S_post.Category_Tag}}">
+
+                            <div class="Single-content">
+                                <h1>{{S_post.Title}}</h1>
+                                 <p>{{S_post.Content}}</p>
+                            </div>
+
+                            <div class="Card-Footer">
+                                <p>{{S_post.Email}}</p>
+                                <a href="{% url 'blogApp:Home_Page' %}">Back</a>
+                            </div> 
+                            </div>
+
+                            <div class="Reaction_Info">
+                                <div class="Item_Info">
+                                    <span id="likes_check">{{S_post.likes_count}}</span>
+                                    <p>likes</p>
+                                </div>
+                                <div class="Item_Info">
+                                    <span>0</span>
+                                    <p>Favourites</p>
+                                </div>
+
+                                {% with Comment.count as total_comments %}
+                                <div class="Item_Info">
+                                    <span>{{total_comments}}</span>
+                                    <p>Comment</p>
+                                </div>
+                                {% endwith %}
+                            </div>
+
+
+                            <div class="Reactions">
+                                <div class="item Favourites">
+                                    <i  class="fa fa-bookmark"></i>
+                                    <p>0</p>
+                                </div>
+
+                                <div class="item Likes">
+
+                                    {% if post.liked %}
+                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart liked "></i>
+                                    {% else %}
+                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart "></i>
+                                    {% endif %}
+
+                                    <p id="likes_count">{{S_post.likes_count}}</p>
+                                </div>
+
+                                {% with Comment.count as total_comments %}
+                                <div class="item Comment">
+                                    <i  class="fa fa-comment"></i>
+                                    <p>{{total_comments}}</p>
+                                </div>
+                                {% endwith %}
+
+                                <div class="item Share">
+                                    <i  class="fa fa-share-alt" onclick="copyToClipboard()"></i>
+                                </div>
+
+                            </div>
+
+                            </div>
+                            <div class="Make-Comment">
+                             
+                            <div class="comment-posted">
+                                {% for UserComment in Comment %}
+                                        <div class="Comment-Wrapper">     
+                                            <div class="Comment-Posted-Info Identity-Bar">
+                                                <h3> comment by  &nbsp; {{UserComment.Name}}</h3>
+                                                <h3>{{UserComment.Publish}}</h3>
+                                        </div>
+                                        <p>{{UserComment.Comment}}</p>
+                                        </div>
+                                    {% empty %}
+                                {% endfor %}
+                                </div>
+                                 
+
+                                <div class="comment">
+                                    <h3>Make a new comment</h3>
+                                    <form method="post">
+                                        {{comment_form.Name}}
+                                        {{comment_form.Email}}
+                                        {{comment_form.Comment}}
+                                        {% csrf_token %}
+                                        <button class="btn" type="submit">submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="Side-Content ">
+                        <div class="Side-Grid">
+                          
+                            <div class="Side-Grid-Item">
+                                <h1>Other Posts</h1>
+                                {% for sidePostItem in O_post %}
+                                <div class="Side-Card">
+                                    <img  src="{{ sidePostItem.Image.url }}">
+                                        <a href="{{sidePostItem.get_absolute_url}}"></p>{{sidePostItem.Title|truncatechars:43}}</p></a>
+                                        <div class="Side-Card-Footer">
+                                            <h3>{{sidePostItem.Category_Tag}}</h3>
+                                            <p>By {{sidePostItem.Last_Name}}</p>
+                                        </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                         
+                        </div>
+             
+                    </div>
+
+            </div>
+           
+                   
+
+    </div>
+
+    
+
+
+<script>
+
+$(document).ready(function() {
+    var postId = $('#likes_button').data('postid');
+    var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+    // Check if the liked status is stored in the session
+    var liked = sessionStorage.getItem('liked_' + postId);
+    if (liked === 'true') {
+        $('#likes_button').addClass('liked');
+    }
+
+    // Bind click event to update like status
+    $(document).on('click', '#likes_button', function(e) {
+        e.preventDefault();
+        var icon = $(this);
+
+        // Send AJAX request to update the like status
+        $.ajax({
+            type: 'POST',
+            url: '/likes/',
+            data: {
+                postid: postId,
+                action: 'post',
+                csrfmiddlewaretoken: csrfToken
+            },
+            success: function(json) {
+                var result = json['result'];
+                var liked = json['liked'];
+
+                // Update the likes count
+                $('#likes_count').text(result);
+
+                // Store the updated like status in the session 
+                sessionStorage.setItem('liked_' + postId, liked);
+
+                // Apply or remove the 'liked' class based on the updated like status
+                if (liked) {
+                    icon.addClass('liked');
+                } else {
+                    icon.removeClass('liked');
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(err);
+            }
+        });
+    });
+});
+
+
+</script>
+
+<script>
+    function copyToClipboard(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url)
+
+        .then(() => {
+            const popup = document.getElementById('popup-message');
+            popup.style.display = 'flex';
+            setTimeout(() => {
+            popup.style.display = 'none';
+            }, 2000); // Hide the message after 2 seconds
+    })
+    .catch((err) => {
+      // Error occurred while copying
+      console.error('Failed to copy URL: ', err);
+    });
+
+    }
+</script>
+
+
+
+
+    {% endblock %}
+
+
+    
+
+
+
+  document.getElementById('likes_check').innerHTML = json['result']
+  document.getElementById('likes_count').innerHTML = json['result']
