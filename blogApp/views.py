@@ -33,8 +33,8 @@ def likes(request):
            post.save()
 
 
-       return JsonResponse({'result':result, 'post.liked':post.liked,})
-
+       return JsonResponse({'result':result, 'liked':post.liked,})
+   
 
 @login_required
 def Delete(request):

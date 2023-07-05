@@ -141,7 +141,13 @@
                                 </div>
 
                                 <div class="item">
-                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart"></i>
+
+                                    {% if post.liked %}
+                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart liked"></i>
+                                    {% else %}
+                                    <i id="likes_button" data-postid="{{S_post.id}}" class="fa fa-heart "></i>
+                                    {% endif %}
+
                                     <p id="likes_count">{{S_post.likes_count}}</p>
                                 </div>
 
@@ -218,14 +224,66 @@
     
 
 
+<script>
+
+$(document).ready(function() {
+    var postId = $('#likes_button').data('postid');
+    var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+    // Check if the liked status is stored in the session
+    var liked = sessionStorage.getItem('liked_' + postId);
+    if (liked === 'true') {
+        $('#likes_button').addClass('liked');
+    }
+
+    // Bind click event to update like status
+    $(document).on('click', '#likes_button', function(e) {
+        e.preventDefault();
+        var icon = $(this);
+
+        // Send AJAX request to update the like status
+        $.ajax({
+            type: 'POST',
+            url: '/likes/',
+            data: {
+                postid: postId,
+                action: 'post',
+                csrfmiddlewaretoken: csrfToken
+            },
+            success: function(json) {
+                var result = json['result'];
+                var liked = json['liked'];
+
+                // Update the likes count
+                $('#likes_count').text(result);
+
+                // Store the updated like status in the session
+                sessionStorage.setItem('liked_' + postId, liked);
+
+                // Apply or remove the 'liked' class based on the updated like status
+                if (liked) {
+                    icon.addClass('liked');
+                } else {
+                    icon.removeClass('liked');
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(err);
+            }
+        });
+    });
+});
 
 
+</script>
+
+
+<!-- 
 <script>
 
         $(document).on('click', '#likes_button', function(e){
             e.preventDefault();
             var icon = $(this);
-            var fieldName = 'liked'
             $.ajax({
                 type: 'POST',
                 url: '/likes/',
@@ -237,17 +295,23 @@
                 success: function (json) {
                     document.getElementById('likes_check').innerHTML = json['result']
                     document.getElementById('likes_count').innerHTML = json['result']
-                    if (liked) {
-                        icon.addClass('liked');
-                     } else {
-                        icon.removeClass('liked');
-                    }
+                    var liked = json['liked'];
+                    if (liked === 'true') {
+                        $('#likes_button').addClass('liked');
+                    } else {
+                        $('#likes_button').removeClass('liked');
+    }
                 },
-                error: function (xhr, errmsg, err) {}
+                error: function (xhr, errmsg, err) {
+                    console.log(err);
+                    var liked = !liked;
+                    updateButtonState(liked);
+                }
             });
         });
 
-</script>
+</script>  -->
+
 
     {% endblock %}
 
