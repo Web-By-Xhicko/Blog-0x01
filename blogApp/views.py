@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from Users.models import Profile
-from .models import Post
+from .models import Post, Comment
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.db.models import F
 from django.http import  JsonResponse
+from django.template.loader import render_to_string
 
 
 @login_required
@@ -87,7 +88,11 @@ def PostListView(request):
     if len(updated_posts) > 4:
          older_posts = Post.Newmanager.order_by('Publish')[:8]
 
-    context = {'Updated_Post': updated_posts, 'Older_Post': older_posts}
+    comment_count = Comment.objects.count()
+    context = {'Updated_Post': updated_posts,
+               'Older_Post': older_posts,
+               'comment_count': comment_count,}
+    
     return render(request, 'blogApp/Index.html', context)
 
 @login_required
@@ -95,7 +100,7 @@ def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
     user_comment = None
-    O_post = Post.Newmanager.filter(Status='published').exclude(id=S_post.id)[:5]
+    O_post = Post.Newmanager.filter(Status='published')  #.exclude(id=S_post.id)[:5]
 
     if request.method == 'POST':
         comment_form = NewCommentForm(request.POST)
@@ -108,7 +113,8 @@ def Single_Post(request, S_post):
         comment_form = NewCommentForm()
         print(O_post)
         return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
-                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post })
+                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, })
+
 
 class CategoryListView(ListView):
     template_name = 'blogApp/Category_Pages.html'

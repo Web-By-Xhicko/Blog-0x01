@@ -67,8 +67,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-top: .1em  solid #030303;
-        border-bottom: .1em  solid #030303;
         padding: .4em 0;
       }
 
@@ -122,7 +120,7 @@
                 <div class="Grid-Item">
                     <div class="Card">
                         <img  src="{{Blog_Post.Image.url}}" alt="{{Blog_Post.Category_Tag}}">
-                            <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:37}}</p></a>
+                            <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:27}}</p></a>
                             <div class="Card-Footer">
                                     <h3>{{Blog_Post.Category_Tag}}</h3>
                                     <p>By {{Blog_Post.Last_Name }}</p>
@@ -140,9 +138,10 @@
                                     <p>0</p>
                                 </div>
 
+                           
                                 <div class="item Comments">
                                     <i  class="fa fa-comment"></i>
-                                    <p>0</p>
+                                    <p>{{comment_count}}</p>
                                 </div>
 
                             </div>
