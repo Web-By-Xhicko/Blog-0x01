@@ -141,7 +141,8 @@
                            
                                 <div class="item Comments">
                                     <i  class="fa fa-comment"></i>
-                                    <p>{{comment_count}}</p>
+                                    
+                                    <p>{{Blog_Post.num_comments}}</p>
                                 </div>
 
                             </div>
@@ -164,10 +165,31 @@
                 <div class="Grid-Item">
                     <div class="Card">
                         <img  src="{{OlderPostList.Image.url}}" alt="{{OlderPostList.Category_Tag}}">
-                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title|truncatechars:37}}</p></a>
+                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title|truncatechars:27}}</p></a>
                             <div class="Card-Footer">
                                     <h3>{{OlderPostList.Category_Tag}}</h3>
-                                <p>By {{OlderPostList.Last_Name }}</p>
+                                    <p>By {{OlderPostList.Last_Name }}</p>
+                            </div>
+                      
+                            <div class="Reactions">
+
+                                <div class="item Likes">
+                                    <i  class="fa fa-heart"></i>
+                                    <p>{{OlderPostList.likes_count}}</p>
+                                </div>
+
+                                 <div class="item Favourites">
+                                    <i  class="fa fa-bookmark"></i>
+                                    <p>0</p>
+                                </div>
+
+                           
+                                <div class="item Comments">
+                                    <i  class="fa fa-comment"></i>
+                                    
+                                    <p>{{OlderPostList.num_comments}}</p>
+                                </div>
+
                             </div>
                     </div>
 

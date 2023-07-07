@@ -8,9 +8,8 @@ from Users.forms import UserProfileUpdateForm, ProfileUpdateForm, PwdChangeForm
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from django.db.models import F
 from django.http import  JsonResponse
-from django.template.loader import render_to_string
+from django.db.models import Count
 
 
 @login_required
@@ -82,26 +81,24 @@ def Update_Profile(request):
 
 @login_required
 def PostListView(request):
-    updated_posts = Post.Newmanager.order_by('-Publish')[:4]
+    updated_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('-Publish')[:4]
     older_posts = None
-
+   
     if len(updated_posts) > 4:
-         older_posts = Post.Newmanager.order_by('Publish')[:8]
+         older_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('Publish')[:8]
 
-    comment_count = Comment.objects.count()
     context = {'Updated_Post': updated_posts,
                'Older_Post': older_posts,
-               'comment_count': comment_count,}
+            }
     
-    return render(request, 'blogApp/Index.html', context)
+    return render(request, 'blogApp/index.html', context)
 
 @login_required
 def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
     user_comment = None
-    O_post = Post.Newmanager.filter(Status='published')  #.exclude(id=S_post.id)[:5]
-
+    O_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(Status='published')  #.exclude(id=S_post.id)[:5]
     if request.method == 'POST':
         comment_form = NewCommentForm(request.POST)
         if comment_form.is_valid(): 
@@ -111,7 +108,6 @@ def Single_Post(request, S_post):
             return HttpResponseRedirect('/' + S_post.slug)
     else:
         comment_form = NewCommentForm()
-        print(O_post)
         return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
                 'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, })
 

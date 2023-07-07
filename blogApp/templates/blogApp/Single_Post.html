@@ -191,12 +191,11 @@
                                         <p>Favourites</p>
                                     </div>
     
-                                    {% with Comment.count as total_comments %}
+                                   
                                     <div class="Item_Info">
-                                        <span>{{total_comments}}</span>
+                                        <span>{{comment_count}}</span>
                                         <p>Comment</p>
                                     </div>
-                                    {% endwith %}
                                 </div>
     
     
@@ -217,12 +216,13 @@
                                         <p id="likes_count">{{S_post.likes_count}}</p>
                                     </div>
     
-                                    {% with Comment.count as total_comments %}
+                                    
                                     <div class="item Comment">
                                         <i  class="fa fa-comment"></i>
-                                        <p>{{total_comments}}</p>
+                                        {% with Comment.count as total_comments %}
+                                            <p>{{total_comments}}</p>
+                                        {% endwith %}
                                     </div>
-                                    {% endwith %}
     
                                     <div class="item Share">
                                         <i  class="fa fa-share-alt" onclick="copyToClipboard()"></i>
@@ -288,13 +288,11 @@
                                                 <p>0</p>
                                             </div>
             
-                                            {% with Comment.count as total_comments %}
                                             <div class="item icons Comment">
                                                 <i  class="fa fa-comment icons"></i>
-                                                <p>{{total_comments}}</p>
+                                                <p>{{sidePostItem.num_comments}}</p>
                                             </div>
-                                            {% endwith %}
-            
+                                       
                                         </div>
                                 </div>
                                 {% endfor %}

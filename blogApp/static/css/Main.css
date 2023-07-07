@@ -402,13 +402,15 @@ nav img{
   display: flex;
   flex-direction: column;
   width: 100%;
+
 }
 
 
 .Side-Card{
   border: 1px solid #C0C0C0;
   border-radius: .2em;
-  padding: .5em;
+  padding: .2em;
+  margin-bottom: .5em ;
 }
 
 .Side-Card img{
@@ -457,7 +459,6 @@ nav img{
 
 .Side-Card-Footer a{
   border-radius: .15em;
-  padding: .2em .6em;
   font-family: 'Anton', sans-serif;
   letter-spacing: .2rem;
   font-size: var(--FS-Paragraph);
