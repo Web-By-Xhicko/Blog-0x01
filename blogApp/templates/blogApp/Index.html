@@ -120,7 +120,8 @@
                 <div class="Grid-Item">
                     <div class="Card">
                         <img  src="{{Blog_Post.Image.url}}" alt="{{Blog_Post.Category_Tag}}">
-                            <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:27}}</p></a>
+                            <a href="{{Blog_Post.get_absolute_url}}"><p>{{ Blog_Post.Title|truncatechars:65}}</p></a>
+                            <!-- {{ Blog_Post.Title|truncatechars:27}} -->
                             <div class="Card-Footer">
                                     <h3>{{Blog_Post.Category_Tag}}</h3>
                                     <p>By {{Blog_Post.Last_Name }}</p>
@@ -165,7 +166,8 @@
                 <div class="Grid-Item">
                     <div class="Card">
                         <img  src="{{OlderPostList.Image.url}}" alt="{{OlderPostList.Category_Tag}}">
-                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title|truncatechars:27}}</p></a>
+                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title}}</p></a>
+                            <!-- {{ OlderPostList.Title|truncatechars:27} -->
                             <div class="Card-Footer">
                                     <h3>{{OlderPostList.Category_Tag}}</h3>
                                     <p>By {{OlderPostList.Last_Name }}</p>

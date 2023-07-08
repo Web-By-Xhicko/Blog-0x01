@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http import  JsonResponse
 from django.db.models import Count
+from django.core.paginator import Paginator
 
 
 @login_required
@@ -97,8 +98,14 @@ def PostListView(request):
 def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
+
+    comments_per_page = 2
+    paginator = Paginator(Comment, comments_per_page)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+
     user_comment = None
-    O_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(Status='published')  #.exclude(id=S_post.id)[:5]
+    O_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(Status='published').exclude(id=S_post.id)[:5]
     if request.method == 'POST':
         comment_form = NewCommentForm(request.POST)
         if comment_form.is_valid(): 
@@ -109,7 +116,7 @@ def Single_Post(request, S_post):
     else:
         comment_form = NewCommentForm()
         return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
-                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, })
+                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, 'page':page })
 
 
 class CategoryListView(ListView):
@@ -147,3 +154,4 @@ class CategoryListView(ListView):
 #                   {'Form':Form,
 #                    'Query': Query,
 #                    'Search_Result':Search_Result})
+

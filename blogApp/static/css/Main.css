@@ -318,14 +318,14 @@ nav img{
   display: grid;
   width: 95%;
   margin: .8em auto;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .Card{
   margin: 1.3em;
   background-color: transparent;
   padding: .7em .5em;
-  border: 1px solid #C0C0C0;
+  /* border: 1px solid #C0C0C0; */
   border-radius: .3em;
   color: #fff;
 }
@@ -396,6 +396,7 @@ nav img{
   font-size: var(--FS-Heading3);
   text-align: center;
   text-transform: uppercase;
+  color: #fff;
 }
 
 .Side-Grid{
@@ -405,70 +406,49 @@ nav img{
 
 }
 
-
 .Side-Card{
   border: 1px solid #C0C0C0;
   border-radius: .2em;
-  padding: .2em;
+  padding: .4em .6em;
   margin-bottom: .5em ;
 }
 
-.Side-Card img{
-  border-radius: .1em;
+.Side-Card-Header{
   display: flex;
+  flex-direction: column;
+}
+
+.Side-Card-Header img{
+  border-radius: .1em;
   object-fit: contain;
   width: 100%;
 }
 
-
-.Side-Card a{
-  font-size:var(--FS-Heading-bg2);
-  font-family: 'Teko', sans-serif;
-  text-transform: capitalize;
-}
-
-.Side-Card a:hover{
-  text-decoration: underline;
-}
-
-
-.Side-Card a p{
-  font-size: var(--FS-Paragraph-bg2);
-  padding: .6em 0 0 0;
+.Side-Card-Header a{
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: .2em;
+  font-size: .8rem;
 }
 
 .Side-Card-Footer{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content:space-between;
+  color: #fff;
+}
+
+.Side-Card-Footer-Top{
+  display: flex;
   justify-content: space-between;
-  align-items: center;
-  color: #fff;
 }
 
-.Side-Card-Footer h3{
-  font-family: 'Teko', sans-serif;
-  font-size:var(--FS-Heading-bg2);
+.Side-Card-Footer-Top h3{
   text-transform: uppercase;
-}
-
-.Side-Card-Footer p{
   font-family: 'Teko', sans-serif;
-  font-size:var(--FS-Paragraph-bg2);
-  text-transform: capitalize;
+  font-size: 1rem;
 }
 
-.Side-Card-Footer a{
-  border-radius: .15em;
-  font-family: 'Anton', sans-serif;
-  letter-spacing: .2rem;
-  font-size: var(--FS-Paragraph);
-  text-transform: capitalize;
-}
-
-.Side-Card-Footer a:hover{
-  background-color: #000;
-  color: #fff;
-}
 
 .Single-Grid{
   display: grid;
@@ -626,6 +606,92 @@ height: 75vh;
   font-size: var(--FS-Small-Heading);
 }
 
+.pagination{
+  padding: .2em .6em;
+  margin-bottom: 6em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Ltn {
+  width: 10%;
+}
+
+
+.Page_Btn{
+  width: 100%;
+  border: 1px solid #fff;
+  padding: .3em .6em;
+  border-radius: .2em;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+.Page_Btn:hover{
+ transform: scale(1.1);
+}
+
+.Page_Btn a{
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+.Disabled {
+  background-color: #c0c0c031;
+  color: #fff;
+  border: none;
+  cursor: not-allowed;
+  border-radius: .2em;
+  padding: .3em .6em;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.Disabled:hover{
+  transform: none;
+}
+
+.Page_Center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Current_Page{
+  background-color: #fff;
+  color: #000;
+  border-radius: .2em;
+  padding: .5em 1em;
+  margin: 0 .3em;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+.Page_Num{
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: .2em;
+  padding: .5em .8em;
+  margin: 0 .3em;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 
 
 
@@ -770,10 +836,10 @@ height: 75vh;
 
 } */
 
-@media only screen and (max-width:1024px){
+@media only screen and (max-width:1100px){
 
   .Grid{
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   #Remove{
@@ -823,7 +889,7 @@ height: 75vh;
 
 
 
-@media only screen and (max-width:500px){
+@media only screen and (max-width:700px){
 
   nav{
     padding: .2em 1em;

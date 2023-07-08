@@ -10,7 +10,6 @@ from Users.forms import PwdResetConfirmForm, PwdChangeForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', include('blogApp.urls', namespace='blogApp')),
     path('Register/', User_Views.Register, name='Register_Page'),
     path('Login/', User_Views.Login, name='Login_Page'),
     path('Logout/', User_Views.Logout, name='Logout_Page'),
@@ -21,4 +20,5 @@ urlpatterns = [
     path('Change_Password/', auth_views.PasswordChangeView.as_view(template_name='Users/password_change.html', form_class=PwdChangeForm), name='Password_Change_Page'),
     path('Password_Done', auth_views.PasswordChangeDoneView.as_view(template_name='Users/password_change_done.html'), name='password_change_done'),
     path('delete/', User_Views2.Delete, name='Delete_Page' ),
+    path('', include('blogApp.urls', namespace='blogApp')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
