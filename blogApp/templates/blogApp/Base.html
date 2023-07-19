@@ -10,8 +10,9 @@
     </title>
     <link rel="stylesheet" href="{% static 'css/Main.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> -->
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="RemoveNav">
         <div class="wrapper">
@@ -24,7 +25,7 @@
                         <li><a href="#">Search</a></li>
                     </ul>
 
-                    <img src="{{user.profile.image.url}}" alt="Default-Image"  class="More_Url" >
+                    <img src="{{user.profile.image.url}}" alt="Default-Image"  class="MoreLink" >
 
                     <div class="Category-option CategoryList">
                         <div class="Category-Option-List">

@@ -1,4 +1,4 @@
- #checks if a user has made a vote
+ <!-- #checks if a user has made a vote
         if update.thumbs.filter(id=request.user.id).exists():
 
             # Checks what a user current vote is 
@@ -518,4 +518,4 @@ $(document).ready(function() {
 
 
   document.getElementById('likes_check').innerHTML = json['result']
-  document.getElementById('likes_count').innerHTML = json['result']
+  document.getElementById('likes_count').innerHTML = json['result'] -->

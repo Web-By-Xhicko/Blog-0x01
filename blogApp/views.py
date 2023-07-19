@@ -4,14 +4,14 @@ from .models import Post, Comment
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
-from Users.forms import UserProfileUpdateForm, ProfileUpdateForm, PwdChangeForm
+from Users.forms import UserProfileUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http import  JsonResponse
 from django.db.models import Count
 from django.core.paginator import Paginator
-
+from django.template.loader import render_to_string
 
 @login_required
 def likes(request):
@@ -36,7 +36,6 @@ def likes(request):
 
        return JsonResponse({'result':result, 'liked':post.liked,})
    
-
 @login_required
 def Delete(request):
     if request.method == 'POST':
@@ -99,7 +98,7 @@ def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
 
-    comments_per_page = 2
+    comments_per_page = 5
     paginator = Paginator(Comment, comments_per_page)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
@@ -112,10 +111,13 @@ def Single_Post(request, S_post):
             user_comment = comment_form.save(commit=False)
             user_comment.Post = S_post
             user_comment.save()
-            return HttpResponseRedirect('/' + S_post.slug)
+
+            Comment_Section = render_to_string('blogApp/Single_Post.html',  {'page': page}, request=request)
+            # Returns the upted comments with the help of the Ajax from the server
+            return JsonResponse({'Comment_Section': Comment_Section})
     else:
         comment_form = NewCommentForm()
-        return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
+    return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
                 'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, 'page':page })
 
 

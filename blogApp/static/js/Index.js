@@ -1,10 +1,9 @@
-
-let moreUrl = document.querySelector('.More_Url')
+let moreLinks = document.querySelector('.MoreLink')
 let sideProfile = document.querySelector('.SideProfile')
-moreUrl.addEventListener('click', ()=>{
+moreLinks.addEventListener('click', ()=>{
     sideProfile.classList.toggle('OpenSideProfile')
     categoryList.classList.remove('CatList')
-  })
+})
 
 let openCategory = document.querySelector('.OpenCategoryList')
 let categoryList = document.querySelector('.CategoryList')
