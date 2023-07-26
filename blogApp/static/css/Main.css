@@ -550,6 +550,32 @@ nav img{
     transform: none;
 }
 
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item p{
+ padding-left: .2em;
+ font-family: 'Teko', sans-serif;
+}
+
+.Favourites i{
+  color: #FFD700  ;
+  text-shadow: 2px 2px 2px #000;
+}
+
+.Comments i{
+  color: #1E90FF;
+  text-shadow: 2px 2px 2px #000;
+}
+
+.Likes i{
+  color:#ee0707;
+  text-shadow: 2px 2px 2px #000;
+}
+
 .Main_Post_Details_Footer{
     display: flex;
     justify-content: space-between;
@@ -816,7 +842,6 @@ nav img{
   text-transform: uppercase;
 }
 
-
 .Side_Post_Wrapper{
   display: flex;
   flex-direction: column;
@@ -871,50 +896,6 @@ nav img{
    font-family: 'Teko', sans-serif;
    text-transform: uppercase;
    margin-right: 1em;
-}
-
-.Side-Card{
-  border: 1px solid #C0C0C0;
-  border-radius: .2em;
-  padding: .4em .6em;
-  margin-bottom: .5em ;
-}
-
-.Side-Card-Header{
-  display: flex;
-  flex-direction: column;
-}
-
-.Side-Card-Header img{
-  border-radius: .1em;
-  object-fit: contain;
-  width: 100%;
-}
-
-.Side-Card-Header a{
-  text-transform: uppercase;
-  /* font-family: 'Oswald', sans-serif; */
-  margin-bottom: .2em;
-  font-size: .8rem;
-}
-
-.Side-Card-Footer{
-  display: flex;
-  flex-direction: column;
-  justify-content:space-between;
-  align-items: center;
-  color: #fff;
-}
-
-.Side-Card-Footer-Top{
-  display: flex;
-  justify-content: space-between;
-}
-
-.Side-Card-Footer-Top h3{
-  text-transform: uppercase;
-  font-family: 'Teko', sans-serif;
-  font-size: 1rem;
 }
 
 .SPC_Footer_Bottom{

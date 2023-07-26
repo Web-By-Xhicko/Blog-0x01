@@ -81,11 +81,11 @@ def Update_Profile(request):
 
 @login_required
 def PostListView(request):
-    updated_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('-Publish')[:4]
+    updated_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('-Publish')[:6]
     older_posts = None
    
-    if len(updated_posts) > 4:
-         older_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('Publish')[:8]
+    if len(updated_posts) > 6:
+         older_posts = Post.Newmanager.annotate(num_comments=Count('Comment')).order_by('Publish')[:6]
 
     context = {'Updated_Post': updated_posts,
                'Older_Post': older_posts,
@@ -132,7 +132,7 @@ class CategoryListView(ListView):
             #Captures a specific category Name  to the template
             'Category' : self.kwargs['Category'],
             #Collects all data from the post ||filters post from the specific category name  to specific category pages|| filters again to only published posts
-            'Category_Post' : Post.Objects.filter(Category__name=self.kwargs['Category']).filter(Status='published')
+            'Category_Post' : Post.Objects.annotate(num_comments=Count('Comment')).filter(Category__name=self.kwargs['Category']).filter(Status='published')
         } 
        return Category_Content
     
