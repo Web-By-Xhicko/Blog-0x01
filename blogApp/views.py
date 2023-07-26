@@ -111,14 +111,16 @@ def Single_Post(request, S_post):
             user_comment = comment_form.save(commit=False)
             user_comment.Post = S_post
             user_comment.save()
-
-            Comment_Section = render_to_string('blogApp/Single_Post.html',  {'page': page}, request=request)
-            # Returns the upted comments with the help of the Ajax from the server
-            return JsonResponse({'Comment_Section': Comment_Section})
+            return HttpResponseRedirect('/' + S_post.slug)
     else:
         comment_form = NewCommentForm()
-    return render(request, 'blogApp/Single_Post.html', {'S_post': S_post,'user_comment' : user_comment, 
-                'Comment' : Comment, 'comment_form': comment_form,'O_post' : O_post, 'page':page })
+    return render(request, 'blogApp/Single_Post.html', 
+                  {'S_post': S_post,
+                   'user_comment' : user_comment, 
+                   'Comment' : Comment,
+                   'comment_form': comment_form,
+                   'O_post' : O_post,
+                   'page':page })
 
 
 class CategoryListView(ListView):

@@ -166,7 +166,9 @@
                 <div class="Grid-Item">
                     <div class="Card">
                         <img  src="{{OlderPostList.Image.url}}" alt="{{OlderPostList.Category_Tag}}">
-                            <a href="{{OlderPostList.get_absolute_url}}"><p>{{ OlderPostList.Title}}</p></a>
+                            <a href="{{OlderPostList.get_absolute_url}}">
+                                <p>{{ OlderPostList.Title}}</p>
+                            </a>
                             <!-- {{ OlderPostList.Title|truncatechars:27} -->
                             <div class="Card-Footer">
                                     <h3>{{OlderPostList.Category_Tag}}</h3>
