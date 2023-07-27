@@ -26,3 +26,5 @@ Close.forEach((closeBtn, index) => {
     disappear[index].classList.toggle('remove');
     });
 });
+
+

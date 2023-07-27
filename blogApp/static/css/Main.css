@@ -391,6 +391,7 @@ nav img{
   color: #fff;
 }
 
+
 .Post_View{
   display: flex;
 }
@@ -399,6 +400,7 @@ nav img{
   display: flex;
   flex-direction: column;
   width: 75%;
+  position: relative;
 }
 
 .Main_Post_Wrapper{
@@ -937,6 +939,57 @@ nav img{
 .SPRI_Comments i{
   color: #1E90FF;
   text-shadow: 2px 2px 2px #000;
+}
+
+.Bookmark{
+  position: relative;
+}
+
+.Cancel_Bookmark{
+  position: absolute;
+  top:3%;
+  right: 4%;
+}
+
+.Cancel_Bookmark a i{
+  color: #ee0707;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px #000;
+}
+
+
+.SuccessMessages{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #02fc24;
+  padding: .7em .9em;
+  border-radius: .2em;
+  width: 30%;
+  margin: .4em auto 0 auto;
+  position: fixed;
+  top: 10%;
+  right: 1%;
+  text-transform: capitalize;
+  transition: .5s ease-in-out;
+}
+
+.SuccessMessages.remove{
+  display: none;
+}
+
+.SuccessMessages p{
+  font-family: 'Roboto', sans-serif;
+  color: #030303;
+  font-weight: 900;
+  font-size: var(--FS-Paragraph);
+}
+
+.SuccessMessages i{
+  color: #030303;
+  font-size: var(--FS-Paragraph);
+  cursor: pointer;
 }
 
 

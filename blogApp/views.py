@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
-from Users.models import Profile
-from .models import Post, Comment
+# from Users.models import Profile
+from .models import Post #Comment
 from .forms import NewCommentForm  # SearchForm#
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from Users.forms import UserProfileUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -11,7 +12,28 @@ from django.contrib.auth.models import User
 from django.http import  JsonResponse
 from django.db.models import Count
 from django.core.paginator import Paginator
-from django.template.loader import render_to_string
+import json
+
+
+def bookmarked(request):
+    bookmarked_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(bookmark = request.user)
+    return render(request, 'blogApp/bookmark.html', {'bookmarked_post': bookmarked_post})
+
+def bookmark(request, id):
+   post = get_object_or_404(Post, id=id)
+   if post.bookmark.filter(id=request.user.id).exists():
+       post.bookmark.remove(request.user)
+       post.bookmark_count -= 1
+       post.save()
+       messages.success(request, 'Bookmark Removed Successfully')
+
+   else:
+       post.bookmark.add(request.user)
+       post.bookmark_count += 1
+       post.save()
+       messages.success(request, 'Bookmark Added Successfully')
+
+   return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
 def likes(request):
@@ -123,7 +145,7 @@ def Single_Post(request, S_post):
                    'page':page })
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin,  ListView):
     template_name = 'blogApp/Category_Pages.html'
     context_object_name = 'Category_List'
 
@@ -152,7 +174,7 @@ class CategoryListView(ListView):
 #             Query = Form.cleaned_data['Query']
 #             #Looking for the posts in the database that contains the query
 #             Search_Result = Post.Objects.filter(Title__contains=Query)
-
+  
 
 #     return render(request, 'blogApp/Search.html', 
 #                   {'Form':Form,

@@ -44,11 +44,12 @@ class Post(models.Model):
     Status = models.CharField(max_length=10, choices=options, default='draft')
     Objects = models.Manager() #default Manager
     Newmanager = NewManager() #custom manager
-
- 
     likes_count = models.IntegerField(default='0')
     likes = models.ManyToManyField(User, related_name='like', default=None, blank=True)
     liked = models.BooleanField(default=False)
+    bookmark_count =  models.IntegerField(default=0)
+    bookmark = models.ManyToManyField(User, related_name='bookmark',default=None, blank=True )
+
 
     #to get to each individual post from a link
     def get_absolute_url(self):
