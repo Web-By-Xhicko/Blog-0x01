@@ -992,6 +992,68 @@ nav img{
   cursor: pointer;
 }
 
+.Settings_Wrapper{
+  margin: 3.5em 1em;
+}
+
+.Settings_Wrapper h1{
+  font-family: 'Teko', sans-serif;
+  font-size: var(--FS-Heading5);
+  text-transform: uppercase;
+  text-align: center;
+  color:#fff;
+  margin-top: 2em;
+}
+
+.Settings_Content{
+  width: 50%;
+  margin: 1em auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.Content_Info{
+  width:100%;
+  background-color: #000;
+  color: #fff;
+  margin: 1em 0;
+  padding:.3em  1em;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  border-radius: .5em;
+  transition: transform .5s ease-in-out;
+}
+
+.Content_Info:hover{
+  transform: translateX(5%);
+}
+
+.CI_Left{
+  font-family: 'Teko', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.CI_Left i{
+  font-size: var(--FS-Heading5);
+}
+
+.CI_Left a{
+  margin-left: .5em;
+  text-transform: capitalize;
+  font-size: var(--FS-Heading3);
+}
+
+.CI_Left a:hover{
+text-decoration: underline;
+}
+
+.Content_Info i{
+  font-size: var(--FS-Heading5);
+}
+
+
 
 /* @media only screen and (max-width:330px){
 

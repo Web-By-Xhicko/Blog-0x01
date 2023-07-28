@@ -1,16 +1,9 @@
 {% extends "blogApp/Base.html" %}
+{% load static %}
     {% block title %} Settings Page{% endblock %}
         {% block templates %} 
 
          <style>
-              /* font-family: 'Anton', sans-serif;..other heading
-  font-family: 'Oswald', sans-serif;.....logo
-  font-family: 'Roboto', sans-serif;....Paragraphs
-  font-family: 'Teko', sans-serif;....Headings */
-
-   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&family=Roboto:wght@300&family=Teko:wght@700&display=swap');
-
-            
 :root{
 --FS-Paragraph-xm: .5rem;
 --FS-Paragraph-md: .6rem;
@@ -37,109 +30,6 @@
 --FS-Heading5: 2.5rem;
 }
 
-.Settings_Wrapper{
-    margin: 3.5em 1em;
-}
-
-.Settings_Wrapper h1{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.Settings_Content{
-    display: grid;
-    width: 80%;
-    margin: 1em auto;
-    grid-template-columns: auto auto;
-    gap: 4em;
-}
-
-.Content_Info1,
-.Content_Info2,
-.Content_Info3, 
-.Content_Info4{
-    width:90%;
-    background-color: #000;
-    color: #fff;
-    padding:3em  .5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: .5em;
-    transition: transform .5s ease-in-out;
-}
-
-.Content_Info1:hover{
-    transform: scale(1.07);
-}
-.Content_Info2:hover{
-    transform: scale(1.07);
-}
-.Content_Info3:hover{
-    transform: scale(1.07);
-}
-.Content_Info4:hover{
-    transform: scale(1.07);
-}
-
-.Content_Info1 i{
-    font-size: 3rem;
-}
-
-.Content_Info1 a{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-}
-
-.Content_Info1 a:hover{
-    text-decoration: underline;
-}
-
-
-.Content_Info2 i{
-    font-size: 3rem;
-}
-
-.Content_Info2 a{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-}
-
-.Content_Info2 a:hover{
-    text-decoration: underline;
-}
-
-.Content_Info3 i{
-    font-size: 3rem;
-}
-
-.Content_Info3 a{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-}
-
-.Content_Info3 a:hover{
-    text-decoration: underline;
-}
-
-
-.Content_Info4 i{
-    font-size: 3rem;
-}
-
-.Content_Info4 a{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-}
-
-.Content_Info4 a:hover{
-    text-decoration: underline;
-}
-
 </style>  
 
 
@@ -149,25 +39,38 @@
 
             <div class="Settings_Content">
 
-                <div class="Content_Info1">
-                    <i class="fa fa-address-card"></i>
-                    <a href="{% url 'blogApp:Profile_Page' %}"> Profile </a>
+                <div class="Content_Info">
+                   <div class="CI_Left">
+                        <i class="fa fa-address-card"></i>
+                        <a href="{% url 'blogApp:Profile_Page' %}"> Profile </a>
+                   </div>
+                        <i class="	fa fa-long-arrow-right"></i>
                 </div>
 
-                <div class="Content_Info2">
-                    <i class="fa fa fa-edit"></i>
-                    <a href="{% url 'blogApp:UpdateProfile_Page' %}"> Update Profile </a>
+                <div class="Content_Info">
+                   <div class="CI_Left">
+                        <i class="fa fa fa-edit"></i>
+                        <a href="{% url 'blogApp:UpdateProfile_Page' %}"> Update Profile </a>
+                   </div>
+                        <i class="	fa fa-long-arrow-right"></i>
                 </div>
 
-                <div class="Content_Info3">
+                <div class="Content_Info">
+                   <div class="CI_Left">
                     <i class="fa fa-eye"></i>
                     <a href="{% url 'Password_Change_Page' %}"> Change password  </a>
+                   </div>
+                        <i class="	fa fa-long-arrow-right"></i>
                 </div>
 
-                <div class="Content_Info4">
+                <div class="Content_Info">
+                   <div class="CI_Left">
                     <i class="fa fa-close"></i>
                     <a href="{% url 'Delete_Page' %}"> Delete Account </a>
+                   </div>
+                        <i class="	fa fa-long-arrow-right"></i>
                 </div>
+
             </div>
          </div>
     

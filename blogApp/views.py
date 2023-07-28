@@ -14,11 +14,12 @@ from django.db.models import Count
 from django.core.paginator import Paginator
 import json
 
-
+@login_required
 def bookmarked(request):
     bookmarked_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(bookmark = request.user)
     return render(request, 'blogApp/bookmark.html', {'bookmarked_post': bookmarked_post})
 
+@login_required
 def bookmark(request, id):
    post = get_object_or_404(Post, id=id)
    if post.bookmark.filter(id=request.user.id).exists():

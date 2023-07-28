@@ -34,7 +34,7 @@ def Login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, mark_safe( f'Hello {username}...You are now logged in, Enjoy your Time!'))
+            messages.success(request, mark_safe( f'Hello {username}, You logged In Successfully'))
             return redirect('blogApp:Home_Page')
         else:
             messages.error(request, 'Invalid Username Or Password.')
