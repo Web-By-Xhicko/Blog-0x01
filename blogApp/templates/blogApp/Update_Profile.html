@@ -44,17 +44,17 @@
         margin: 4em 0;
         position: relative;
     }
-
+    
     .Back{
-      position: absolute;
-      top: 0;
-      margin: 0 1em ;
-    }
+  position: absolute;
+  top: 0;
+  margin: 0 1em ;
+}
 
-    .Back a{
-      color: #000;
-      font-size: 1.5rem;
-    }
+.Back a{
+  color: #fff;
+  font-size: 1.5rem;
+}
 
     .Wrapper h1{
     font-family: 'Teko', sans-serif;
@@ -62,6 +62,7 @@
     text-transform: uppercase;
     text-align: center;
     margin: 0 0 .5em 0;
+    color: #fff;
     }
 
     form{
@@ -161,15 +162,20 @@
     }
     
   .SuccessMessages{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background: #02fc24;
-        padding: .7em .9em;
-        border-radius: .2em;
-        width: 50%;
-        margin: .5em auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #02fc24;
+  padding: .7em .9em;
+  border-radius: .2em;
+  width: 30%;
+  margin: .4em auto 0 auto;
+  position: fixed;
+  top: 10%;
+  right: 1%;
+  text-transform: capitalize;
+  transition: .5s ease-in-out;
       }
     
       .SuccessMessages.remove{
@@ -189,50 +195,55 @@
         cursor: pointer;
       }
 
-
+      
   .WarningMessages{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background: #ffa600;
-        padding: .7em .9em;
-        border-radius: .2em;
-        width: 50%;
-        margin: .5em auto 0 auto;
-      }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffa600;
+  padding: .7em .9em;
+  border-radius: .2em;
+  width: 30%;
+  margin: .4em auto 0 auto;
+  position: fixed;
+  top: 10%;
+  right: 1%;
+  text-transform: capitalize;
+  transition: .5s ease-in-out;
+  }
     
-      .WarningMessages.remove{
-        display: none;
-      }
-    
-      .WarningMessages p{
-        font-family: 'Roboto', sans-serif;
-        color: #030303;
-        font-weight: 900;
-        font-size: var(--FS-Paragraph);
-      }
-    
-      .WarningMessages i{
-        color: #030303;
-        font-size: var(--FS-Paragraph);
-        cursor: pointer;
-      }
+.WarningMessages.remove{
+  display: none;
+}
 
-      .FileName{
-        width: 100%;
-        border: 1px solid #000;
-        font-family: 'Oswald', sans-serif;
-      }
+.WarningMessages p{
+  font-family: 'Roboto', sans-serif;
+  color: #030303;
+  font-weight: 900;
+  font-size: var(--FS-Paragraph);
+}
 
-      .FileName span{
-        color: #fff;
-        background-color: #000;
-        border: none;
-        padding: 0  .5em 0 0 ;
-        margin-right: .5em;
-        font-family: 'Oswald', sans-serif;
-      }
+.WarningMessages i{
+  color: #030303;
+  font-size: var(--FS-Paragraph);
+  cursor: pointer;
+}
+
+.FileName{
+  width: 100%;
+  border: 1px solid #000;
+  font-family: 'Oswald', sans-serif;
+}
+
+.FileName span{
+  color: #fff;
+  background-color: #000;
+  border: none;
+  padding: 0  .5em 0 0 ;
+  margin-right: .5em;
+  font-family: 'Oswald', sans-serif;
+}
 
 </style>
 
@@ -240,14 +251,14 @@
 
       <div class="Back">
         <a href="{% url 'blogApp:Settings_Page' %}">
-           <i class="fa fa-arrow-left"></i>
+           <i class="fa fa-long-arrow-left"></i>
         </a>
      </div>
 
         {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'success' %}
-                <div class="SuccessMessages Disappear">
+                <div class="SuccessMessages Msg Disappear">
                     <p>{{ message }}</p>
                     <i class="fa fa-close Close"></i>
                 </div> 
@@ -259,7 +270,7 @@
         {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'warning' %}
-                <div class="WarningMessages Disappear">
+                <div class="WarningMessages Msg Disappear">
                     <p>{{ message }}</p>
                     <i class="fa fa-close Close"></i>
                 </div> 
@@ -284,6 +295,23 @@
 
     </div>
 
+
+<script>
+
+function hideFlashMessages() {
+    const flashMessages = document.querySelectorAll('.Msg');
+    flashMessages.forEach((message) => {
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 3000); 
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    hideFlashMessages();
+});
+
+</script>    
 
 {% endblock %}
 
