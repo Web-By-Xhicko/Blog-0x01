@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 1em 0;
+    margin: 1em 0 0 0 ;
     height: 81.8vh;
   }
 
@@ -54,7 +54,7 @@
     text-transform: uppercase;
     font-size: var(--FS-Heading5);
     font-family: 'Teko', sans-serif;
-    /* margin: .8em 0; */
+    color: #fff;
   }
 
   form{
@@ -62,7 +62,6 @@
     flex-direction: column;
     max-width: 600px;
     width: 70%;
-    border: .1em solid #000;
     border-radius: .2em;
     padding: .7em 2em;
 
@@ -102,18 +101,15 @@ form small{
     color: #000;
   }
 
-
-
-
-  .btn{
+.btn{
     margin: .7em 0;
-    padding: 1em ;
-    background-color: #000;
-    color: #fff;
+    padding: 0.5em;
+    background-color: #fff;
+    color: #000;
     margin: .5em 0;
     border-radius: .2em ;
     border: none;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Teko', sans-serif;
     font-size: var(--FS-Paragraph);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -138,20 +134,21 @@ form small{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: .5em;
   }
 
   .form-links p{
-    color: #000;
+    color: #fff;
     font-weight: 900;
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
   }
   
   .form-links a{
-    color: #000;
+    color: #fff;
     font-weight: 900;
     text-transform: uppercase;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Oswald', sans-serif;
     margin-left: .3em;
   }
 
@@ -218,64 +215,58 @@ form small{
     cursor: pointer;
   }
 
-  .SuccessMessages{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background: #02fc24;
-        padding: .7em .9em;
-        border-radius: .2em;
-        width: 45%;
-        margin: 5em auto 0 auto;
-      }
-    
-      .SuccessMessages.remove{
-        display: none;
-      }
-    
-      .SuccessMessages p{
-        font-family: 'Roboto', sans-serif;
-        color: #030303;
-        font-weight: 900;
-        font-size: var(--FS-Paragraph);
-      }
-    
-      .SuccessMessages i{
-        color: #030303;
-        font-size: var(--FS-Paragraph);
-        cursor: pointer;
-      }
+
+  .Msg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  transition: .5s ease-in-out;
+  margin: .4em auto 0 auto;
+  width: 30%;
+  padding: .7em .9em;
+  border-radius: .2em;
+}
+
+.Msg p{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-weight: 900;
+    font-size: var(--FS-Paragraph);
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.SuccessMessages{
+  background: #02fc2317;
+  border: 2px solid  #02fc24;
+}
+
+.WarningMessages{
+  background: #ffa6001c;
+  border: 2px solid  #ffa600;
+}
+
+@media screen and (max-width:600px){
+
+form{
+  width: 100%;
+}
+
+.btn{
+    font-size: 1.5rem;
+}
+
+ .Msg{
+  width: 90%;
+  top: 10%;
+  margin: .4em auto;
+}
 
 
-  .WarningMessages{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background: #ffa600;
-        padding: .7em .9em;
-        border-radius: .2em;
-        width: 45%;
-        margin: 5em auto 0 auto;
-      }
-    
-      .WarningMessages.remove{
-        display: none;
-      }
-    
-      .WarningMessages p{
-        font-family: 'Roboto', sans-serif;
-        color: #030303;
-        font-weight: 900;
-        font-size: var(--FS-Paragraph);
-      }
-    
-      .WarningMessages i{
-        color: #030303;
-        font-size: var(--FS-Paragraph);
-        cursor: pointer;
-      }
+}
+
 
 </style>
    
@@ -287,9 +278,8 @@ form small{
   {% if messages %}
   {% for message in messages %}
       {% if message.tags == 'success' %}
-          <div class="SuccessMessages Disappear">
+          <div class="SuccessMessages  Msg">
               <p>{{ message }}</p>
-              <i class="fa fa-close Close"></i>
           </div> 
       {% endif %}
   {% endfor %}
@@ -298,14 +288,13 @@ form small{
   {% if messages %}
   {% for message in messages %}
       {% if message.tags == 'warning' %}
-          <div class="WarningMessages Disappear">
+          <div class="WarningMessages Msg">
               <p>{{ message }}</p>
-              <i class="fa fa-close Close"></i>
           </div> 
       {% endif %}
   {% endfor %}
 {% endif %}
-
+ 
     <h1>Sign in </h1>
   
     <form action="." method="POST" class="SubmitListener">
@@ -321,8 +310,6 @@ form small{
           {% endif %}
       {% endfor %}
   {% endif %}
-  
-
   
 
       {% csrf_token %}
@@ -350,6 +337,26 @@ form small{
    
 
   </div>   
+
+
+<script>
+
+function hideFlashMessages() {
+    const flashMessages = document.querySelectorAll('.Msg');
+    flashMessages.forEach((message) => {
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 3000); 
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    hideFlashMessages();
+});
+
+
+
+</script>
 
   <script>
   

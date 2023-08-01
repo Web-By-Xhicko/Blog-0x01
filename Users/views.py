@@ -19,7 +19,7 @@ def Register(request):
          if form.is_valid():
              form.save()
              username = form.cleaned_data.get('username')
-             messages.success(request, mark_safe( f'Account Sucessfully created for {username}! &nbsp; Welcome to Infohub!'))
+             messages.success(request, mark_safe( f'account sucessfully created!'))
              return redirect('Login_Page')
     else:
         form = UserRegistrationForm()
@@ -45,7 +45,7 @@ def Login(request):
 
 def Logout(request):
     logout(request)
-    messages.warning(request,'You have Logged out Sucessfully, Login Again?' )
+    messages.warning(request,'logged out sucessfully!' )
     return redirect('Login_Page')
 
 

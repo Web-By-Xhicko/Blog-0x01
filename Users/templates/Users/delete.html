@@ -53,6 +53,8 @@
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
     text-align: center;
+    color: #fff;
+
 }
 .Back{
     position: absolute;
@@ -63,6 +65,7 @@
 .Back a{
     color: #000;
     font-size: 1.5rem;
+    color: #fff;
 }
 
 .Delete_Options{
@@ -78,6 +81,8 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
     text-transform: capitalize;
+    color: #fff;
+
 }
 
 .Delete_Holder{
@@ -191,8 +196,8 @@
            <p>your account will be set to inactive for the next 3 days before total deletion</p>
 
            <div class="Delete_Holder">
-            <button> <a href="{% url 'blogApp:Settings_Page' %}">Cancel Delete</a> </button>
-            <button class="Approve">Delete account</button>
+            <button> <a href="{% url 'blogApp:Settings_Page' %}">Cancel </a> </button>
+            <button class="Approve">Delete </button>
            </div>
 
            <div class="Delete_Action Disappear Appear">

@@ -41,6 +41,10 @@
         color: #fff;
         cursor: pointer;
     }
+
+    .Wrapper{
+      position: relative;
+    }
     
         
     nav{
@@ -49,13 +53,12 @@
         align-items: center;
         background-color: #000;
         color: #fff;
-        padding: .05em 1em;
+        padding: .05em  .8em;
         position: fixed;
         top: 0;
         right: 0;
         left: 0;
-        z-index: 1000;
-        padding: .6em 3em;
+        z-index: 2;
     }
     
     nav h2{
@@ -66,37 +69,76 @@
       text-transform: uppercase;
     }
     
-    nav ul { 
+
+    nav svg{
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+   .Wrapper ul { 
       list-style: none;
       display: flex;
+      text-align: center;
+      flex-direction: column;
       justify-content: flex-end;
+      position: absolute;
+      top: -20px;
+      right: 5px;
+      background-color: #fff;
+      padding: 0 .4em;
+      height: 0;
+      overflow: hidden;
+      transition: all .5s ease-in-out ;
+    }
+
+    .Wrapper ul.RevealList{
+      height: 50px;
+      overflow: visible;
     }
     
-    nav ul li {
+    .Wrapper ul li {
       padding: 0 .8em;
       font-family: 'Oswald', sans-serif;
       font-size: 1.1rem;
       text-transform: capitalize;
       transition: transform 0.3s;
     }
+
+    .Wrapper ul li a {
+      color: #000;
+    }
     
-    nav ul li:hover {
-      text-transform: uppercase; 
-      transform: translateY(-5px);
+    .Wrapper ul li:hover {
+      transform: translateX(5px);
     }
     </style>
     
-    
-    <nav>
-      <h2>Info Hub</h2>
-    
-          <ul>
-              <li><a href="{% url 'Register_Page' %}">Register</a></li>
-              <li><a href="{% url 'Login_Page' %}">Login</a></li>
-          </ul>
-    
-    </nav>
-    
+ <div class="Wrapper">
+     
+  <nav>
+    <h2>Info Hub</h2>
+  
+    <svg class="Cast" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+
+  </nav>
+
+      <ul class="Items">
+        <li><a href="{% url 'Register_Page' %}">Register</a></li>
+        <li><a href="{% url 'Login_Page' %}">Login</a></li>
+    </ul>
+ </div>
+  
+ <script>
+   let reveal = document.querySelector('.Cast')
+   let items = document.querySelector('.Items')
+
+    reveal.addEventListener('click', ()=>{
+      items.classList.toggle('RevealList')
+    })
+ </script>
     {% endblock %}
     
     
