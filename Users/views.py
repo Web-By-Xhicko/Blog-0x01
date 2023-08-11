@@ -81,6 +81,6 @@ class PassowrdResetDonePage(PasswordResetFormPage):
         return reverse_lazy('Password_Reset_Page')
 
     def get(self, request, *args, **kwargs):
-        messages.success(request, 'Verification successful! check your email for the password reset link.')
+        messages.success(request, 'Verification successful, Check mail!')
         return super().get(request, *args, **kwargs)
     

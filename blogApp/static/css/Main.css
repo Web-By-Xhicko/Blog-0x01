@@ -40,6 +40,7 @@ font-family: 'Teko', sans-serif;....Headings */
 body{
   /* background-color: #333333; */
   background-color: #0b0b0bf2;
+  scrollbar-width: none;
 }
 
 a{
@@ -960,17 +961,14 @@ nav img{
 
 .SuccessMessages{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: #02fc24;
+  background: #02fc2317;
+  border: 2px solid  #02fc24;
   padding: .7em .9em;
   border-radius: .2em;
-  width: 30%;
-  margin: .4em auto 0 auto;
-  position: fixed;
-  top: 10%;
-  right: 1%;
+  width: 90%;
+  margin: 1em auto 0 auto;
   text-transform: capitalize;
   transition: .5s ease-in-out;
 }
@@ -981,9 +979,10 @@ nav img{
 
 .SuccessMessages p{
   font-family: 'Roboto', sans-serif;
-  color: #030303;
+  color: #fff;
   font-weight: 900;
   font-size: var(--FS-Paragraph);
+  letter-spacing: 1px;
 }
 
 .SuccessMessages i{

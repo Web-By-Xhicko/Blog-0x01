@@ -101,7 +101,7 @@ class PwdResetForm(PasswordResetForm):
       email = self.cleaned_data['email']
       check = User.objects.filter(email=email).exists()
       if not check:
-         messages.warning(self.request, 'Sorry! we could not find a user with that email address.')
+         messages.warning(self.request, 'Verification not Sucessful, Try Again!')
          raise forms.ValidationError('unfortunately we can not find that email address') 
       return email 
    
@@ -119,7 +119,6 @@ class PwdResetConfirmForm( SetPasswordForm):
       required = True,
       label = 'Confirm  Passowrd'
    )
-
 
 class PwdChangeForm(PasswordChangeForm):
    old_password = forms.CharField(
