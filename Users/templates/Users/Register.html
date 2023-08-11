@@ -161,20 +161,13 @@ form small{
     align-items: center;
   }
 
-  .form-links p{
+  .form-links p, 
+  .form-links a{
     color: #fff;
-    font-weight: 900;
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
   }
   
-  .form-links a{
-    color: #fff;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    margin-left: .3em;
-  }
   .form-links  a:hover{
    text-decoration: underline;
   }
@@ -355,7 +348,7 @@ form small{
            <div class="Form-bottom">
 
               <div class="form-links flex">
-                <p>Already have an account ?</p> 
+                <p>Already have an account?</p> &nbsp;
                 <a href="{% url 'Login_Page' %}">Sign in</a>
               </div>
             

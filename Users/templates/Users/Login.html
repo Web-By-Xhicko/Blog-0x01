@@ -137,20 +137,13 @@ form small{
     margin-bottom: .5em;
   }
 
-  .form-links p{
+  .form-links p, 
+  .form-links a{
     color: #fff;
-    font-weight: 900;
     text-transform: capitalize;
     font-family: 'Roboto', sans-serif;
   }
   
-  .form-links a{
-    color: #fff;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    margin-left: .3em;
-  }
 
   .form-links  a:hover{
    text-decoration: underline;
@@ -323,12 +316,12 @@ form{
   
            <div class="Form-bottom">
               <div class="form-links flex">
-                <p>Don't have an account ?</p> 
+                <p>Don't have an account ?</p>   &nbsp;
                 <a href="{% url 'Register_Page' %}">Register</a>
               </div>
 
               <div class="form-links flex">
-                <p>Forgotten Password?</p> 
+                <p>Forgotten Password ?</p>  &nbsp;
                 <a href="{% url 'Password_Reset_Page' %}">Click Here </a>
               </div>
            </div>
