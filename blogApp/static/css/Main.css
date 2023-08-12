@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@700&family=Roboto:wght@300&family=Teko:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,600;1,300;1,700&family=Rubik:ital,wght@0,300;0,800;1,400;1,900&display=swap');
 
 /* font-family: 'Anton', sans-serif;..other heading
 font-family: 'Oswald', sans-serif;.....logo
 font-family: 'Roboto', sans-serif;....Paragraphs
-font-family: 'Teko', sans-serif;....Headings */
+font-family: 'Teko', sans-serif;....Headings 
+'Josefin Sans', sans-serif;1,3,6,7
+'Rubik', sans-serif;3,4,8,9
+*/
 
 :root{
   --FS-Paragraph-xm: .5rem;
@@ -119,9 +123,9 @@ nav img{
 }
 
 .Updates h1{
-  font-size:var(--FS-Heading2);
-  font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
+  font-size:20px;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: capitalize;
   position: relative;
 }
 
@@ -130,8 +134,8 @@ nav img{
   position: absolute;
   top:40%;
   left: -35%;
-  height: 10%;
-  width: 30%;
+  height: 3px;
+  width: 60px;
   background-color: #fff;
   border-bottom-left-radius: .1em;
   border-top-left-radius: .1em;
@@ -142,8 +146,8 @@ nav img{
   position: absolute;
   top:40%;
   right: -33%;
-  height: 10%;
-  width: 30%;
+  height: 3px;
+  width: 60px;
   background-color: #fff;
   border-bottom-right-radius: .1em;
   border-top-right-radius: .1em;
@@ -346,7 +350,8 @@ nav img{
 
 .Card a{
   font-size:var(--FS-Heading1);
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Josefin sans', sans-serif;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
@@ -414,7 +419,7 @@ nav img{
   display: flex;
   flex-direction: column;
   padding: .4em 1em;
-  margin:  0 2em;
+  /* margin:  0 2em; */
 }
 
 .Main_Post_Details_Header{
@@ -422,18 +427,26 @@ nav img{
   justify-content: space-between;
   align-items: center;
   color: #fff;
+  margin-bottom: 5px;
 }
 
 .Main_Post_Details_Header h1{
-  font-family: 'Teko', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: var(--FS-Heading2);
-  font-weight: 900;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #fff;
 }
 
+.Main_Post_Details_Header h1:nth-child(2){
+  font-family: 'Josefin sans', sans-serif;
+  font-size: 1rem;
+}
+
 .Main_Post_Details_Image{
-   border-radius: .5em .5em 0 0; 
+  border-radius: .5em .5em 0 0; 
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .Main_Post_Details_Content{
@@ -442,23 +455,24 @@ nav img{
 }
 
 .Main_Post_Details_Content h1{
-  font-family: 'Teko', sans-serif;
-  font-size: var(--FS-Heading3);
-  font-weight: 900;
+  font-family: 'Josefin sans', sans-serif;
+  font-size:18px;
+  font-weight: 600;
   text-transform: uppercase;
-  margin: 0 0 .5em 0;
+  margin-bottom: 10px;
 }
 
 .Main_Post_Details_Content p{
-    flex-grow: 1;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Josefin sans', sans-serif;
+    font-weight: 300;
+    font-size: 21px;
 }
 
 .Main_Post_Details_Meta_Info{
   display: flex;
   flex-direction: column;
   margin:  1em 0;
-  padding: .3em .7em;
+  padding: .3em ;
   border: .05em solid #fff;
   border-radius: .2em;
 }
@@ -492,9 +506,7 @@ nav img{
     transition:  .5s ease-in-out;
 }
 
-.item i:hover{
-    transform: scale(1.3);
-}
+
 
 .icons i:hover{
     transform: none;  
@@ -505,7 +517,7 @@ nav img{
 }
 
 .item p{
-    font-size: 1.4rem;
+    font-size: 16px;
     padding-left: .3em;
 }
 
@@ -516,9 +528,8 @@ nav img{
 }
 
 .Item_Info span, p{
-    font-family: 'Teko', sans-serif;
-    font-size:1.2rem;
-    margin-right: .2em;
+    font-family: 'Josefin sans', sans-serif;
+    font-size:16px;
 }
 
 .Item_Info p{
@@ -587,12 +598,20 @@ nav img{
     font-family: 'Anton', sans-serif
 }
 
+.Main_Post_Details_Footer p{
+  font-family: 'Josefin sans', sans-serif;
+  font-weight: 700;
+}
+
 .Main_Post_Details_Footer a{
   padding: .2em .6em;
   border:1px solid #C0C0C0 ;
   color: #fff;
   border-radius: .2em;
+  font-family: 'Josefin sans', sans-serif ;
+  font-weight: 700;
 }
+
 
 .Make_Comment{
   width: 94%;
@@ -605,9 +624,10 @@ nav img{
 }
 
 .Make_Comment h1{
+  margin-top: 2em;
   text-align: center;
-  font-family: 'Teko', sans-serif;
-  font-size:2rem;
+  font-family: 'Josefin sans', sans-serif;
+  font-size:25px;
   color: #fff;
   text-transform: uppercase;
 }
@@ -669,18 +689,18 @@ nav img{
   display: flex;
   flex-direction: column;
   padding: .4em 1em;
-  margin:  1em 2em;
   color: #fff;
-  width: 95%;
+  width: 100%;
+  margin: 2em 0;
 }
 
 .Comment_Posted h1{
   text-align: center;
-  font-family: 'Teko', sans-serif;
-  font-size:2rem;
+  font-family: 'Josefin sans', sans-serif;
+  font-size:25px;
   color: #fff;
   text-transform: uppercase;
-  margin-bottom: 1em;
+  margin-bottom: .2em;
 }
 
 .Comment_Wrapper{
@@ -690,12 +710,6 @@ nav img{
   border:1px solid #C0C0C0 ;
 }
 
-.Comment_Wrapper p {
- color: #fff;
- padding: .3em .4em;
- border-radius: .2em;
- font-family: 'Roboto', sans-serif;
-}
 
 .Comment_Posted_Info {
   margin: .2em 0 0 0;
@@ -705,10 +719,17 @@ nav img{
 }
 
 .Comment_Posted_Info h3{
-  font-family: 'Teko', sans-serif;
+  margin-bottom: .4em;
+  font-family: 'Josefin sans', sans-serif;
   font-size: var(--FS-Small-Heading);
 }
 
+.Comment_Wrapper p {
+  color: #fff;
+  border-radius: .2em;
+  font-family: 'Josefin sans', sans-serif;
+ }
+ 
 .No_Comment_Available{
   display: flex;
   justify-content: center;
@@ -722,29 +743,24 @@ nav img{
 }
 
 .pagination{
-  padding: .4em 1em;
-  margin:  0 2em;
-  width: 95%;
+  padding: .4em 1em; 
+  width: 100%; 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.Ltn {
-  width: 10%;
-}
 
 .Page_Btn{
   width: 100%;
   border: 1px solid #fff;
-  padding: .3em .6em;
+  padding: .05em .6em;
   border-radius: .2em;
   display: flex;
   justify-content: center;
-  letter-spacing: 1px;
   transition: .5s ease-in-out;
   cursor: pointer;
-}
+} 
 
 .Page_Btn:hover{
  transform: scale(1.1);
@@ -753,8 +769,8 @@ nav img{
 .Page_Btn a{
   color: #fff;
   font-family: 'Oswald', sans-serif;
-  font-size: 1rem;
-  font-weight: 900;
+  font-size:15px;
+  font-weight: 500;
   text-transform: uppercase;
   transition: .5s ease-in-out;
   cursor: pointer;
@@ -766,11 +782,9 @@ nav img{
   border: none;
   cursor: not-allowed;
   border-radius: .2em;
-  padding: .3em .6em;
   font-family: 'Oswald', sans-serif;
-  letter-spacing: 1px;
-  font-size: 1rem;
-  font-weight: 900;
+  font-size: 15px;
+  font-weight: 500;
   text-align: center;
   text-transform: uppercase;
 }
@@ -789,7 +803,7 @@ nav img{
   background-color: #fff;
   color: #000;
   border-radius: .2em;
-  padding: .5em 1em;
+  padding: .1em .5em;
   margin: 0 .3em;
   font-family: 'Oswald', sans-serif;
 }
@@ -798,7 +812,7 @@ nav img{
   color: #fff;
   border: 1px solid #fff;
   border-radius: .2em;
-  padding: .5em .8em;
+  padding: .1em .6em;
   margin: 0 .3em;
   font-family: 'Oswald', sans-serif;
   text-align: center;
@@ -853,7 +867,7 @@ nav img{
 
 .Side_Post_Wrapper h1{
   text-align: center;
-  font-family: 'Teko', sans-serif;
+  font-family: 'Josefin sans', sans-serif;
   font-size: var(--FS-Heading2);
   font-weight: 900;
   text-transform: uppercase;
@@ -1220,6 +1234,15 @@ text-decoration: underline;
     display: none;
   }
 
+  .Side_Post_Wrapper{
+    display: none;
+  }
+
+  .Full_Post_Wrapper{
+    width: 100%;
+  }
+  
+
 }
 
 
@@ -1243,7 +1266,7 @@ text-decoration: underline;
   }
 
   .RevOpts.CatList2{
-    max-height: 300px;
+    max-height: 340px;
   }
 
 
@@ -1288,5 +1311,36 @@ text-decoration: underline;
     flex-direction: column;
     text-align: center;
 }
+
+.Main_Post_Details{
+  padding: .4em;
+  margin:  0 .2em;
+}
+
+}
+
+@media only screen and (max-width:600px){
+  
+  .Main_Post_Details_Header{
+   flex-direction: column;
+   justify-content:flex-start;
+   align-items: flex-start;
+  }
+  
+  .Main_Post_Details_Header h1:nth-child(2){
+    font-family: 'Josefin sans', sans-serif;
+    font-size: 1rem;
+  }
+
+  .Make_Comment{
+    width: 100%;
+    margin:  0 ;
+  }
+
+  .Comment_Posted_Info {
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+  }
 
 }

@@ -121,7 +121,7 @@ def Single_Post(request, S_post):
     S_post =  get_object_or_404(Post, slug=S_post, Status='published')
     Comment = S_post.Comment.filter(Status=True)
 
-    comments_per_page = 5
+    comments_per_page = 2
     paginator = Paginator(Comment, comments_per_page)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)

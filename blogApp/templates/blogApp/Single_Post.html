@@ -43,19 +43,15 @@
                     {% if message.tags == 'success' %}
                     <div class="SuccessMessages Disappear">
                         <p>{{ message }}</p>
-                        <i class="fa fa-close Close"></i>
                     </div> 
                 {% endif %}
              {% endfor %}
            {% endif %}
            
             <div class="Main_Post_Wrapper">
-
-           
-    
                 <div class="Main_Post_Details">
                     <div class="Main_Post_Details_Header">
-                        <h1>{{S_post.First_Name}} &nbsp; {{S_post.Last_Name}}</h1>
+                        <h1>{{S_post.First_Name}} {{S_post.Last_Name}}</h1>
                         <h1>{{S_post.Publish}}</h1>
                     </div>
             
@@ -70,11 +66,11 @@
                         <div class="Reaction_Info">
                             <div class="Item_Info">
                                 <span id="likes_check">{{S_post.likes_count}}</span>
-                                <p>likes</p>
+                                &nbsp;<p>likes</p>
                             </div>
                             <div class="Item_Info">
                                 <span>{{S_post.bookmark_count}}</span>
-                                <p>Bookmarks</p>
+                                &nbsp;<p>Bookmarks</p>
                             </div>
                     
                            
@@ -82,7 +78,7 @@
                                 {% with Comment.count as total_comments %}
                                 <span>{{total_comments}}</span>
                                 {% endwith %}
-                                <p>Comment</p>
+                                &nbsp;<p>Comment</p>
                             </div>
                         </div>
                         <hr>
@@ -144,7 +140,7 @@
                 {% for UserComment in page %}
                         <div class="Comment_Wrapper">     
                             <div class="Comment_Posted_Info">
-                                <h3> comment by  &nbsp; {{UserComment.Name}}</h3>
+                                <h3> comment by {{UserComment.Name}}</h3>
                                 <h3>{{UserComment.Publish}}</h3>
                         </div>
                         <p>{{UserComment.Comment|truncatechars:270}}</p>
@@ -159,7 +155,7 @@
             {% endif %}
 
             
-            {% if page %}
+             {% if page %}
             <div class="pagination">
     
         
