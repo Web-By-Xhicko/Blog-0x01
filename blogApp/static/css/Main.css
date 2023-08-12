@@ -59,7 +59,7 @@ nav{
     align-items: center;
     background-color: #000;
     color: #fff;
-    padding: .3em 3em;
+    padding: 0 3em;
     position: fixed;
     top: 0;
     right: 0;
@@ -106,6 +106,12 @@ nav ul li:hover {
   transform: translateY(-5px);
 }
 
+.Logo{
+  object-fit: contain;
+  height: auto;
+  width:90px;
+}
+
 nav img{
   width: 50px;
   height: 50px; 
@@ -118,36 +124,37 @@ nav img{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 4em;
+  margin-top: 6em;
   color: #fff;
 }
 
-.Updates h1{
-  font-size:20px;
+.Updates p{
+  font-size:25px;
   font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
   text-transform: capitalize;
   position: relative;
 }
 
-.Updates h1::after{
+.Updates p::after{
   content: "";
   position: absolute;
   top:40%;
-  left: -35%;
+  left: -44px;
   height: 3px;
-  width: 60px;
+  width: 40px;
   background-color: #fff;
   border-bottom-left-radius: .1em;
   border-top-left-radius: .1em;
 }
 
-.Updates h1::before{
+.Updates p::before{
   content: "";
   position: absolute;
   top:40%;
-  right: -33%;
+  right: -44px;
   height: 3px;
-  width: 60px;
+  width: 40px;
   background-color: #fff;
   border-bottom-right-radius: .1em;
   border-top-right-radius: .1em;
@@ -351,6 +358,7 @@ nav img{
 .Card a{
   font-size:var(--FS-Heading1);
   font-family: 'Josefin sans', sans-serif;
+  text-align: justify;
   font-weight: 700;
   text-transform: capitalize;
 }
@@ -464,6 +472,7 @@ nav img{
 
 .Main_Post_Details_Content p{
     font-family: 'Josefin sans', sans-serif;
+    text-align: justify;
     font-weight: 300;
     font-size: 21px;
 }
@@ -728,6 +737,8 @@ nav img{
   color: #fff;
   border-radius: .2em;
   font-family: 'Josefin sans', sans-serif;
+  text-align: justify;
+
  }
  
 .No_Comment_Available{
@@ -890,6 +901,12 @@ nav img{
   border-radius: .3em;
 }
 
+.Side_Post_Content_Middle a{
+  font-family: 'Josefin sans', sans-serif;
+  text-align: justify;
+  font-weight: 700;
+  text-transform: capitalize;
+}
 .Side_Post_Content_Middle a:hover{
   text-decoration: underline;
 }
@@ -972,69 +989,40 @@ nav img{
   text-shadow: 2px 2px 2px #000;
 }
 
-
-.SuccessMessages{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #02fc2317;
-  border: 2px solid  #02fc24;
-  padding: .7em .9em;
-  border-radius: .2em;
-  width: 90%;
-  margin: 1em auto 0 auto;
-  text-transform: capitalize;
-  transition: .5s ease-in-out;
-}
-
-.SuccessMessages.remove{
-  display: none;
-}
-
-.SuccessMessages p{
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-  font-weight: 900;
-  font-size: var(--FS-Paragraph);
-  letter-spacing: 1px;
-}
-
-.SuccessMessages i{
-  color: #030303;
-  font-size: var(--FS-Paragraph);
-  cursor: pointer;
-}
-
-
-.WarningMessages{
+.Msg{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: #ffa600;
+  text-transform: capitalize;
+  transition: .5s ease-in-out;
+  margin: 6em auto 0 auto;
+  width: 98%;
   padding: .7em .9em;
   border-radius: .2em;
-  width: 50%;
-  margin: .5em auto 0 auto;
+}
+.Msg2{
+  margin: .6em auto;
 }
 
-.WarningMessages.remove{
-  display: none;
+.Msg p{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-weight: 900;
+    font-size: var(--FS-Paragraph);
+    text-transform: capitalize;
+    letter-spacing: 1px;
 }
 
-.WarningMessages p{
-  font-family: 'Roboto', sans-serif;
-  color: #030303;
-  font-weight: 900;
-  font-size: var(--FS-Paragraph);
+.SuccessMessages{
+  background: #02fc2317;
+  border: 2px solid  #02fc24;
 }
 
-.WarningMessages i{
-  color: #030303;
-  font-size: var(--FS-Paragraph);
-  cursor: pointer;
+.WarningMessages{
+  background: #ffa6001c;
+  border: 2px solid  #ffa600;
 }
-
 
 .Settings_Wrapper{
   margin: 3.5em 1em;
@@ -1280,7 +1268,7 @@ text-decoration: underline;
 @media only screen and (max-width:700px){
 
   nav{
-    padding: .2em 1em;
+    padding: 0 1em;
 }
 
   .Single-content h1{
@@ -1320,6 +1308,11 @@ text-decoration: underline;
 }
 
 @media only screen and (max-width:600px){
+
+  .Grid{
+    width: 100%;
+    margin: 0;
+  }
   
   .Main_Post_Details_Header{
    flex-direction: column;

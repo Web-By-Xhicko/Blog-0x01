@@ -71,7 +71,7 @@
         {% if messages %}
             {% for message in messages %}
                 {% if message.tags == 'success' %}
-                <div class="SuccessMessages Disappear">
+                <div class="SuccessMessages Msg">
                     <p>{{ message }}</p>
                 </div> 
                 {% endif %}
@@ -81,7 +81,7 @@
 
         {% if Updated_Post %}
             <div class="Updates">
-                <h1>latest Post</h1>
+                <p>latest Posts</p>
             </div>
 
 

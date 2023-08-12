@@ -1,4 +1,5 @@
 {% extends 'Users/Base.html' %}
+  {% load static %}
 {% block title %} Login Page {% endblock %}
 
 {% block templates %}
@@ -38,6 +39,12 @@
 --FS-Heading3: 1.7rem;
 --FS-Heading4: 2rem;
 --FS-Heading5: 2.5rem;
+}
+
+.Logo{
+  object-fit: contain;
+  height: auto;
+  width:90px;
 }
 
   .Form-Wrapper{
@@ -101,12 +108,11 @@ form small{
     color: #000;
   }
 
-.btn{
+.btnnn{
     margin: .7em 0;
     padding: 0.5em;
     background-color: #fff;
     color: #000;
-    margin: .5em 0;
     border-radius: .2em ;
     border: none;
     font-family: 'Teko', sans-serif;
@@ -117,7 +123,7 @@ form small{
     transition: transform .5s ease;
   }
 
-  .btn:hover{
+  .btnnn:hover{
     transform: scale(103%, 103%);
   }
 
@@ -208,7 +214,6 @@ form small{
     cursor: pointer;
   }
 
-
   .Msg{
   display: flex;
   flex-direction: row;
@@ -216,8 +221,8 @@ form small{
   align-items: center;
   text-transform: capitalize;
   transition: .5s ease-in-out;
-  margin: .4em auto 0 auto;
-  width: 30%;
+  margin: 6em auto 0 auto;
+  width: 98%;
   padding: .7em .9em;
   border-radius: .2em;
 }
@@ -240,6 +245,7 @@ form small{
   background: #ffa6001c;
   border: 2px solid  #ffa600;
 }
+
 
 @media screen and (max-width:600px){
 
@@ -311,7 +317,7 @@ form{
         {{form.password}}
         <button class="Show_Password password-toggle-button"  type="button"><i  class="fa fa fa-eye"></i></button>
       </div>
-    <button class="btn" type="submit">Login</button>
+    <button class="btnnn" type="submit">Login</button>
             
   
            <div class="Form-bottom">
