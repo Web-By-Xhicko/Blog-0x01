@@ -128,22 +128,33 @@ def Single_Post(request, S_post):
 
     user_comment = None
     O_post = Post.Newmanager.annotate(num_comments=Count('Comment')).filter(Status='published').exclude(id=S_post.id)[:5]
-    if request.method == 'POST':
-        comment_form = NewCommentForm(request.POST)
-        if comment_form.is_valid(): 
-            user_comment = comment_form.save(commit=False)
-            user_comment.Post = S_post
-            user_comment.save()
-            return HttpResponseRedirect('/' + S_post.slug)
+    
+    if request.user.is_authenticated:
+        username = request.user.username
+        email = request.user.email
+
+        if request.method == 'POST':
+            comment_form = NewCommentForm(request.POST)
+
+            if comment_form.is_valid(): 
+                user_comment = comment_form.save(commit=False)
+                user_comment.Name = username  
+                user_comment.Email = email  
+                user_comment.Post = S_post
+                user_comment.save()
+                return HttpResponseRedirect('/' + S_post.slug)
+        else:
+            comment_form = NewCommentForm()
+
+        return render(request, 'blogApp/Single_Post.html', 
+                    {'S_post': S_post,
+                    'user_comment' : user_comment, 
+                    'Comment' : Comment,
+                    'comment_form': comment_form,
+                    'O_post' : O_post,
+                    'page':page })
     else:
-        comment_form = NewCommentForm()
-    return render(request, 'blogApp/Single_Post.html', 
-                  {'S_post': S_post,
-                   'user_comment' : user_comment, 
-                   'Comment' : Comment,
-                   'comment_form': comment_form,
-                   'O_post' : O_post,
-                   'page':page })
+        pass
 
 
 class CategoryListView(LoginRequiredMixin,  ListView):
