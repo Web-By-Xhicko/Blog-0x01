@@ -40,39 +40,16 @@
 --FS-Heading5: 2.5rem;
 }
 
-    .Wrapper{
-        margin: 4em 0;
-        position: relative;
-    }
-    
-    .Back{
-  position: absolute;
-  top: 0;
-  margin: 0 1em ;
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.Back a{
-  color: #fff;
-  font-size: 1.5rem;
-}
-
-    .Wrapper h1{
-    font-family: 'Teko', sans-serif;
-    font-size: var(--FS-Heading5);
-    text-transform: uppercase;
-    text-align: center;
-    margin: 0 0 .5em 0;
-    color: #fff;
-    }
-
-    form{
-        display: flex;
-       flex-direction: column;
-       justify-content: center;
-       align-items: center;
-    }
-
-    .textarea{
+.textarea{
   margin: .5em 0;
   padding: .5em .7em;
   width: 100%;
@@ -92,7 +69,7 @@
   text-transform: capitalize;
   background-color: #fff;
   border: .01em solid #000;
-  border-radius: .2em ;
+  /* border-radius: .2em ; */
   font-weight: 900;
   font-family: 'Teko', sans-serif;
   font-size: var(--FS-Heading1);
@@ -109,19 +86,20 @@
 }
 
 .image_input{
-    border: 1px solid #000;
+    border: 1px solid #fff;
+    color: #fff;
     margin: .4em 0;
-    border-radius: .2em;
     width: 100%;
 }
 
 ::-webkit-file-upload-button{
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     border: none;
     padding: 1em;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Josefin sans', sans-serif;
+    text-transform: capitalize;
     cursor: pointer;
 }
 
@@ -152,102 +130,10 @@
 }
 
 
-.Form_Wrapper{
-    width: 50%;
-    margin:  0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    }
-    
-  .SuccessMessages{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background: #02fc24;
-  padding: .7em .9em;
-  border-radius: .2em;
-  width: 30%;
-  margin: .4em auto 0 auto;
-  position: fixed;
-  top: 10%;
-  right: 1%;
-  text-transform: capitalize;
-  transition: .5s ease-in-out;
-      }
-    
-      .SuccessMessages.remove{
-        display: none;
-      }
-    
-      .SuccessMessages p{
-        font-family: 'Roboto', sans-serif;
-        color: #030303;
-        font-weight: 900;
-        font-size: var(--FS-Paragraph);
-      }
-    
-      .SuccessMessages i{
-        color: #030303;
-        font-size: var(--FS-Paragraph);
-        cursor: pointer;
-      }
-
-      
-  .WarningMessages{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background: #ffa600;
-  padding: .7em .9em;
-  border-radius: .2em;
-  width: 30%;
-  margin: .4em auto 0 auto;
-  position: fixed;
-  top: 10%;
-  right: 1%;
-  text-transform: capitalize;
-  transition: .5s ease-in-out;
-  }
-    
-.WarningMessages.remove{
-  display: none;
-}
-
-.WarningMessages p{
-  font-family: 'Roboto', sans-serif;
-  color: #030303;
-  font-weight: 900;
-  font-size: var(--FS-Paragraph);
-}
-
-.WarningMessages i{
-  color: #030303;
-  font-size: var(--FS-Paragraph);
-  cursor: pointer;
-}
-
-.FileName{
-  width: 100%;
-  border: 1px solid #000;
-  font-family: 'Oswald', sans-serif;
-}
-
-.FileName span{
-  color: #fff;
-  background-color: #000;
-  border: none;
-  padding: 0  .5em 0 0 ;
-  margin-right: .5em;
-  font-family: 'Oswald', sans-serif;
-}
 
 </style>
 
-    <div class="Wrapper">
+    <div class="Update_Profile_Wrapper">
 
       <div class="Back">
         <a href="{% url 'blogApp:Settings_Page' %}">
@@ -272,7 +158,6 @@
             {% if message.tags == 'warning' %}
                 <div class="WarningMessages Msg Disappear">
                     <p>{{ message }}</p>
-                    <i class="fa fa-close Close"></i>
                 </div> 
             {% endif %}
         {% endfor %}
@@ -288,7 +173,7 @@
                     {{UserProfileUpdate.email}}
                     {{ProfileUpdate.age}}
                     {{ProfileUpdate.image}}
-                    <div class="FileName"><span>Current File</span>{{FileName}}</div>
+      
               </div>
                 <button class="btn" type="submit">Update</button>
             </form>

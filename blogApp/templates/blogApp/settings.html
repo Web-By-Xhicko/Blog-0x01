@@ -3,72 +3,29 @@
     {% block title %} Settings Page{% endblock %}
         {% block templates %} 
 
-         <style>
-:root{
---FS-Paragraph-xm: .5rem;
---FS-Paragraph-md: .6rem;
---FS-Paragraph-md2: .7rem;
---FS-Paragraph-bg: .8rem;
---FS-Paragraph-bg2: .9rem;
---FS-Heading-xm: .5rem;
---FS-Heading-md: .6rem;
---FS-Heading-bg: .7rem;
---FS-Heading-md2: .8rem;
---FS-Heading-bg2: .9rem;
---FS-Paragraph: 1rem;
---FS-Paragraph2: 1.1rem;
---FS-Paragraph3: 1.2rem;
---FS-Paragraph4: 1.3rem;
---FS-Heading1:clamp(.4rem,  1rem, 1.5rem);
---FS-Small-Heading:1.1rem;
---FS-Small-Heading2:1.2rem;
---FS-Small-Heading3:1.3rem;
---FS-Small-Heading4:1.4rem;
---FS-Heading2: 1.5rem;
---FS-Heading3: 1.7rem;
---FS-Heading4: 2rem;
---FS-Heading5: 2.5rem;
-}
-
-</style>  
-
-
-
          <div class="Settings_Wrapper">
             <h1>Settings Page</h1>
 
             <div class="Settings_Content">
 
                 <div class="Content_Info">
-                   <div class="CI_Left">
-                        <i class="fa fa-address-card"></i>
                         <a href="{% url 'blogApp:Profile_Page' %}"> Profile </a>
-                   </div>
-                        <i class="	fa fa-long-arrow-right"></i>
+                        <i class="fa fa-address-card"></i>
                 </div>
 
                 <div class="Content_Info">
-                   <div class="CI_Left">
-                        <i class="fa fa fa-edit"></i>
                         <a href="{% url 'blogApp:UpdateProfile_Page' %}"> Update Profile </a>
-                   </div>
-                        <i class="	fa fa-long-arrow-right"></i>
+                        <i class="fa fa fa-edit"></i>
                 </div>
 
                 <div class="Content_Info">
-                   <div class="CI_Left">
-                    <i class="fa fa-eye"></i>
                     <a href="{% url 'Password_Change_Page' %}"> Change password  </a>
-                   </div>
-                        <i class="	fa fa-long-arrow-right"></i>
+                    <i class="fa fa-eye"></i>
                 </div>
 
                 <div class="Content_Info">
-                   <div class="CI_Left">
-                    <i class="fa fa-close"></i>
                     <a href="{% url 'Delete_Page' %}"> Delete Account </a>
-                   </div>
-                        <i class="	fa fa-long-arrow-right"></i>
+                    <i class="fa fa-close"></i>
                 </div>
 
             </div>
