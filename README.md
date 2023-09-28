@@ -1,6 +1,6 @@
 # Info Hub - Your Ultimate Blogging Web Application
 
-This blogging project represents the first phase of a comprehensive three-project series undertaken to enhance my qualifications for pursuing Django Rest Framework studies.
+This blogging project represents the first phase of a comprehensive Two-project series undertaken to enhance my qualifications for pursuing Django Rest Framework studies.
 
 Welcome to Info Hub, a powerful blogging platform built with HTML, CSS, JavaScript, Python, and Django. Info Hub allows you to access curated content, share your thoughts, connect with others, and explore a world of diverse content. This README will guide you through the features and functionalities of Info Hub.
 
